@@ -1,0 +1,12 @@
+{
+  "name": "endorlabs",
+  "version": "1.0.0",
+  "description": "Set up endorctl and use Endor Labs to scan, prioritize, and fix security risks across your software supply chain",
+  "author": {
+    "name": "Endor Labs",
+    "url": "https://github.com/endorlabs"
+  },
+  "repository": "https://github.com/endorlabs/endor-skills",
+  "license": "MIT",
+  "keywords": ["security", "dependencies", "endorlabs", "endorctl", "upgrade-impact", "sca", "endor"]
+}

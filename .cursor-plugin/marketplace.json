@@ -1,0 +1,17 @@
+{
+  "name": "endorlabs",
+  "owner": {
+    "name": "Endor Labs",
+    "email": "support@endorlabs.com"
+  },
+  "metadata": {
+    "description": "Endor Labs skills for dependency security and upgrade impact analysis"
+  },
+  "plugins": [
+    {
+      "name": "endorlabs",
+      "source": "./",
+      "description": "Endor Labs skills for setting up endorctl and analyzing dependency upgrade impact"
+    }
+  ]
+}

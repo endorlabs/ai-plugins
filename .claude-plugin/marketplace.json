@@ -1,0 +1,22 @@
+{
+  "name": "endorlabs",
+  "owner": {
+    "name": "Endor Labs",
+    "email": "support@endorlabs.com"
+  },
+  "metadata": {
+    "description": "Endor Labs skills for AI-native application security — scan, analyze, and remediate across your software supply chain"
+  },
+  "plugins": [
+    {
+      "name": "endorlabs",
+      "source": "./",
+      "description": "Set up endorctl and use Endor Labs to scan, prioritize, and fix security risks across your software supply chain",
+      "version": "1.0.0",
+      "author": {
+        "name": "Endor Labs"
+      },
+      "keywords": ["security", "dependencies", "endorctl", "upgrade-impact", "sca"]
+    }
+  ]
+}

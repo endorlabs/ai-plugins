@@ -5,7 +5,7 @@
     "email": "support@endorlabs.com"
   },
   "metadata": {
-    "description": "Endor Labs skills for AI-native application security — scan, analyze, and remediate across your software supply chain"
+    "description": "Endor Labs ai plugin for AI-native application security — scan and analyze your software supply chain"
   },
   "plugins": [
     {
@@ -16,7 +16,7 @@
       "author": {
         "name": "Endor Labs"
       },
-      "keywords": ["security", "dependencies", "endorctl", "upgrade-impact", "sca"]
+      "keywords": ["security", "dependencies", "endorctl", "sca"]
     }
   ]
 }

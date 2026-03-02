@@ -5,13 +5,13 @@
     "email": "support@endorlabs.com"
   },
   "metadata": {
-    "description": "Endor Labs skills for dependency security and upgrade impact analysis"
+    "description": "Endor Labs ai plugin for AI-native application security — scan and analyze across your software supply chain"
   },
   "plugins": [
     {
       "name": "endorlabs",
       "source": "./",
-      "description": "Endor Labs skills for setting up endorctl and analyzing dependency upgrade impact"
+      "description": "Endor Labs plugin for setting up endorctl"
     }
   ]
 }

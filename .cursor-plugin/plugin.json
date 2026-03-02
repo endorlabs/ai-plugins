@@ -2,12 +2,12 @@
   "name": "endorlabs",
   "displayName": "Endor Labs",
   "version": "1.0.0",
-  "description": "Endor Labs skills for setting up endorctl and analyzing dependency upgrade impact",
+  "description": "Endor Labs skills for setting up endorctl",
   "author": {
     "name": "Endor Labs",
     "url": "https://github.com/endorlabs"
   },
   "repository": "https://github.com/endorlabs/endor-skills",
   "license": "MIT",
-  "keywords": ["security", "dependencies", "endorlabs", "endorctl", "upgrade-impact", "sca"]
+  "keywords": ["security", "dependencies", "endorlabs", "endorctl", "sca"]
 }

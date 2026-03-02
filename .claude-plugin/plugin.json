@@ -8,5 +8,5 @@
   },
   "repository": "https://github.com/endorlabs/endor-skills",
   "license": "MIT",
-  "keywords": ["security", "dependencies", "endorlabs", "endorctl", "upgrade-impact", "sca", "endor"]
+  "keywords": ["security", "dependencies", "endorlabs", "endorctl", "sca", "endor"]
 }

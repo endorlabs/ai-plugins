@@ -61,16 +61,14 @@ chmod +x build.sh
 
 This creates `endor-setup.skill` in the `dist/` directory.
 
-**2. Install the Skill (for Claude Code)**
+**2. Install the plugin (for Claude Code)**
 
 ```bash
-# Install globally (recommended)
-mkdir -p ~/.claude/skills
-unzip dist/endor-setup.skill -d ~/.claude/skills/endor-setup
+# Inside claude code
+/plugin marketplace add prakhar-per/ai-plugins
 
-# Or install for a specific project
-mkdir -p <repo_path>/.claude/skills
-unzip dist/endor-setup.skill -d <repo_path>/.claude/skills/endor-setup
+/plugin install ai-plugins@endorlabs
+
 ```
 
 **Install for other agents:** Follow your specific AI agent's skill installation documentation.

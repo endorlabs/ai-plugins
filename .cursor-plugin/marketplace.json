@@ -9,7 +9,7 @@
   },
   "plugins": [
     {
-      "name": "endorlabs",
+      "name": "ai-plugins",
       "source": "./",
       "description": "Endor Labs plugin for setting up endorctl"
     }

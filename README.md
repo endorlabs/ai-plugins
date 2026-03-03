@@ -42,7 +42,7 @@ npm install -g skills
 Add the skill to OpenCode, Claude Code, Codex, Cursor, Cursor-cli and other agents:
 
 ```bash
-npx skills add endorlabs/endor-skills
+npx skills add endorlabs/ai-plugins
 ```
 
 ### Option 2: Build locally
@@ -52,7 +52,7 @@ npx skills add endorlabs/endor-skills
 ```bash
 # Clone this repository
 git clone <your-repo-url>
-cd endor-skills
+cd ai-plugins
 
 # Build the skill
 chmod +x build.sh

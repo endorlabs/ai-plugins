@@ -6,7 +6,7 @@
     "name": "Endor Labs",
     "url": "https://github.com/endorlabs"
   },
-  "repository": "https://github.com/endorlabs/endor-skills",
+  "repository": "https://github.com/endorlabs/ai-plugins",
   "license": "MIT",
   "keywords": ["security", "dependencies", "endorlabs", "endorctl", "sca", "endor"]
 }

@@ -9,5 +9,6 @@
   },
   "repository": "https://github.com/endorlabs/ai-plugins",
   "license": "MIT",
-  "keywords": ["security", "dependencies", "endorlabs", "endorctl", "sca"]
+  "keywords": ["security", "dependencies", "endorlabs", "endorctl", "sca"],
+  "logo": "assets/logo.svg"
 }

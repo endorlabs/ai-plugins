@@ -1,5 +1,5 @@
 {
-  "name": "endorlabs",
+  "name": "ai-plugins",
   "version": "1.0.0",
   "description": "Set up endorctl and use Endor Labs to scan, prioritize, and fix security risks across your software supply chain",
   "author": {

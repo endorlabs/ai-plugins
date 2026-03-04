@@ -65,7 +65,7 @@ This creates `endor-setup.skill` in the `dist/` directory.
 
 ```bash
 # Inside claude code
-/plugin marketplace add prakhar-per/ai-plugins
+/plugin marketplace add endorlabs/ai-plugins
 
 /plugin install ai-plugins@endorlabs
 

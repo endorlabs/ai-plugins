@@ -1,5 +1,5 @@
 {
-  "name": "endorlabs",
+  "name": "endorlabs-plugin-marketplace",
   "owner": {
     "name": "Endor Labs",
     "email": "support@endorlabs.com"
@@ -9,7 +9,7 @@
   },
   "plugins": [
     {
-      "name": "ai-plugins",
+      "name": "endorlabs",
       "source": "./",
       "description": "Endor Labs plugin for setting up endorctl"
     }

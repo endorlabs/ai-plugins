@@ -308,15 +308,28 @@ Construct the `AUTH_FLAGS` based on the user's provider selection:
 # Browser (generic): AUTH_FLAGS="--auth-mode=browser-auth"
 ```
 
-**Step 4c-i: Initiate brower oauth and capture tenant list**
+**Step 4c-i: Initiate browser oauth and capture tenant list**
 
-Run init and capture output — this will open the browser for OAuth. After browser auth completes, it will show a tenant list if the user has multiple tenants:
+Run init and capture output — this will open the browser for OAuth. After browser auth completes, it will show a tenant list if the user has multiple tenants.
+
+**IMPORTANT**: Use a timeout to prevent the command from blocking indefinitely at the interactive tenant selection prompt. The shell tool in AI coding agents (Cursor, Claude Code, etc.) cannot provide interactive input to a running process. The timeout ensures the command exits so the agent can parse the output and proceed to Step 4c-ii.
+
 ```bash
-# Run init and capture output (opens browser for OAuth)
-endorctl init $AUTH_FLAGS --namespace=<user-provided-namespace> 2>&1 | tee /tmp/endorctl_init_output.txt
+# Run init with a timeout (60s allows time for browser OAuth, but won't hang forever at the tenant prompt)
+# The timeout will kill the process after 60 seconds if it's still waiting for input
+timeout 60 bash -c 'endorctl init $AUTH_FLAGS --namespace=<user-provided-namespace> 2>&1' | tee /tmp/endorctl_init_output.txt || true
 ```
 
-If the command fails with EOF error and shows a tenant list like:
+After this command completes (either successfully or via timeout/EOF), check the captured output:
+```bash
+# Check if tenant selection was required
+if grep -q "Please select the tenant" /tmp/endorctl_init_output.txt; then
+  echo "MULTI_TENANT_DETECTED"
+  cat /tmp/endorctl_init_output.txt
+fi
+```
+
+If the output shows a tenant list like:
 ```
 Your account has access to multiple tenants. Please select the tenant you would like to initialize:
 0 : tenant-a [SYSTEM_ROLE_ADMIN]
@@ -325,13 +338,23 @@ Your account has access to multiple tenants. Please select the tenant you would 
 Enter tenant number:
 ```
 
+Then proceed immediately to Step 4c-ii.
+
 **Step 4c-ii: Re-run with tenant number piped in**
-Parse the output to find the tenant number matching the user's requested namespace, then:
+
+Parse the captured output to find the tenant number matching the user's requested namespace. The tenant number is the number before the `:` on the line containing the namespace name.
+
 ```bash
-# Find the line number for the user's namespace and pipe it
-# Example: if user wants "parent" and it's option 18:
-endorctl init $AUTH_FLAGS --namespace=<user-provided-namespace> 2>&1 <<< "<tenant-number>"
+# Parse the tenant number from the captured output
+# Example: for namespace "qa-test", find the line "15 : qa-test [SYSTEM_ROLE_ADMIN]" and extract "15"
+TENANT_NUM=$(grep -E "^\s*[0-9]+ : <user-provided-namespace> " /tmp/endorctl_init_output.txt | awk '{print $1}')
+echo "Found tenant number: $TENANT_NUM"
+
+# Re-run with tenant number piped via stdin (no tee needed this time)
+echo "$TENANT_NUM" | endorctl init $AUTH_FLAGS --namespace=<user-provided-namespace>
 ```
+
+**IMPORTANT**: The `echo "$TENANT_NUM" |` syntax pipes the tenant number into stdin, which is more portable across shell environments than `<<<`. This avoids the interactive prompt entirely on the second run.
 
 **If authentication still fails** (e.g., user doesn't have access to the specified namespace):
 

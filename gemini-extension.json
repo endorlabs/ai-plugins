@@ -1,0 +1,17 @@
+{
+  "name": "endorlabs",
+  "displayName": "Endor Labs AI Plugins",
+  "description": "Set up endorctl and use Endor Labs to scan, prioritize, and fix security risks across your software supply chain.",
+  "version": "1.0.0",
+  "publisher": "endorlabs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/endorlabs/ai-plugins"
+  },
+  "homepage": "https://www.endorlabs.com",
+  "keywords": ["security", "endorlabs", "endorctl", "sca", "endor"],
+  "skills": {
+    "path": "./skills"
+  }
+}

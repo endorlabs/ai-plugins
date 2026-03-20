@@ -13,7 +13,9 @@ When the user asks to set up endorctl and run basic scan, follow this sequence:
 
 1. **Check if endorctl is installed** (Step 1)
    - If NOT installed → Download and install it (Step 2)
-   - If installed but NOT authenticated → Ask for namespace (Step 3), then Authenticate (Step 4)
+   - If installed but NOT authenticated → Ask if they have an existing tenant (Step 3a), then branch:
+     - **Yes (existing tenant)** → Ask for namespace (Step 3), then Authenticate (Step 4), then run scan
+     - **No (no existing tenant)** → Browser callback auth (Step 4b), capture ENDOR_TOKEN (listener on port 30000, `redirect=cli`), then run scan with `--namespace=demo-trial --dry-run`
    - If installed AND authenticated → Ask for namespace (Step 3), then run scan
 
 2. **ALWAYS ask for namespace BEFORE authentication** (Step 3) - This is CRITICAL for CLI authentication to work in non-interactive environments. The namespace must be collected first so it can be passed to `endorctl init --namespace=<namespace>` to avoid interactive tenant selection prompts.
@@ -69,7 +71,7 @@ fi
 **Decision tree based on results:**
 - If `NOT_INSTALLED`: Immediately go to Step 2 (Download) - DO NOT ask the user, just proceed with installation
 - If `CONFIG_EXISTS`: User is already authenticated → The `ENDOR_API` has been extracted using the grep command above. Go to Step 3 (Ask for Namespace). **Do NOT run `cat` on the config file.**
-- If `NOT_AUTHENTICATED`: Go to Step 4 (Authenticate), then Step 3 (Ask for Namespace)
+- If `NOT_AUTHENTICATED`: Go to Step 3a (Ask if user has existing tenant), then branch per user's answer (Step 3 + 4 + 5 for existing tenant, or Step 4b for no-tenant browser callback flow).
 
 **CRITICAL**: The config file check is ONLY to determine if authentication is already set up. Even if a namespace exists in the config, you MUST still ask the user which namespace they want to use before running the scan. Never assume the namespace from the config file.
 
@@ -201,7 +203,20 @@ endorctl --version
 ```
 If this command prints the version information, endorctl has been downloaded and verified successfully. If it fails, retry the installation steps above.
 
-## Step 3: Ask for Namespace (ALWAYS REQUIRED)
+## Step 3a: Ask if user has existing tenant (ONLY when NOT_AUTHENTICATED)
+
+**When to execute**: Only when Step 1 shows `NOT_AUTHENTICATED` (endorctl is installed but no config exists).
+
+Ask the user using AskUserQuestion (or equivalent) with two options:
+
+1. **Yes, I have an existing Endor Labs tenant** – Continue with the standard flow: ask for namespace (Step 3), then authenticate with `endorctl init` (Step 4), then run scan (Step 5).
+2. **No, I don't have a tenant yet** – Use the no-tenant flow: browser callback auth (Step 4b) to capture `ENDOR_TOKEN`, then run a dry-run scan to try Endor Labs without a tenant.
+
+**Branch**:
+- If **Yes** → Proceed to Step 3 (Ask for Namespace), then Step 4 (Authenticate), then Step 5 (Run Scan).
+- If **No** → Proceed to Step 4b (Browser callback auth and dry-run scan).
+
+## Step 3: Ask for Namespace (ALWAYS REQUIRED when user has existing tenant)
 
 **IMPORTANT**: ALWAYS ask the user for their Endor Labs namespace before running a scan, even if a namespace already exists in the config file.
 
@@ -264,7 +279,7 @@ endorctl scan --namespace=<user-provided-namespace>
 
 Ask the user using AskUserQuestion with two options:
 
-1. **CLI Authentication (Recommended)** - Sign in via browser using your identity provider (Google, GitHub, GitLab, SSO, etc.)
+1. **CLI Authentication (Recommended)** - Sign in via browser using your identity provider (Google, GitHub, GitLab, Email, SSO, etc.)
 2. **API Key** - Use API key and secret for automated/CI environments (no browser needed)
 
 ### Option 1: CLI Authentication
@@ -276,18 +291,20 @@ If the user selects CLI Authentication, ask which identity provider they use. Pr
 1. **Google** - Sign in with Google
 2. **GitHub** - Sign in with GitHub
 3. **GitLab** - Sign in with GitLab
-4. **Enterprise SSO** - Sign in via your organization's SSO provider (requires tenant name)
-5. **Browser (generic)** - Generic browser-based sign-in
+4. **Email** - Sign in with a magic link sent to your email
+5. **Enterprise SSO** - Sign in via your organization's SSO provider (requires tenant name)
 
-Based on the user's selection, use the corresponding `--auth-mode` value:
+Based on the user's selection, use the corresponding flags:
 
-| Provider         | `--auth-mode` value | Additional Flags              |
-|------------------|----------------------|-------------------------------|
-| Google           | `google`             | None                          |
-| GitHub           | `github`             | None                          |
-| GitLab           | `gitlab`             | None                          |
-| Enterprise SSO   | `sso`                | `--auth-tenant <tenant-name>` |
-| Browser (generic)| `browser-auth`       | None                          |
+| Provider         | Flag(s)                                             |
+|------------------|-----------------------------------------------------|
+| Google           | `--auth-mode=google`                                |
+| GitHub           | `--auth-mode=github`                                |
+| GitLab           | `--auth-mode=gitlab`                                |
+| Email            | `--auth-email=<user-email>` (no `--auth-mode`)      |
+| Enterprise SSO   | `--auth-mode=sso --auth-tenant=<tenant-name>`       |
+
+**For Email**: After the user selects Email, use AskUserQuestion with a free-text input (no predefined options) to ask for their email address: "What is your email address? (A magic link will be sent to this email for authentication)"
 
 **For Enterprise SSO only**: After the user selects SSO, also ask them for their SSO tenant name:
 ```
@@ -301,12 +318,14 @@ Based on the user's selection, use the corresponding `--auth-mode` value:
 Construct the `AUTH_FLAGS` based on the user's provider selection:
 ```bash
 # Set AUTH_FLAGS based on user's provider selection
-# Google:           AUTH_FLAGS="--auth-mode=google"
-# GitHub:           AUTH_FLAGS="--auth-mode=github"
-# GitLab:           AUTH_FLAGS="--auth-mode=gitlab"
-# Enterprise SSO:   AUTH_FLAGS="--auth-mode=sso --auth-tenant=<tenant-name>"
-# Browser (generic): AUTH_FLAGS="--auth-mode=browser-auth"
+# Google:            AUTH_FLAGS="--auth-mode=google"
+# GitHub:            AUTH_FLAGS="--auth-mode=github"
+# GitLab:            AUTH_FLAGS="--auth-mode=gitlab"
+# Email:             AUTH_FLAGS="--auth-email=<user-email>"   (NOTE: uses --auth-email, NOT --auth-mode)
+# Enterprise SSO:    AUTH_FLAGS="--auth-mode=sso --auth-tenant=<tenant-name>"
 ```
+
+**IMPORTANT for Email auth**: Email authentication uses `--auth-email=<email>` instead of `--auth-mode`. When the user selects Email, the `endorctl init` command uses a magic link flow: the server sends a magic link to the provided email address, and the user must click it to complete authentication. The callback redirect then provides the token.
 
 **Step 4c-i: Initiate browser oauth and capture tenant list**
 
@@ -372,6 +391,89 @@ No init needed - scan will use these credentials directly.
 
 **Note**: API Key authentication avoids interactive prompts entirely and works best in automated/CLI environments. **This is the recommended approach for users who frequently encounter multi-tenant selection issues.**
 
+## Step 4b: No-tenant browser callback auth and dry-run scan
+
+**When to execute**: Only when the user answered "No" in Step 3a (they do not have an existing Endor Labs tenant). This flow captures an auth token via browser callback on port **30000** and runs a dry-run scan against the **demo-trial** namespace (no `endorctl init` required).
+
+### Step 4b-i: Ask identity provider
+
+Ask the user which identity provider they want to sign in with (e.g. Google, GitHub, GitLab, Email). Map the answer to `AUTH_MODE`:
+
+| Provider         | `AUTH_MODE`    | Extra info needed         |
+|------------------|----------------|---------------------------|
+| Google           | `google`       | None                      |
+| GitHub           | `github`       | None                      |
+| GitLab           | `gitlab`       | None                      |
+| Email            | `email`        | User's email address      |
+
+**For Email**: Use AskUserQuestion with a free-text input (no predefined options) to ask for the user's email address: "What is your email address? (A magic link will be sent to this email for authentication)". The auth URL uses a different path (see Step 4b-ii).
+
+### Step 4b-ii: Build auth URL and callback listener
+
+Use the Endor Labs auth URL with **`redirect=cli`** only. Do **not** use a full URL like `redirect=http://localhost:30000` – the server may concatenate it incorrectly (e.g. resulting in `https://app.endorlabs.comhttp//localhost:3000`). The `cli` redirect tells the API to send the callback to **localhost:30000**, so the listener must use port **30000**.
+
+```bash
+# Set auth provider (e.g. from user's selection: google, github, gitlab, email)
+AUTH_MODE="google"
+
+# Auth URL – MUST use redirect=cli (API then redirects to localhost:30000). Do NOT use redirect=http://localhost:... or URL can be malformed.
+AUTH_URL="https://api.endorlabs.com/v1/auth/${AUTH_MODE}?redirect=cli"
+
+# For Email, use a DIFFERENT path (/v1/auth/login) with the email parameter:
+# AUTH_URL="https://api.endorlabs.com/v1/auth/login?email=<user-email>&redirect=cli"
+```
+
+**IMPORTANT for Email auth**: Email uses the `/v1/auth/login` endpoint (not `/v1/auth/email`). The API sends a magic link to the provided email address. The user must check their inbox and click the magic link to complete authentication. The magic link redirects to `localhost:30000` with the token, so the callback listener (Step 4b-iii) captures it the same way as other providers.
+
+### Step 4b-iii: Start callback listener and open browser
+
+Start an HTTP listener on port **30000** (must match the port used by `redirect=cli`). It responds to the browser redirect and captures the token from the request. Open the browser in the background after a short delay so the listener is ready.
+
+```bash
+# Response to send back to the browser after capturing the request
+HTTP_RESPONSE="HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\r\n\r\n<html><body><h2>Authentication successful!</h2><p>You can close this tab.</p></body></html>"
+
+# Open browser in background (after 1s so listener is ready)
+(sleep 1 && open "$AUTH_URL" 2>/dev/null || xdg-open "$AUTH_URL" 2>/dev/null) &
+
+# One-shot HTTP listener on port 30000 (required for redirect=cli). Capture GET request and send response.
+# Try nc -l 30000 first (Linux); fallback to nc -l -p 30000 (macOS/BSD)
+REQUEST=$(echo -e "$HTTP_RESPONSE" | nc -l 30000 2>/dev/null) || \
+REQUEST=$(echo -e "$HTTP_RESPONSE" | nc -l -p 30000 2>/dev/null)
+
+# Extract token from GET line: GET /?token=eyJhbG... HTTP/1.1
+ENDOR_TOKEN=$(echo "$REQUEST" | head -1 | sed -n 's/.*token=\([^ &]*\).*/\1/p')
+
+if [ -z "$ENDOR_TOKEN" ]; then
+  echo "ERROR: Failed to capture token from browser callback. If the API uses redirect=headless, the token is shown in the browser – please paste it when prompted, or set ENDOR_TOKEN manually."
+  exit 1
+fi
+
+# Persist for next command (shell state may not persist)
+echo "$ENDOR_TOKEN" > /tmp/endor_token.txt
+export ENDOR_TOKEN
+echo "Token captured successfully (expires in ~1 hour)."
+```
+
+**Email auth note**: When using Email authentication, the browser opens the auth URL which triggers the API to send a magic link email. The user must then check their inbox and click the magic link. This can take longer than OAuth providers (30s–2min depending on email delivery). The `nc` listener will wait until the magic link callback redirects to `localhost:30000`. Inform the user: _"Please check your email and click the magic link to complete authentication. The listener is waiting for the callback."_
+
+**Fallback when API only supports `redirect=headless`**: If the callback never receives a request (e.g. API only redirects to a page that displays the token), ask the user to copy the token from the browser and run: `export ENDOR_TOKEN=<paste-token-here>` or write it to `/tmp/endor_token.txt`, then continue to Step 4b-iv.
+
+### Step 4b-iv: Run dry-run scan with captured token
+
+Run the scan with `--namespace=demo-trial --dry-run` using the captured token. **Always use namespace `demo-trial`** for the no-tenant flow. Ensure `ENDOR_TOKEN` is set (from environment or from `/tmp/endor_token.txt` if the shell does not persist).
+
+```bash
+# If ENDOR_TOKEN not set in this shell, load from temp file
+[ -z "$ENDOR_TOKEN" ] && export ENDOR_TOKEN=$(cat /tmp/endor_token.txt 2>/dev/null)
+
+export PATH="$HOME/bin:$PATH"   # if endorctl was installed to ~/bin
+# With specific scan type using --dry-run (fetch flag from docs first!)
+endorctl scan --namespace=demo-trial --dry-run <flags-from-docs>
+```
+
+**Note**: The no-tenant flow always uses namespace **demo-trial** with **--dry-run**. After the user creates a tenant, they can run `endorctl init` (Step 4) and use the normal flow with their namespace and full scans.
+
 ## Scan Types and Options (ALWAYS FETCH FROM DOCS)
 
 **IMPORTANT**: When the user requests a specific type of scan (e.g., "quick scan", "secrets scan", "SAST scan", "container scan", etc.), you MUST fetch the current scan options from the documentation before running the scan.
@@ -436,17 +538,16 @@ endorctl scan --namespace=$ENDOR_NAMESPACE <flags-from-docs>
 
 ## Full Automated Setup
 
-For first-time users:
-1. Download endorctl for the current OS (if not installed)
-2. **ALWAYS** ask user for their ENDOR_NAMESPACE first (this is needed for authentication)
-3. Authenticate: Ask user "CLI Authentication or API Key?"
-   - **CLI Auth**: Ask which provider (Google, GitHub, GitLab, Enterprise SSO, Browser), then run `endorctl init --auth-mode=<mode> --namespace=<namespace>` (MUST include namespace to avoid interactive prompts). For SSO, also collect `--auth-tenant`.
-   - **API Key**: Instruct the user to set these environment variables, ENDOR_API_CREDENTIALS_KEY and ENDOR_API_CREDENTIALS_SECRET, then export them
-4. Run `endorctl scan --namespace=<namespace>`
+For first-time users (no config):
+1. Download endorctl for the current OS (if not installed).
+2. **Ask "Do you have an existing Endor Labs tenant?"** (Step 3a).
+   - **Yes** → Ask for ENDOR_NAMESPACE (Step 3), then authenticate (Step 4), then run scan (Step 5).
+   - **No** → Browser callback auth (Step 4b): ask identity provider, open browser, listen on port **30000**, capture ENDOR_TOKEN, then run `endorctl scan --namespace=demo-trial --dry-run`.
+3. For **existing-tenant** path: collect namespace first, then either CLI Auth (ask provider, run `endorctl init --auth-mode=<mode> --namespace=<namespace>` or `endorctl init --auth-email=<email> --namespace=<namespace>` for Email auth) or API Key (instruct user to set ENDOR_API_CREDENTIALS_KEY and ENDOR_API_CREDENTIALS_SECRET), then run `endorctl scan --namespace=<namespace>`.
 
 For returning users (already authenticated):
-1. Check installation and authentication status
-2. **ALWAYS** ask user for their ENDOR_NAMESPACE (always offer existing config value as suggestion)
-3. Run `endorctl scan --namespace=<namespace>`
+1. Check installation and authentication status.
+2. **ALWAYS** ask user for their ENDOR_NAMESPACE (always offer existing config value as suggestion).
+3. Run `endorctl scan --namespace=<namespace>`.
 
 **CRITICAL REMINDER**: The namespace MUST be collected BEFORE running `endorctl init` with Browser OAuth. This prevents EOF errors from interactive tenant selection prompts in non-interactive environments like Claude Code.

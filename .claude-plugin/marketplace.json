@@ -17,6 +17,41 @@
         "name": "Endor Labs"
       },
       "keywords": ["security", "dependencies", "endorctl", "sca"]
+    },
+    {
+      "name": "endor-labs-agent-kit",
+      "displayName": "Endor Labs Agent Kit",
+      "source": "./plugins/claude/endor-labs-agent-kit",
+      "description": "Endor Labs workflow agents for SCA remediation, SAST triage, upgrade impact analysis, troubleshooting, and dependency risk review.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Endor Labs"
+      },
+      "category": "Developer Tools",
+      "keywords": [
+        "endor-labs",
+        "security",
+        "sca",
+        "sast",
+        "claude-code",
+        "agentic remediation",
+        "SAST remediation",
+        "agentic AppSec",
+        "AppSec",
+        "Upgrade Impact Analysis"
+      ],
+      "tags": [
+        "endor-labs",
+        "security",
+        "sca",
+        "sast",
+        "claude-code",
+        "agentic remediation",
+        "SAST remediation",
+        "agentic AppSec",
+        "AppSec",
+        "Upgrade Impact Analysis"
+      ]
     }
   ]
 }

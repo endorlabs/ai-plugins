@@ -1,0 +1,153 @@
+---
+name: endor-agent-kit-setup
+description: Use when setting up Endor Labs Agent Kit for Antigravity CLI, checking readiness, verifying Endor auth, choosing namespaces, or diagnosing missing endorctl, gh, Antigravity CLI, Endor MCP, or workflow prerequisites.
+---
+
+# Endor Agent Kit Setup For Antigravity CLI
+
+Generated for the Endor Labs Agent Kit Antigravity CLI plugin.
+
+## Bundled Antigravity CLI Workflows
+
+- `Triage AI SAST findings` -> skill `ai-sast-triage`, subagent `@ai-sast-triage`
+- `Diagnose Endor setup and scan issues` -> skill `endor-troubleshooter`, subagent `@endor-troubleshooter`
+- `Assess GitHub onboarding gaps` -> skill `probe-droid`, subagent `@probe-droid`
+- `Find safe SCA remediation paths` -> skill `sca-remediation`, subagent `@sca-remediation`
+
+## Antigravity CLI Plugin Commands
+
+Validate and install from the generated local plugin package:
+
+```bash
+antigravity plugin validate /path/to/endor-labs-agent-kit/plugins/antigravity/endor-labs-agent-kit
+antigravity plugin install /path/to/endor-labs-agent-kit/plugins/antigravity/endor-labs-agent-kit
+antigravity plugin list
+```
+
+Remove the plugin only after explicit user approval:
+
+```bash
+antigravity plugin uninstall endor-labs-agent-kit
+```
+
+Antigravity CLI is the consumer migration path for Gemini CLI. Keep Gemini
+extension installation and Antigravity plugin installation as separate
+host-specific choices, and validate the selected package before installing.
+
+# Endor Agent Kit Setup
+
+Use this setup workflow when the user asks to install, check, update, or remove
+Endor Labs Agent Kit plugin support files, or when an Endor Agent Kit workflow
+is blocked by missing `endorctl`, GitHub CLI, authentication, namespace, or
+local toolchain readiness.
+
+## Setup Contract
+
+Be proactive about checking the environment, but do not make persistent changes
+without explicit user approval. Report evidence for each check. Never print
+secret values.
+
+Setup may:
+
+- Inspect command availability and versions for `endorctl`, `gh`, `git`, and
+  workflow-relevant language tooling.
+- Safely parse `~/.endorctl/config.yaml` for non-secret fields such as
+  `ENDOR_API` and `ENDOR_NAMESPACE`.
+- Report the presence of credential fields by key name only.
+- Run lightweight read-only Endor auth verification when config or credentials
+  are present.
+- Offer re-authentication when verification fails.
+- Check `gh` authentication and point to official installation guidance.
+- Install, update, or uninstall host-specific Agent Kit support files only after
+  explicit approval.
+
+Setup must not:
+
+- Run `endorctl scan`.
+- Run `endorctl host-check`.
+- Print `~/.endorctl/config.yaml` or secret values.
+- Ask the user to paste API keys, API secrets, tokens, or passwords into chat.
+- Write `ENDOR_API_CREDENTIALS_KEY` or `ENDOR_API_CREDENTIALS_SECRET`.
+- Edit shell profile files such as `.zshrc`, `.bashrc`, or PowerShell profile.
+- Install `gh`, package managers, language runtimes, Docker, JDKs, or build
+  tooling.
+- Configure MCP globally. MCP remains opt-in per recipe/workflow.
+
+## Readiness Report
+
+Start with a concise readiness report. Separate configured state from verified
+state.
+
+Include these sections when relevant:
+
+- Ready
+- Needs action
+- Optional checks
+- Available fixes
+
+For Endor auth, report sanitized fields only:
+
+```text
+Endor config: found
+API endpoint: https://api.endorlabs.com
+Namespace: auri
+Auth: API credential fields present
+Endor auth: verified for namespace auri
+Secret values: hidden
+```
+
+If a namespace is missing, say that a namespace is required before live Endor
+lookups. If a namespace is detected, let the user use it or override it for the
+current workflow.
+
+## Endor Tooling
+
+If `endorctl` is missing, offer documented install options in this order:
+
+1. Package manager route when available, such as Homebrew or npm.
+2. Direct binary download with checksum verification.
+
+Only install `endorctl` after explicit approval. If installing to `~/bin`, tell
+the user how to update `PATH` for the current shell. Do not edit shell profiles.
+
+If API credential fields are present, do not run browser auth unless the user
+explicitly asks to switch or re-authenticate. If API credential setup is needed,
+tell the user to set `ENDOR_API_CREDENTIALS_KEY` and
+`ENDOR_API_CREDENTIALS_SECRET` through their preferred secure environment
+mechanism.
+
+When browser or SSO authentication is requested, confirm the namespace first.
+Use non-interactive flags where supported. If multi-tenant selection appears,
+summarize the available tenant choices and ask the user before retrying.
+
+## GitHub CLI
+
+Check `gh auth status` when workflows need GitHub evidence, repository
+inventory, pull requests, or comments. If `gh` is missing, provide current
+official installation guidance instead of installing it automatically.
+
+Do not manage GitHub token scopes or create personal access tokens in v1. Verify
+only the specific read or write capability needed for the selected workflow.
+
+## Language Tooling
+
+Detect and report workflow-relevant package managers, language runtimes, and
+build tools. Do not install them.
+
+When tooling is missing, report the affected validation step and ask the user to
+install it through their team-standard toolchain.
+
+## Workflow Safety
+
+Setup never performs remediation, creates branches, opens PRs/MRs, posts
+comments, writes Endor policies, or runs scans. Mutating workflows such as SCA
+Remediation and AI SAST Triage keep those actions behind their generated agent
+approval gates.
+
+## Antigravity-Specific Rules
+
+- Keep Antigravity plugin installs explicit. Do not install, link, update, enable, disable, or uninstall plugins without user approval.
+- Do not add plugin-wide MCP automatically. Only guide MCP setup when a selected workflow needs it and the user approves.
+- Do not collect, write, or persist Endor API credential values. Report credential presence by key name only.
+- Antigravity subagents are host-managed; if subagent delegation is unavailable, use the matching skill and report the limitation.
+- Tell the user to restart Antigravity CLI after installing or updating the plugin if newly installed skills or subagents are not visible.

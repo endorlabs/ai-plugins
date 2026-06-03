@@ -18,10 +18,12 @@
 - Source repo: `/Users/mattbrown/AURI/endor-labs-agent-kit`
 - Public mirror: `/Users/mattbrown/AURI/ai-plugins`
 - Generated package tree: `plugins/`
-- Root skill-compatible package: `.cursor-plugin/`, `skills/`, `GEMINI.md`,
-  `gemini-extension.json`
+- Cursor package: `.cursor-plugin/`, `agents/`, `skills/`, `assets/logo.svg`
+- Root skill-compatible compatibility: `GEMINI.md`, `gemini-extension.json`,
+  `skills/`
 
 Generated provider packages under `plugins/` should come from Agent Kit
+publication output. Cursor package files should also come from Agent Kit
 publication output. Behavior changes belong in the source repo first.
 
 ## Distribution Paths
@@ -33,8 +35,8 @@ publication output. Behavior changes belong in the source repo first.
   `plugins/codex/endor-labs-agent-kit/`
 - Gemini CLI: `plugins/gemini/endor-labs-agent-kit/`
 - Antigravity CLI: `plugins/antigravity/endor-labs-agent-kit/`
-- Cursor/root: `.cursor-plugin/`, `skills/`, `GEMINI.md`,
-  `gemini-extension.json`
+- Cursor: `.cursor-plugin/`, `agents/`, `skills/`, `assets/logo.svg`
+- Root compatibility: `GEMINI.md`, `gemini-extension.json`, `skills/`
 
 ## Common Validation
 
@@ -48,6 +50,8 @@ python3 -m json.tool gemini-extension.json >/dev/null
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
 diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/plugins ./plugins
+diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
+diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/agents ./agents
 git diff --check
 ```
 

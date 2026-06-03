@@ -72,8 +72,10 @@ Gemini and Antigravity packages are staged under `plugins/`. Gemini installs
 from the generated extension directory for local validation and from the tagged
 GitHub repository for public distribution; no zip artifact is published.
 
-Cursor uses the repository root package metadata in `.cursor-plugin/` and the
-root Agent Kit skill set in `skills/`.
+Cursor uses the repository root package metadata in `.cursor-plugin/`, generated
+workflow agents in `agents/`, support skills in `skills/`, and `assets/logo.svg`. The root
+`GEMINI.md` and `gemini-extension.json` files are separate compatibility files;
+they are not Cursor package metadata.
 
 ## Distribution Paths
 
@@ -83,18 +85,18 @@ root Agent Kit skill set in `skills/`.
 | Codex | `.agents/plugins/marketplace.json`, `plugins/codex/endor-labs-agent-kit/` | Package includes skills, custom-agent TOML files, and installer script. |
 | Gemini CLI | `plugins/gemini/endor-labs-agent-kit/` | Directory is for local validation; public installs use the tagged GitHub repository. |
 | Antigravity CLI | `plugins/antigravity/endor-labs-agent-kit/` | Installs from the package directory with root `plugin.json`. |
-| Cursor | `.cursor-plugin/`, `skills/`, `assets/logo.svg` | Root skill package mirrors Agent Kit's common workflows. |
-| Root skill-compatible hosts | `gemini-extension.json`, `GEMINI.md`, `skills/` | Compatibility surface for hosts that load root skill directories. |
+| Cursor | `.cursor-plugin/`, `agents/`, `skills/`, `assets/logo.svg` | Source-generated Cursor plugin with common workflow agents and support skills. |
+| Root skill-compatible hosts | `gemini-extension.json`, `GEMINI.md`, `skills/` | Compatibility surface for hosts that load root skill directories; Gemini CLI's primary package is under `plugins/gemini/endor-labs-agent-kit/`. |
 
 ## Capabilities
 
-| Job | Claude Code | Codex | Gemini CLI | Antigravity CLI | Cursor/root |
+| Job | Claude Code | Codex | Gemini CLI | Antigravity CLI | Cursor |
 | --- | --- | --- | --- | --- | --- |
-| Set up this machine and self-check readiness | Skill `endor-agent-kit-setup` | Skill `endor-agent-kit-setup` | Skill `endor-agent-kit-setup` | Skill `endor-agent-kit-setup` | Skill `endor-agent-kit-setup` |
-| Triage Endor AI SAST findings | Agent `endor-labs-agent-kit:ai-sast-triage` | Skill `ai-sast-triage`, custom agent `endor-ai-sast-triage-agent` | Skill/subagent `ai-sast-triage` | Skill/subagent `ai-sast-triage` | Skill `ai-sast-triage` |
-| Diagnose Endor setup, scan, or integration issues | Agent `endor-labs-agent-kit:endor-troubleshooter` | Skill `endor-troubleshooter`, custom agent `endor-troubleshooter-agent` | Skill/subagent `endor-troubleshooter` | Skill/subagent `endor-troubleshooter` | Skill `endor-troubleshooter` |
-| Assess GitHub onboarding gaps | Agent `endor-labs-agent-kit:probe-droid` | Skill `probe-droid`, custom agent `endor-probe-droid-agent` | Skill/subagent `probe-droid` | Skill/subagent `probe-droid` | Skill `probe-droid` |
-| Find safe SCA remediation paths | Agent `endor-labs-agent-kit:sca-remediation` | Skill `sca-remediation`, custom agent `endor-sca-remediation-agent` | Skill/subagent `sca-remediation` | Skill/subagent `sca-remediation` | Skill `sca-remediation` |
+| Set up this machine and self-check readiness | Skill `endor-agent-kit-setup` | Skill `endor-agent-kit-setup` | Skill `endor-agent-kit-setup` | Skill `endor-agent-kit-setup` | Agent `endor-agent-kit-setup-agent`, skill `endor-agent-kit-setup` |
+| Triage Endor AI SAST findings | Agent `endor-labs-agent-kit:ai-sast-triage` | Skill `ai-sast-triage`, custom agent `endor-ai-sast-triage-agent` | Skill/subagent `ai-sast-triage` | Skill/subagent `ai-sast-triage` | Agent `endor-ai-sast-triage-agent`, skill `ai-sast-triage` |
+| Diagnose Endor setup, scan, or integration issues | Agent `endor-labs-agent-kit:endor-troubleshooter` | Skill `endor-troubleshooter`, custom agent `endor-troubleshooter-agent` | Skill/subagent `endor-troubleshooter` | Skill/subagent `endor-troubleshooter` | Agent `endor-troubleshooter-agent`, skill `endor-troubleshooter` |
+| Assess GitHub onboarding gaps | Agent `endor-labs-agent-kit:probe-droid` | Skill `probe-droid`, custom agent `endor-probe-droid-agent` | Skill/subagent `probe-droid` | Skill/subagent `probe-droid` | Agent `endor-probe-droid-agent`, skill `probe-droid` |
+| Find safe SCA remediation paths | Agent `endor-labs-agent-kit:sca-remediation` | Skill `sca-remediation`, custom agent `endor-sca-remediation-agent` | Skill/subagent `sca-remediation` | Skill/subagent `sca-remediation` | Agent `endor-sca-remediation-agent`, skill `sca-remediation` |
 | Use Claude-only read-only package and dependency helpers | Claude agents in `plugins/claude/endor-labs-agent-kit/agents/` | Not packaged in v1 | Not packaged in v1 | Not packaged in v1 | Not packaged in v1 |
 
 The legacy Claude package `plugins/claude/ai-plugins/` contains the same Claude
@@ -134,12 +136,12 @@ Generated Agent Kit workflows preserve these lookup requirements:
 
 ## Agent Catalog
 
-| Agent | Use it when you want to... | Claude Code | Codex | Gemini | Antigravity | Cursor/root |
+| Agent | Use it when you want to... | Claude Code | Codex | Gemini | Antigravity | Cursor |
 | --- | --- | --- | --- | --- | --- | --- |
-| AI SAST Triage | Triage Endor AI SAST findings, use exploit/remediation context, and open requested change requests | `plugins/claude/endor-labs-agent-kit/agents/ai-sast-triage.md` | `plugins/codex/endor-labs-agent-kit/skills/ai-sast-triage/` | `plugins/gemini/endor-labs-agent-kit/skills/ai-sast-triage/` | `plugins/antigravity/endor-labs-agent-kit/skills/ai-sast-triage/` | `skills/ai-sast-triage/` |
-| Endor Troubleshooter | Diagnose Endor Labs errors, warnings, scan failures, missing integrations, SSO, containers, policy, and reachability issues | `plugins/claude/endor-labs-agent-kit/agents/endor-troubleshooter.md` | `plugins/codex/endor-labs-agent-kit/skills/endor-troubleshooter/` | `plugins/gemini/endor-labs-agent-kit/skills/endor-troubleshooter/` | `plugins/antigravity/endor-labs-agent-kit/skills/endor-troubleshooter/` | `skills/endor-troubleshooter/` |
-| Probe Droid | Probe GitHub.com onboarding gaps and prescribe Endor setup actions | `plugins/claude/endor-labs-agent-kit/agents/probe-droid.md` | `plugins/codex/endor-labs-agent-kit/skills/probe-droid/` | `plugins/gemini/endor-labs-agent-kit/skills/probe-droid/` | `plugins/antigravity/endor-labs-agent-kit/skills/probe-droid/` | `skills/probe-droid/` |
-| SCA Remediation | Remediate dependency vulnerabilities with Endor SCA findings, UIA evidence, risk decisions, validation, and approved PR/MR creation | `plugins/claude/endor-labs-agent-kit/agents/sca-remediation.md` | `plugins/codex/endor-labs-agent-kit/skills/sca-remediation/` | `plugins/gemini/endor-labs-agent-kit/skills/sca-remediation/` | `plugins/antigravity/endor-labs-agent-kit/skills/sca-remediation/` | `skills/sca-remediation/` |
+| AI SAST Triage | Triage Endor AI SAST findings, use exploit/remediation context, and open requested change requests | `plugins/claude/endor-labs-agent-kit/agents/ai-sast-triage.md` | `plugins/codex/endor-labs-agent-kit/skills/ai-sast-triage/` | `plugins/gemini/endor-labs-agent-kit/skills/ai-sast-triage/` | `plugins/antigravity/endor-labs-agent-kit/skills/ai-sast-triage/` | `agents/endor-ai-sast-triage-agent.md` + `skills/ai-sast-triage/` |
+| Endor Troubleshooter | Diagnose Endor Labs errors, warnings, scan failures, missing integrations, SSO, containers, policy, and reachability issues | `plugins/claude/endor-labs-agent-kit/agents/endor-troubleshooter.md` | `plugins/codex/endor-labs-agent-kit/skills/endor-troubleshooter/` | `plugins/gemini/endor-labs-agent-kit/skills/endor-troubleshooter/` | `plugins/antigravity/endor-labs-agent-kit/skills/endor-troubleshooter/` | `agents/endor-troubleshooter-agent.md` + `skills/endor-troubleshooter/` |
+| Probe Droid | Probe GitHub.com onboarding gaps and prescribe Endor setup actions | `plugins/claude/endor-labs-agent-kit/agents/probe-droid.md` | `plugins/codex/endor-labs-agent-kit/skills/probe-droid/` | `plugins/gemini/endor-labs-agent-kit/skills/probe-droid/` | `plugins/antigravity/endor-labs-agent-kit/skills/probe-droid/` | `agents/endor-probe-droid-agent.md` + `skills/probe-droid/` |
+| SCA Remediation | Remediate dependency vulnerabilities with Endor SCA findings, UIA evidence, risk decisions, validation, and approved PR/MR creation | `plugins/claude/endor-labs-agent-kit/agents/sca-remediation.md` | `plugins/codex/endor-labs-agent-kit/skills/sca-remediation/` | `plugins/gemini/endor-labs-agent-kit/skills/sca-remediation/` | `plugins/antigravity/endor-labs-agent-kit/skills/sca-remediation/` | `agents/endor-sca-remediation-agent.md` + `skills/sca-remediation/` |
 | Dependency Decision Helper | Decide whether to add, upgrade to, or keep a package version | `plugins/claude/endor-labs-agent-kit/agents/dependency-decision-helper.md` | - | - | - | - |
 | Package Risk Summary | Summarize package-version risk | `plugins/claude/endor-labs-agent-kit/agents/package-risk-summary.md` | - | - | - | - |
 | Repository Dependency Reviewer | Review local dependency manifests with read-only Endor evidence | `plugins/claude/endor-labs-agent-kit/agents/repository-dependency-reviewer.md` | - | - | - | - |
@@ -147,33 +149,49 @@ Generated Agent Kit workflows preserve these lookup requirements:
 | Vulnerability Explainer | Understand a CVE, GHSA, or Endor vulnerability and next actions | `plugins/claude/endor-labs-agent-kit/agents/vulnerability-explainer.md` | - | - | - | - |
 | Remediation Planner | Preview safe dependency remediation options without opening PRs | `plugins/claude/endor-labs-agent-kit/agents/remediation-planner.md` | - | - | - | - |
 
-## Cursor And Root Package
+## Cursor And Root Compatibility
 
 The old root `endor-setup` skill has been replaced by the Agent Kit root skill
 package. Existing Cursor users who need the former behavior should stay pinned
 to their existing SHA.
 
-The current Cursor/root package contains:
+The current Cursor package contains source-generated Cursor metadata, agents,
+and support skills:
 
 ```text
 .cursor-plugin/
   marketplace.json
   plugin.json
+agents/
+  endor-agent-kit-setup-agent.md
+  endor-ai-sast-triage-agent.md
+  endor-troubleshooter-agent.md
+  endor-probe-droid-agent.md
+  endor-sca-remediation-agent.md
 assets/
   logo.svg
 skills/
   ai-sast-triage/
+    actions.yaml
+    architecture.svg
   endor-agent-kit-setup/
   endor-troubleshooter/
+    architecture.svg
   probe-droid/
+    architecture.svg
   sca-remediation/
-GEMINI.md
-gemini-extension.json
+    actions.yaml
+    architecture.svg
 ```
 
-The root package mirrors the common generated Agent Kit skills and normalizes
-host framing for skill-compatible hosts. It does not include Claude-only agents
-or Codex custom-agent TOML files.
+Root `GEMINI.md` and `gemini-extension.json` remain checked in for root
+skill-compatible compatibility. They are not generated by the Cursor package
+target and should not be used as Cursor metadata.
+
+The Cursor package mirrors the common generated Agent Kit workflows as Cursor
+plugin agents, keeps skills as support material, and normalizes Cursor host
+framing. It does not include Claude-only agents, Codex custom-agent TOML files,
+Gemini subagents, or Gemini extension metadata.
 
 ## Package Generation
 
@@ -195,9 +213,13 @@ Generated artifacts to sync into this repo:
 - `plugins/`
 - `.claude-plugin/marketplace.json`
 - `.agents/plugins/marketplace.json`
+- `.cursor-plugin/`
+- generated root workflow `agents/`
+- generated root workflow `skills/`
+- `assets/logo.svg`
 
-The root Cursor/skill-compatible package is derived from the generated common
-skill package and should preserve the same safety-critical workflow body.
+Root `GEMINI.md` and root `gemini-extension.json` are separate compatibility
+files. Do not sync them as Cursor package output.
 
 ## Validation
 
@@ -216,6 +238,13 @@ python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 python3 -m json.tool gemini-extension.json >/dev/null
+test -f agents/endor-agent-kit-setup-agent.md
+test -f agents/endor-ai-sast-triage-agent.md
+test -f agents/endor-troubleshooter-agent.md
+test -f agents/endor-probe-droid-agent.md
+test -f agents/endor-sca-remediation-agent.md
+test -f skills/ai-sast-triage/architecture.svg
+test -f skills/sca-remediation/actions.yaml
 git diff --check
 ```
 
@@ -223,10 +252,17 @@ Compare generated packages against the Agent Kit source repo:
 
 ```bash
 diff -qr /path/to/endor-labs-agent-kit/plugins ./plugins
+diff -qr /path/to/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
+diff -qr /path/to/endor-labs-agent-kit/agents ./agents
+for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
+  diff -qr "/path/to/endor-labs-agent-kit/skills/$skill" "./skills/$skill"
+done
 ```
 
 The only acceptable difference should be an explicitly documented distribution
-decision. A normal sync should be byte-for-byte identical.
+decision. A normal provider package sync should be byte-for-byte identical, and
+Cursor metadata/root workflow agents and support skills should match the
+source-generated Cursor package.
 
 ## Release Checklist
 
@@ -278,6 +314,7 @@ Use the sca-remediation skill to check this repository for P0 SCA findings I can
 .agents/plugins/marketplace.json
 .claude-plugin/marketplace.json
 .cursor-plugin/
+agents/
 assets/logo.svg
 docs/
   distribution-sync.md

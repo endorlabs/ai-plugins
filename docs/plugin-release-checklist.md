@@ -17,8 +17,10 @@ Distribution roots:
   `plugins/codex/endor-labs-agent-kit/`
 - Gemini CLI: `plugins/gemini/endor-labs-agent-kit/`
 - Antigravity CLI: `plugins/antigravity/endor-labs-agent-kit/`
-- Cursor/root skill-compatible hosts: `.cursor-plugin/`, `skills/`,
-  `gemini-extension.json`, and `GEMINI.md`
+- Cursor: `.cursor-plugin/`, generated root workflow `agents/`, generated root
+  workflow `skills/`, and `assets/logo.svg`
+- Root skill-compatible compatibility: `gemini-extension.json`, `GEMINI.md`,
+  and generated root workflow `skills/`
 
 ## Source Sync
 
@@ -42,10 +44,17 @@ Then sync generated artifacts into `ai-plugins`:
 rsync -a --delete /path/to/endor-labs-agent-kit/plugins/ ./plugins/
 cp /path/to/endor-labs-agent-kit/.claude-plugin/marketplace.json .claude-plugin/marketplace.json
 cp /path/to/endor-labs-agent-kit/.agents/plugins/marketplace.json .agents/plugins/marketplace.json
+rsync -a --delete /path/to/endor-labs-agent-kit/.cursor-plugin/ ./.cursor-plugin/
+rsync -a --delete /path/to/endor-labs-agent-kit/agents/ ./agents/
+for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
+  rsync -a --delete "/path/to/endor-labs-agent-kit/skills/$skill/" "./skills/$skill/"
+done
+mkdir -p assets
+cp /path/to/endor-labs-agent-kit/assets/logo.svg assets/logo.svg
 ```
 
-The root Cursor/root skill-compatible package should be refreshed from the
-generated common skill package while preserving root host wording.
+Do not sync root `GEMINI.md` or root `gemini-extension.json` as Cursor package
+output. They are separate compatibility files.
 
 ## Local Validation
 
@@ -64,6 +73,13 @@ python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 python3 -m json.tool gemini-extension.json >/dev/null
+test -f agents/endor-agent-kit-setup-agent.md
+test -f agents/endor-ai-sast-triage-agent.md
+test -f agents/endor-troubleshooter-agent.md
+test -f agents/endor-probe-droid-agent.md
+test -f agents/endor-sca-remediation-agent.md
+test -f skills/ai-sast-triage/architecture.svg
+test -f skills/sca-remediation/actions.yaml
 git diff --check
 ```
 
@@ -71,9 +87,16 @@ Compare generated package drift:
 
 ```bash
 diff -qr /path/to/endor-labs-agent-kit/plugins ./plugins
+diff -qr /path/to/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
+diff -qr /path/to/endor-labs-agent-kit/agents ./agents
+for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
+  diff -qr "/path/to/endor-labs-agent-kit/skills/$skill" "./skills/$skill"
+done
 ```
 
-Normal distribution sync should be byte-for-byte identical.
+Normal provider package sync should be byte-for-byte identical, and Cursor
+metadata/root workflow agents and support skills should match the
+source-generated Cursor package.
 
 ## Safety Gates
 
@@ -135,10 +158,17 @@ antigravity plugin list
 antigravity plugin uninstall endor-labs-agent-kit
 ```
 
-Cursor/root skill-compatible hosts:
+Cursor and root skill-compatible hosts:
 
 ```bash
 for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+test -f agents/endor-agent-kit-setup-agent.md
+test -f agents/endor-probe-droid-agent.md
+test -f skills/ai-sast-triage/architecture.svg
 ```
+
+Keep Cursor validation separate from Gemini validation. Cursor uses
+`.cursor-plugin/`, `agents/`, `skills/`, and `assets/logo.svg`; Gemini CLI uses
+`plugins/gemini/endor-labs-agent-kit/`.

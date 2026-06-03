@@ -1,14 +1,12 @@
 {
-  "name": "endor-labs-agent-kit",
-  "displayName": "Endor Labs Agent Kit",
-  "version": "0.1.0",
-  "description": "Endor Labs Agent Kit setup and security workflow skills for Cursor.",
+  "agents": "./agents/",
   "author": {
-    "name": "Endor Labs",
-    "url": "https://github.com/endorlabs"
+    "email": "support@endorlabs.com",
+    "name": "Endor Labs"
   },
-  "repository": "https://github.com/endorlabs/ai-plugins",
-  "license": "MIT",
+  "description": "Endor Labs Agent Kit setup and security workflow agents and skills for Cursor.",
+  "displayName": "Endor Labs Agent Kit",
+  "homepage": "https://endorlabs.com",
   "keywords": [
     "endor-labs",
     "security",
@@ -19,5 +17,10 @@
     "agentic remediation",
     "AppSec"
   ],
-  "logo": "assets/logo.svg"
+  "license": "MIT",
+  "logo": "assets/logo.svg",
+  "name": "endor-labs-agent-kit",
+  "repository": "https://github.com/endorlabs/ai-plugins",
+  "skills": "./skills/",
+  "version": "0.1.0"
 }

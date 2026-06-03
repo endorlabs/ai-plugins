@@ -1,0 +1,60 @@
+# Endor Labs AI Plugins
+
+> Public distribution repository for Endor Labs Agent Kit packages across
+> Claude Code, Codex, Gemini CLI, Antigravity CLI, Cursor, and root
+> skill-compatible hosts.
+
+## Start Here
+
+- `README.md`: public distribution front door for humans and agents.
+- `docs/for-agents.md`: agent operating rules for installing, reviewing,
+  editing, validating, and syncing this mirror.
+- `docs/distribution-sync.md`: exact source-to-mirror sync workflow.
+- `docs/plugin-release-checklist.md`: release validation matrix.
+- `plugins/README.md`: generated provider package index.
+
+## Source Boundary
+
+- Source repo: `/Users/mattbrown/AURI/endor-labs-agent-kit`
+- Public mirror: `/Users/mattbrown/AURI/ai-plugins`
+- Generated package tree: `plugins/`
+- Root skill-compatible package: `.cursor-plugin/`, `skills/`, `GEMINI.md`,
+  `gemini-extension.json`
+
+Generated provider packages under `plugins/` should come from Agent Kit
+publication output. Behavior changes belong in the source repo first.
+
+## Distribution Paths
+
+- Claude Code: `.claude-plugin/marketplace.json`,
+  `plugins/claude/endor-labs-agent-kit/`, and
+  `plugins/claude/ai-plugins/`
+- Codex: `.agents/plugins/marketplace.json` and
+  `plugins/codex/endor-labs-agent-kit/`
+- Gemini CLI: `plugins/gemini/endor-labs-agent-kit/`
+- Antigravity CLI: `plugins/antigravity/endor-labs-agent-kit/`
+- Cursor/root: `.cursor-plugin/`, `skills/`, `GEMINI.md`,
+  `gemini-extension.json`
+
+## Common Validation
+
+```bash
+for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
+python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
+python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
+python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
+python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+python3 -m json.tool gemini-extension.json >/dev/null
+test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
+test ! -e plugins/gemini/endor-labs-agent-kit.zip
+diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/plugins ./plugins
+git diff --check
+```
+
+## Safety Rules
+
+- Setup must not run scans.
+- Setup must not run `endorctl host-check`.
+- Do not print, persist, or copy secret values.
+- Do not auto-install host or language tooling.
+- Live Endor API evidence requires explicit approval and namespace provenance.

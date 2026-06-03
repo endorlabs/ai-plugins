@@ -23,6 +23,8 @@ Distribution roots:
 ## Source Sync
 
 Agent behavior is source-owned by `endorlabs/endor-labs-agent-kit`.
+Read `docs/distribution-sync.md` before syncing generated package artifacts and
+`docs/for-agents.md` before asking an agent to review or edit this mirror.
 
 Regenerate in the Agent Kit source repo:
 

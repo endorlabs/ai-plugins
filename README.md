@@ -11,6 +11,19 @@ checked-in distribution artifacts.
 
 Current generated Agent Kit package version: `0.1.0`.
 
+## Start Here
+
+| Reader | Start With | Outcome |
+| --- | --- | --- |
+| Human installer | [Quick Start](#quick-start) | Install the right host package, run setup, and try a workflow. |
+| Agent installer or reviewer | `docs/for-agents.md` | Understand what can be copied, what is generated, and when to stop for approval. |
+| Distribution maintainer | `docs/distribution-sync.md` | Sync generated packages from `endor-labs-agent-kit` without drifting the mirror. |
+| Release operator | `docs/plugin-release-checklist.md` | Validate local packages and public host install paths before tagging or publishing. |
+
+This repo is the public distribution surface. Behavior changes belong in the
+Agent Kit source repo first, then this repo is refreshed from generated outputs.
+A machine-readable index is available in `llms.txt`.
+
 ## Quick Start
 
 Use `endor-agent-kit-setup` first after installing a package. Setup checks local
@@ -168,6 +181,9 @@ Do not change generated Agent Kit behavior by editing package files in this
 repo. Make behavior changes in the Agent Kit source repo, regenerate there,
 then sync generated distribution artifacts here.
 
+Agents should read `docs/for-agents.md` before modifying this repo and
+`docs/distribution-sync.md` before touching generated package directories.
+
 Source repo command:
 
 ```bash
@@ -263,9 +279,13 @@ Use the sca-remediation skill to check this repository for P0 SCA findings I can
 .claude-plugin/marketplace.json
 .cursor-plugin/
 assets/logo.svg
-docs/plugin-release-checklist.md
+docs/
+  distribution-sync.md
+  for-agents.md
+  plugin-release-checklist.md
 GEMINI.md
 gemini-extension.json
+llms.txt
 plugins/
   README.md
   claude/

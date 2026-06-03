@@ -1,0 +1,95 @@
+# For Agents
+
+Use this guide when an AI agent is installing, reviewing, editing, or
+publishing the public Endor Labs Agent Kit distribution repo.
+
+## Decide The Job
+
+| User Intent | Work In | Do Not Start By Editing |
+| --- | --- | --- |
+| Install a host package | `README.md`, then `plugins/<host>/endor-labs-agent-kit/README.md` | Generated package internals |
+| Install the legacy Claude package | `plugins/claude/ai-plugins/README.md` | Marketplace ids or generated agents |
+| Review or validate distribution artifacts | `docs/plugin-release-checklist.md` and package READMEs | Source recipes that live in another repo |
+| Change agent behavior | `/Users/mattbrown/AURI/endor-labs-agent-kit/source/agents/` | This repo's generated `plugins/` tree |
+| Change generated docs or package shape | `/Users/mattbrown/AURI/endor-labs-agent-kit/src/endor_agent_kit/publication/` | Hand-edited generated package READMEs |
+| Sync a release candidate | `docs/distribution-sync.md` | Partial copied package files |
+
+## Source Boundary
+
+This repository is the public distribution mirror. The source of truth for
+Agent Kit behavior is `/Users/mattbrown/AURI/endor-labs-agent-kit`.
+
+Generated provider packages under `plugins/` should come from Agent Kit
+publication output. Do not rewrite generated prompts, skills, agents, package
+READMEs, or manifest files here to change behavior. Change the source repo,
+regenerate, sync, and compare.
+
+The root Cursor/root skill-compatible package is a public distribution surface
+owned by this repo. Preserve its host wording while keeping safety-critical
+workflow bodies aligned with Agent Kit.
+
+## Install Without Drift
+
+When installing or copying artifacts:
+
+1. Read the root `README.md` and the selected package README.
+2. Copy generated directories exactly.
+3. Keep sibling files such as `actions.yaml`, `architecture.svg`,
+   `agent.manifest.json`, `output-contract.md`, and `endorctl-setup.md` when a
+   package includes them.
+4. Do not summarize, merge, or rewrite generated prompt bodies.
+5. Report missing Endor auth, namespace, `gh`, MCP, `endorctl`, host CLI, or
+   runtime prerequisites before live Endor work.
+
+## Edit Safely
+
+Before editing generated package directories, confirm whether the change belongs
+in the Agent Kit source repo. Normal package updates use:
+
+```bash
+rsync -a --delete /Users/mattbrown/AURI/endor-labs-agent-kit/plugins/ ./plugins/
+cp /Users/mattbrown/AURI/endor-labs-agent-kit/.claude-plugin/marketplace.json .claude-plugin/marketplace.json
+cp /Users/mattbrown/AURI/endor-labs-agent-kit/.agents/plugins/marketplace.json .agents/plugins/marketplace.json
+diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/plugins ./plugins
+```
+
+Run local mirror validation before claiming the sync is clean:
+
+```bash
+for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
+python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
+python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
+python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
+python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+python3 -m json.tool gemini-extension.json >/dev/null
+test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
+test ! -e plugins/gemini/endor-labs-agent-kit.zip
+git diff --check
+```
+
+## Approval Gates
+
+Ask before stale, destructive, credentialed, or external-write actions:
+
+- branch push
+- PR/MR creation
+- public package release
+- host marketplace writes
+- install or uninstall commands in a user's real host profile
+- live `endorctl api` lookups
+- Endor auth, namespace, integration, scan profile, exception-policy, or
+  package-manager changes
+
+Setup workflows must not run scans, run `endorctl host-check`, auto-install
+tools, edit shell profiles, configure global MCP, or write credentials without
+explicit approval.
+
+## Public Package Rules
+
+- New Claude Code users should prefer `endor-labs-agent-kit@endorlabs`.
+- Existing Claude Code users may keep `ai-plugins@endorlabs`.
+- Do not enable both Claude package ids in the same profile for normal use.
+- Gemini distribution is directory/GitHub based. Do not create or publish
+  `plugins/gemini/endor-labs-agent-kit.zip`.
+- Provider install behavior can drift. Re-check live provider docs and host CLI
+  behavior before release.

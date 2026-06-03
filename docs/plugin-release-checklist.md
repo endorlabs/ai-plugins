@@ -66,7 +66,8 @@ Run these from the `ai-plugins` repo root:
 for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
 claude plugin validate plugins/claude/endor-labs-agent-kit
 claude plugin validate plugins/claude/ai-plugins
-python3 /Users/mattbrown/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py plugins/codex/endor-labs-agent-kit
+CODEX_PLUGIN_VALIDATOR="${CODEX_PLUGIN_VALIDATOR:-/path/to/plugin-creator/scripts/validate_plugin.py}"
+python3 "$CODEX_PLUGIN_VALIDATOR" plugins/codex/endor-labs-agent-kit
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
 antigravity plugin validate plugins/antigravity/endor-labs-agent-kit

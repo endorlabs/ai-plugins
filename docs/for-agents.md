@@ -12,14 +12,15 @@ publishing the public Endor Labs Agent Kit distribution repo.
 | Run Cursor SDK automation | `cursor-sdk/README.md` | Cursor IDE plugin metadata or Gemini extension files |
 | Install the legacy Claude package | `plugins/claude/ai-plugins/README.md` | Marketplace ids or generated agents |
 | Review or validate distribution artifacts | `docs/plugin-release-checklist.md` and package READMEs | Source recipes that live in another repo |
-| Change agent behavior | `/Users/mattbrown/AURI/endor-labs-agent-kit/source/agents/` | This repo's generated `plugins/` tree |
-| Change generated docs or package shape | `/Users/mattbrown/AURI/endor-labs-agent-kit/src/endor_agent_kit/publication/` | Hand-edited generated package READMEs |
+| Change agent behavior | [🐙 The Endor Labs Agent Kit](https://github.com/endorlabs/endor-labs-agent-kit/tree/main) `source/agents/` | This repo's generated `plugins/` tree |
+| Change generated docs or package shape | [🐙 The Endor Labs Agent Kit](https://github.com/endorlabs/endor-labs-agent-kit/tree/main) `src/endor_agent_kit/publication/` | Hand-edited generated package READMEs |
 | Sync a release candidate | `docs/distribution-sync.md` | Partial copied package files |
 
 ## Source Boundary
 
 This repository is the public distribution mirror. The source of truth for
-Agent Kit behavior is `/Users/mattbrown/AURI/endor-labs-agent-kit`.
+Agent Kit behavior is
+[🐙 The Endor Labs Agent Kit](https://github.com/endorlabs/endor-labs-agent-kit/tree/main).
 
 Generated provider packages under `plugins/` should come from Agent Kit
 publication output. Do not rewrite generated prompts, skills, agents, package
@@ -52,23 +53,27 @@ Before editing generated package directories, confirm whether the change belongs
 in the Agent Kit source repo. Normal package updates use:
 
 ```bash
-rsync -a --delete /Users/mattbrown/AURI/endor-labs-agent-kit/plugins/ ./plugins/
-cp /Users/mattbrown/AURI/endor-labs-agent-kit/.claude-plugin/marketplace.json .claude-plugin/marketplace.json
-cp /Users/mattbrown/AURI/endor-labs-agent-kit/.agents/plugins/marketplace.json .agents/plugins/marketplace.json
-rsync -a --delete /Users/mattbrown/AURI/endor-labs-agent-kit/.cursor-plugin/ ./.cursor-plugin/
-rsync -a --delete /Users/mattbrown/AURI/endor-labs-agent-kit/agents/ ./agents/
-rsync -a --delete /Users/mattbrown/AURI/endor-labs-agent-kit/cursor-sdk/ ./cursor-sdk/
+AGENT_KIT_REPO="/path/to/endor-labs-agent-kit"
+
+rsync -a --delete "$AGENT_KIT_REPO/plugins/" ./plugins/
+cp "$AGENT_KIT_REPO/.claude-plugin/marketplace.json" .claude-plugin/marketplace.json
+cp "$AGENT_KIT_REPO/.agents/plugins/marketplace.json" .agents/plugins/marketplace.json
+rsync -a --delete "$AGENT_KIT_REPO/.cursor-plugin/" ./.cursor-plugin/
+rsync -a --delete "$AGENT_KIT_REPO/agents/" ./agents/
+rsync -a --delete "$AGENT_KIT_REPO/cursor-sdk/" ./cursor-sdk/
 for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
-  rsync -a --delete "/Users/mattbrown/AURI/endor-labs-agent-kit/skills/$skill/" "./skills/$skill/"
+  rsync -a --delete "$AGENT_KIT_REPO/skills/$skill/" "./skills/$skill/"
 done
 mkdir -p assets
-cp /Users/mattbrown/AURI/endor-labs-agent-kit/assets/logo.svg assets/logo.svg
-diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/plugins ./plugins
+cp "$AGENT_KIT_REPO/assets/logo.svg" assets/logo.svg
+diff -qr "$AGENT_KIT_REPO/plugins" ./plugins
 ```
 
 Run local mirror validation before claiming the sync is clean:
 
 ```bash
+AGENT_KIT_REPO="/path/to/endor-labs-agent-kit"
+
 for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
 python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
 python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
@@ -79,11 +84,11 @@ python3 -m py_compile cursor-sdk/run_cursor_agent.py
 python3 -m json.tool gemini-extension.json >/dev/null
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
-diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
-diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/agents ./agents
-diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/cursor-sdk ./cursor-sdk
+diff -qr "$AGENT_KIT_REPO/.cursor-plugin" ./.cursor-plugin
+diff -qr "$AGENT_KIT_REPO/agents" ./agents
+diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
 for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
-  diff -qr "/Users/mattbrown/AURI/endor-labs-agent-kit/skills/$skill" "./skills/$skill"
+  diff -qr "$AGENT_KIT_REPO/skills/$skill" "./skills/$skill"
 done
 git diff --check
 ```

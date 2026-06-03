@@ -12,6 +12,7 @@ Distribution roots:
 
 - Claude Code: `.claude-plugin/marketplace.json` and
   `plugins/claude/endor-labs-agent-kit/`
+- Claude Code legacy compatibility: `plugins/claude/ai-plugins/`
 - Codex: `.agents/plugins/marketplace.json` and
   `plugins/codex/endor-labs-agent-kit/`
 - Gemini CLI: `plugins/gemini/endor-labs-agent-kit/`
@@ -51,6 +52,7 @@ Run these from the `ai-plugins` repo root:
 ```bash
 for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
 claude plugin validate plugins/claude/endor-labs-agent-kit
+claude plugin validate plugins/claude/ai-plugins
 python3 /Users/mattbrown/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py plugins/codex/endor-labs-agent-kit
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
@@ -94,9 +96,17 @@ Claude Code:
 ```text
 /plugin marketplace add endorlabs/ai-plugins@<tag>
 /plugin install endor-labs-agent-kit@endorlabs
+/plugin install ai-plugins@endorlabs
 /plugin list
 /agents
 ```
+
+`ai-plugins@endorlabs` is retained for existing Claude Code users. Do not enable
+both Claude plugin ids in the same profile for normal use because they expose
+the same setup skill and agents. Release notes and install docs must state that
+new installs should prefer `endor-labs-agent-kit@endorlabs`, existing users do
+not need an automatic migration, and the plugin does not auto-disable,
+uninstall, or edit Claude settings for either id.
 
 Codex:
 

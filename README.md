@@ -18,7 +18,7 @@ readiness, guides `endorctl` authentication and namespace selection, reports
 `gh` and toolchain gaps, and offers host-specific self-checks before live Endor
 lookups.
 
-Claude Code marketplace install:
+Claude Code marketplace install for new users:
 
 ```text
 /plugin marketplace add endorlabs/ai-plugins
@@ -27,11 +27,27 @@ Claude Code marketplace install:
 /agents
 ```
 
+Existing Claude Code users with the historical plugin id can keep using the
+legacy compatibility package:
+
+```text
+/plugin marketplace add endorlabs/ai-plugins
+/plugin install ai-plugins@endorlabs
+/reload-plugins
+/agents
+```
+
+Do not enable `endor-labs-agent-kit@endorlabs` and `ai-plugins@endorlabs` in
+the same Claude profile for normal use. They expose the same setup skill and
+agents; `ai-plugins@endorlabs` exists to avoid breaking existing installs. The
+plugin does not auto-disable, uninstall, or edit Claude settings for either id.
+
 Local Claude Code validation from this checkout:
 
 ```text
 /plugin marketplace add ./
 /plugin install endor-labs-agent-kit@endorlabs
+/plugin install ai-plugins@endorlabs
 /reload-plugins
 /agents
 ```
@@ -50,7 +66,7 @@ root Agent Kit skill set in `skills/`.
 
 | Host | Distribution path | Notes |
 | --- | --- | --- |
-| Claude Code | `.claude-plugin/marketplace.json`, `plugins/claude/endor-labs-agent-kit/` | Marketplace exposes `endor-labs-agent-kit` only. |
+| Claude Code | `.claude-plugin/marketplace.json`, `plugins/claude/endor-labs-agent-kit/`, `plugins/claude/ai-plugins/` | Marketplace exposes preferred `endor-labs-agent-kit` plus legacy `ai-plugins` compatibility. |
 | Codex | `.agents/plugins/marketplace.json`, `plugins/codex/endor-labs-agent-kit/` | Package includes skills, custom-agent TOML files, and installer script. |
 | Gemini CLI | `plugins/gemini/endor-labs-agent-kit/` | Directory is for local validation; public installs use the tagged GitHub repository. |
 | Antigravity CLI | `plugins/antigravity/endor-labs-agent-kit/` | Installs from the package directory with root `plugin.json`. |
@@ -67,6 +83,11 @@ root Agent Kit skill set in `skills/`.
 | Assess GitHub onboarding gaps | Agent `endor-labs-agent-kit:probe-droid` | Skill `probe-droid`, custom agent `endor-probe-droid-agent` | Skill/subagent `probe-droid` | Skill/subagent `probe-droid` | Skill `probe-droid` |
 | Find safe SCA remediation paths | Agent `endor-labs-agent-kit:sca-remediation` | Skill `sca-remediation`, custom agent `endor-sca-remediation-agent` | Skill/subagent `sca-remediation` | Skill/subagent `sca-remediation` | Skill `sca-remediation` |
 | Use Claude-only read-only package and dependency helpers | Claude agents in `plugins/claude/endor-labs-agent-kit/agents/` | Not packaged in v1 | Not packaged in v1 | Not packaged in v1 | Not packaged in v1 |
+
+The legacy Claude package `plugins/claude/ai-plugins/` contains the same Claude
+agents and setup skill for existing `ai-plugins@endorlabs` users. New users
+should prefer `endor-labs-agent-kit@endorlabs`; existing users do not need an
+automatic migration.
 
 ## Safety Rules
 
@@ -169,6 +190,7 @@ Run the distribution checks from this repo before commit:
 ```bash
 for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
 claude plugin validate plugins/claude/endor-labs-agent-kit
+claude plugin validate plugins/claude/ai-plugins
 python3 /Users/mattbrown/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py plugins/codex/endor-labs-agent-kit
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip

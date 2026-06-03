@@ -1,40 +1,22 @@
 ---
 name: endor-agent-kit-setup
-description: Use when setting up Endor Labs Agent Kit for Gemini CLI, checking readiness, verifying Endor auth, choosing namespaces, or diagnosing missing endorctl, gh, Gemini CLI, Endor MCP, or workflow prerequisites.
+description: Use when setting up Endor Labs Agent Kit for Cursor or root skill-compatible hosts, checking readiness, verifying Endor auth, choosing namespaces, or diagnosing missing endorctl, gh, Endor MCP, or workflow prerequisites.
 ---
 
-# Endor Agent Kit Setup For Gemini CLI
+# Endor Agent Kit Setup For Cursor And Root Skill Hosts
 
-Generated for the Endor Labs Agent Kit Gemini CLI extension.
+Mirrored from the generated Endor Labs Agent Kit setup workflow for Cursor and root skill-compatible hosts.
 
-## Bundled Gemini CLI Workflows
+## Bundled Root Skill Workflows
 
-- `Triage AI SAST findings` -> skill `ai-sast-triage`, subagent `@ai-sast-triage`
-- `Diagnose Endor setup and scan issues` -> skill `endor-troubleshooter`, subagent `@endor-troubleshooter`
-- `Assess GitHub onboarding gaps` -> skill `probe-droid`, subagent `@probe-droid`
-- `Find safe SCA remediation paths` -> skill `sca-remediation`, subagent `@sca-remediation`
+- `Triage AI SAST findings` -> skill `ai-sast-triage`
+- `Diagnose Endor setup and scan issues` -> skill `endor-troubleshooter`
+- `Assess GitHub onboarding gaps` -> skill `probe-droid`
+- `Find safe SCA remediation paths` -> skill `sca-remediation`
 
-## Gemini CLI Extension Install Commands
+## Cursor And Root Package Install Notes
 
-Install from the generated local extension package:
-
-```bash
-gemini extensions install /path/to/endor-labs-agent-kit/plugins/gemini/endor-labs-agent-kit
-```
-
-Install from the public GitHub repository after a release tag is published:
-
-```bash
-gemini extensions install https://github.com/endorlabs/ai-plugins --ref <tag>
-```
-
-Observed local validation on Gemini CLI 0.44.1: local installs may still
-show a folder trust prompt even when `--consent` is supplied. Inspect the
-extension package, approve only the expected Agent Kit folder,
-then restart Gemini CLI so skills and subagents become visible.
-Do not create or install zip archives for Gemini CLI; use the local extension
-directory for local testing and the tagged GitHub repository for release
-installs.
+Install or update this package through the selected host plugin mechanism only after user approval. For Cursor, use the repository root package metadata in `.cursor-plugin/` and the root `skills/` directory. For Gemini CLI, prefer the generated package under `plugins/gemini/endor-labs-agent-kit/` for local validation or the tagged GitHub repository for public installs.
 
 # Endor Agent Kit Setup
 
@@ -146,10 +128,10 @@ comments, writes Endor policies, or runs scans. Mutating workflows such as SCA
 Remediation and AI SAST Triage keep those actions behind their generated agent
 approval gates.
 
-## Gemini-Specific Rules
+## Root Package Rules
 
-- Keep Gemini extension installs explicit. Do not install, link, update, or uninstall extensions without user approval.
+- Keep package installs explicit. Do not install, link, update, or uninstall packages without user approval.
 - Do not add plugin-wide MCP automatically. Only guide MCP setup when a selected workflow needs it and the user approves.
 - Do not collect, write, or persist Endor API credential values. Report credential presence by key name only.
-- Gemini subagents are preview functionality; if subagent delegation is unavailable, use the matching skill and report the limitation.
-- Tell the user to restart Gemini CLI after installing or updating the extension.
+- If host-specific agent delegation is unavailable, use the matching skill and report the limitation.
+- Tell the user to reload or restart the host after installing or updating the package if newly installed skills are not visible.

@@ -1,16 +1,25 @@
 {
-  "name": "endorlabs",
-  "displayName": "Endor Labs AI Plugins",
-  "description": "Set up endorctl and use Endor Labs to scan, prioritize, and fix security risks across your software supply chain.",
-  "version": "1.0.0",
+  "name": "endor-labs-agent-kit",
+  "displayName": "Endor Labs Agent Kit",
+  "description": "Endor Labs Agent Kit setup and security workflow skills.",
+  "version": "0.1.0",
   "publisher": "endorlabs",
+  "contextFileName": "GEMINI.md",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/endorlabs/ai-plugins"
   },
   "homepage": "https://www.endorlabs.com",
-  "keywords": ["security", "endorlabs", "endorctl", "sca", "endor"],
+  "keywords": [
+    "endor-labs",
+    "security",
+    "endorctl",
+    "sca",
+    "sast",
+    "agentic remediation",
+    "AppSec"
+  ],
   "skills": {
     "path": "./skills"
   }

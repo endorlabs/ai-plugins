@@ -1,14 +1,23 @@
 {
-  "name": "endorlabs",
-  "displayName": "Endor Labs",
-  "version": "1.0.1",
-  "description": "Endor Labs skills for setting up endorctl",
+  "name": "endor-labs-agent-kit",
+  "displayName": "Endor Labs Agent Kit",
+  "version": "0.1.0",
+  "description": "Endor Labs Agent Kit setup and security workflow skills for Cursor.",
   "author": {
     "name": "Endor Labs",
     "url": "https://github.com/endorlabs"
   },
   "repository": "https://github.com/endorlabs/ai-plugins",
   "license": "MIT",
-  "keywords": ["security", "dependencies", "endorlabs", "endorctl", "sca"],
+  "keywords": [
+    "endor-labs",
+    "security",
+    "dependencies",
+    "endorctl",
+    "sca",
+    "sast",
+    "agentic remediation",
+    "AppSec"
+  ],
   "logo": "assets/logo.svg"
 }

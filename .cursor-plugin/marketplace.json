@@ -1,17 +1,31 @@
 {
-  "name": "endorlabs-plugin-marketplace",
+  "name": "endorlabs",
   "owner": {
     "name": "Endor Labs",
     "email": "support@endorlabs.com"
   },
   "metadata": {
-    "description": "Endor Labs ai plugin for AI-native application security — scan and analyze across your software supply chain"
+    "description": "Endor Labs Agent Kit plugin marketplace for Cursor."
   },
   "plugins": [
     {
-      "name": "endorlabs",
+      "name": "endor-labs-agent-kit",
       "source": "./",
-      "description": "Endor Labs plugin for setting up endorctl"
+      "description": "Endor Labs Agent Kit setup and security workflow skills.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Endor Labs"
+      },
+      "category": "Developer Tools",
+      "keywords": [
+        "endor-labs",
+        "security",
+        "sca",
+        "sast",
+        "cursor",
+        "agentic remediation",
+        "AppSec"
+      ]
     }
   ]
 }

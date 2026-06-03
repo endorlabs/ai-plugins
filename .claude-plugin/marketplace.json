@@ -1,33 +1,18 @@
 {
+  "description": "Endor Labs Agent Kit Claude Code plugin marketplace.",
   "name": "endorlabs",
   "owner": {
-    "name": "Endor Labs",
-    "email": "support@endorlabs.com"
-  },
-  "metadata": {
-    "description": "Endor Labs ai plugin for AI-native application security — scan and analyze your software supply chain"
+    "email": "support@endorlabs.com",
+    "name": "Endor Labs"
   },
   "plugins": [
     {
-      "name": "ai-plugins",
-      "source": "./",
-      "description": "Set up endorctl and use Endor Labs to scan, prioritize, and fix security risks across your software supply chain",
-      "version": "1.0.0",
-      "author": {
-        "name": "Endor Labs"
-      },
-      "keywords": ["security", "dependencies", "endorctl", "sca"]
-    },
-    {
-      "name": "endor-labs-agent-kit",
-      "displayName": "Endor Labs Agent Kit",
-      "source": "./plugins/claude/endor-labs-agent-kit",
-      "description": "Endor Labs workflow agents for SCA remediation, SAST triage, upgrade impact analysis, troubleshooting, and dependency risk review.",
-      "version": "0.1.0",
       "author": {
         "name": "Endor Labs"
       },
       "category": "Developer Tools",
+      "description": "Endor Labs workflow agents and setup for Claude Code.",
+      "displayName": "Endor Labs Agent Kit",
       "keywords": [
         "endor-labs",
         "security",
@@ -40,6 +25,8 @@
         "AppSec",
         "Upgrade Impact Analysis"
       ],
+      "name": "endor-labs-agent-kit",
+      "source": "./plugins/claude/endor-labs-agent-kit",
       "tags": [
         "endor-labs",
         "security",
@@ -51,7 +38,8 @@
         "agentic AppSec",
         "AppSec",
         "Upgrade Impact Analysis"
-      ]
+      ],
+      "version": "0.1.0"
     }
   ]
 }

@@ -56,12 +56,30 @@ read the repository root and `origin` remote URL, then resolve the matching
 Endor project by repository URL, owner/repo, repository name, or Endor project
 name. In Claude Managed Agents, do not assume local git is available; use the
 repository URL, owner/repo, or Endor project name supplied in the user message,
-session metadata, or environment. If multiple Endor projects match, ask the
-user to choose among human-readable names and repository URLs. Only ask for a
-project UUID when human-readable selectors cannot resolve a unique project.
+session metadata, or environment. If a proven namespace returns no matching
+project, retry the same read-only project lookup with `--traverse` before
+reporting the project as missing; active `endorctl` configs may point at a
+parent namespace while projects live in child namespaces. If traverse finds the
+project in a child namespace, use the returned child namespace for later scoped
+VersionUpgrade reads when available. If the child namespace is not returned,
+keep `--traverse` on subsequent project-scoped read-only lookups and label the
+namespace provenance as parent namespace plus traverse. If multiple Endor
+projects match, ask the user to choose among human-readable names and
+repository URLs. Only ask for a project UUID when human-readable selectors
+cannot resolve a unique project.
 
 After resolution, use the resolved `project_uuid` only as the internal Endor
 filter needed by `VersionUpgrade` resources.
+
+Record whether `--traverse` was used in project resolution evidence. Do not
+return `project_resolution` as missing until both the normal lookup and the
+traverse fallback have been evaluated for the proven namespace.
+
+Default project-scoped Endor lookups to `context.type==CONTEXT_TYPE_MAIN`
+unless the user explicitly asks for PR/CI-run, commit-ref, or all-context
+evidence. When a non-main context is intentional, label the scope, preserve the
+returned context/ref evidence, and keep its counts separate from main-context
+counts.
 
 This agent is read-only. Do not edit files, create pull requests, run scans,
 dismiss findings, create policies, install packages, or mutate Endor Labs state.
@@ -195,6 +213,9 @@ Use a supplied `project_uuid` only as an advanced fallback; otherwise resolve it
 from `repository_url`, `project_name`, the current git remote, or session
 project context. Never query an arbitrary project when project resolution is
 missing or ambiguous.
+Project-scoped `VersionUpgrade` and finding-fixing upgrade lookups default to
+`CONTEXT_TYPE_MAIN`; use PR/CI-run or all-context evidence only when explicitly
+requested and label that scope in the output.
 
 ## Step 1: Choose the Endor Query Mode
 

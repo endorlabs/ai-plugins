@@ -158,6 +158,17 @@ Use exact evidence from the tenant when fields are available. If a resource,
 field, or filter is unsupported in the current tenant or `endorctl` version,
 continue with the usable fields and add a precise `data_gaps` entry.
 
+## Default Endor Context Scope
+
+Default repository-scoped Endor evidence to `context.type==CONTEXT_TYPE_MAIN`
+when the resource supports context filters. This aligns onboarding, package,
+resolution-error, reachability, and finding evidence with the monitored-branch
+project UI view. Use PR refs, commit SHA refs, `CONTEXT_TYPE_CI_RUN`, or
+all-context evidence only when the user explicitly asks for that scope or the
+documented resource does not expose a context filter. Keep non-main counts
+separate from main-context counts, and record `context.type` plus source ref
+details in `evidence_queries[]` whenever they are available.
+
 ## GitHub Inventory
 
 Use authenticated `gh` CLI first. If live GitHub inventory is unavailable, use
@@ -314,12 +325,35 @@ Use `<namespace_flag>` as `--namespace <namespace>` when the user provides
 If namespace provenance is unclear, say so in `data_gaps`; do not dump an
 entire Endor config file.
 
+If a proven namespace returns no matching Endor projects or strict repository
+matches, retry the same read-only Endor inventory lookup with `--traverse`
+before classifying repositories as not onboarded or project evidence as
+missing. This handles active `endorctl` configurations that point at a parent
+namespace while projects live in child namespaces.
+
+When traverse finds projects in child namespaces, preserve the child namespace
+when returned and use it for later scoped Endor reads. If the child namespace is
+not returned, keep `--traverse` on subsequent project-scoped read-only lookups
+from the parent namespace. Record both non-traverse and traverse attempts in
+`evidence_queries[]`.
+
 List Endor projects:
 
 ```bash
 endorctl api list \
   --resource Project \
   <namespace_flag> \
+  --list-all \
+  --field-mask "uuid,meta.name,meta.tags,meta.create_time,meta.update_time,spec.git.http_clone_url,spec.git.full_name,spec.internal_reference_key,spec.platform_source,spec.scan_profile_uuid,spec.is_archived"
+```
+
+Traverse fallback when the first project inventory has no strict match:
+
+```bash
+endorctl api list \
+  --resource Project \
+  <namespace_flag> \
+  --traverse \
   --list-all \
   --field-mask "uuid,meta.name,meta.tags,meta.create_time,meta.update_time,spec.git.http_clone_url,spec.git.full_name,spec.internal_reference_key,spec.platform_source,spec.scan_profile_uuid,spec.is_archived"
 ```
@@ -1023,11 +1057,13 @@ available in the cloud environment.
 
 ## Step 3: Inventory Endor Projects And GitHub App Coverage
 
-List Endor projects and strict-match them to GitHub repositories. Try
-repository, repository-version, and GitHub App installation evidence when
-available. Endor-side GitHub App evidence is authoritative. If GitHub App
-coverage cannot be queried, use `GITHUB_APP_COVERAGE_UNKNOWN` and explain what
-resource or permission is missing.
+List Endor projects and strict-match them to GitHub repositories. If the first
+project inventory produces no strict match under a proven namespace, retry with
+`--traverse` before classifying repositories as not onboarded. Try repository,
+repository-version, and GitHub App installation evidence when available.
+Endor-side GitHub App evidence is authoritative. If GitHub App coverage cannot
+be queried, use `GITHUB_APP_COVERAGE_UNKNOWN` and explain what resource or
+permission is missing.
 
 ## Step 4: Collect Scan, Package, Profile, And Integration Evidence
 

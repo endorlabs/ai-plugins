@@ -211,6 +211,15 @@ print full `resolved_dependencies`, deleted finding maps, full finding maps,
 credential-bearing integration specs, or every scan log entry unless the user
 explicitly asks for a raw export.
 
+Default repository-scoped Endor evidence to `context.type==CONTEXT_TYPE_MAIN`
+when the resource supports context filters. This matches the normal Endor
+project UI view. Use PR refs, commit SHA refs, `CONTEXT_TYPE_CI_RUN`, or
+all-context queries only when the user explicitly asks for PR/CI-run evidence
+or the troubleshooting lane is specifically about a PR/CI scan. When non-main
+context is intentional, label the scope in the answer and preserve
+`context.type` plus `spec.source_code_version.ref` in `evidence_queries[]`.
+Never merge PR/CI-run finding counts into main-context finding counts.
+
 Project or repository selector resolution:
 
 ```bash
@@ -219,6 +228,26 @@ endorctl api list --resource Project --namespace <namespace> \
   --field-mask "uuid,meta.name,meta.parent_uuid,meta.tags,meta.create_time,meta.update_time,spec" \
   -o json
 ```
+
+If that project or repository selector query returns no matching project in a
+proven namespace, retry the same read-only query with `--traverse` before
+reporting `PROJECT_NOT_FOUND`. This handles active `endorctl` configurations
+that point at a parent namespace while the repository project lives in a child
+namespace.
+
+```bash
+endorctl api list --resource Project --namespace <namespace> --traverse \
+  --filter '<name_or_repository_selector_filter>' \
+  --field-mask "uuid,meta.name,meta.parent_uuid,meta.tags,meta.create_time,meta.update_time,spec" \
+  -o json
+```
+
+When traverse finds the project in a child namespace, use the returned project
+namespace for later scoped reads when available. If the child namespace is not
+returned, keep `--traverse` on later project-scoped read-only lookups and label
+that evidence as parent namespace plus traverse. Record both the original and
+traverse query attempts in `evidence_queries[]`; never say a project is missing
+until both attempts have been evaluated.
 
 Scan execution evidence:
 
@@ -293,8 +322,8 @@ Package and dependency evidence:
 
 ```bash
 endorctl api list --resource PackageVersion --namespace <namespace> \
-  --filter 'meta.parent_uuid=="<project_uuid>"' \
-  --field-mask "uuid,meta.name,meta.parent_uuid,meta.tags,spec" \
+  --filter 'context.type==CONTEXT_TYPE_MAIN and spec.project_uuid=="<project_uuid>"' \
+  --field-mask "uuid,context,meta.name,meta.parent_uuid,meta.tags,spec" \
   -o json
 ```
 
@@ -415,8 +444,8 @@ Policy and finding evidence:
 
 ```bash
 endorctl api list --resource Finding --namespace <namespace> \
-  --filter 'meta.parent_uuid=="<project_uuid>"' \
-  --field-mask "uuid,meta.name,meta.parent_uuid,meta.tags,spec" \
+  --filter 'context.type==CONTEXT_TYPE_MAIN and spec.project_uuid=="<project_uuid>"' \
+  --field-mask "uuid,context,meta.name,meta.parent_uuid,meta.tags,spec" \
   -o json
 ```
 

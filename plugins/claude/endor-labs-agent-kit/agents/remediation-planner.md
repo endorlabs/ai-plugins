@@ -28,6 +28,17 @@ cannot inspect local git, ask for a repository URL, owner/repo, or Endor
 project name. Only ask for a project UUID when human-readable selectors cannot
 resolve a unique project.
 
+If a proven namespace returns no matching project, retry the same read-only
+project lookup with `--traverse` before reporting the project as missing. This
+handles active `endorctl` configurations that point at a parent namespace while
+projects live in child namespaces.
+
+If traverse finds the project in a child namespace, use the returned child
+namespace for later scoped remediation lookups when available. If the child
+namespace is not returned, keep `--traverse` on subsequent project-scoped
+read-only lookups and label the namespace provenance as parent namespace plus
+traverse. Record the original lookup and traverse fallback in the evidence.
+
 If multiple projects match, ask the user to choose among human-readable project
 names and repository URLs. If project context cannot be resolved, return
 `project_resolution` in `data_gaps` and keep the response read-only.
@@ -35,8 +46,13 @@ names and repository URLs. If project context cannot be resolved, return
 ## Workflow
 
 1. Resolve project context from the current repository, repository URL, owner/repo, Endor project name, finding UUID, or optional project UUID.
-2. Gather remediation options: use documented Endor API lookups or authenticated `endorctl api` commands to read VersionUpgrade and finding-fixing upgrade evidence for the resolved project.
+2. Gather remediation options: use documented Endor API lookups or authenticated `endorctl api` commands to read main-context VersionUpgrade and finding-fixing upgrade evidence for the resolved project.
 3. Preview plan: Build a dry-run plan with the selected option and alternatives.
+
+Default project-scoped Endor lookups to `context.type==CONTEXT_TYPE_MAIN`
+unless the user explicitly asks for PR/CI-run or all-context evidence. When a
+non-main context is intentional, label the scope and keep its counts separate
+from main-context counts.
 
 ## Safety
 

@@ -19,6 +19,7 @@ Distribution roots:
 - Antigravity CLI: `plugins/antigravity/endor-labs-agent-kit/`
 - Cursor: `.cursor-plugin/`, generated root workflow `agents/`, generated root
   workflow `skills/`, and `assets/logo.svg`
+- Cursor SDK: `cursor-sdk/`
 - Root skill-compatible compatibility: `gemini-extension.json`, `GEMINI.md`,
   and generated root workflow `skills/`
 
@@ -46,6 +47,7 @@ cp /path/to/endor-labs-agent-kit/.claude-plugin/marketplace.json .claude-plugin/
 cp /path/to/endor-labs-agent-kit/.agents/plugins/marketplace.json .agents/plugins/marketplace.json
 rsync -a --delete /path/to/endor-labs-agent-kit/.cursor-plugin/ ./.cursor-plugin/
 rsync -a --delete /path/to/endor-labs-agent-kit/agents/ ./agents/
+rsync -a --delete /path/to/endor-labs-agent-kit/cursor-sdk/ ./cursor-sdk/
 for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
   rsync -a --delete "/path/to/endor-labs-agent-kit/skills/$skill/" "./skills/$skill/"
 done
@@ -72,6 +74,8 @@ python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
 python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
+python3 -m py_compile cursor-sdk/run_cursor_agent.py
 python3 -m json.tool gemini-extension.json >/dev/null
 test -f agents/endor-agent-kit-setup-agent.md
 test -f agents/endor-ai-sast-triage-agent.md
@@ -89,6 +93,7 @@ Compare generated package drift:
 diff -qr /path/to/endor-labs-agent-kit/plugins ./plugins
 diff -qr /path/to/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
 diff -qr /path/to/endor-labs-agent-kit/agents ./agents
+diff -qr /path/to/endor-labs-agent-kit/cursor-sdk ./cursor-sdk
 for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
   diff -qr "/path/to/endor-labs-agent-kit/skills/$skill" "./skills/$skill"
 done
@@ -172,3 +177,17 @@ test -f skills/ai-sast-triage/architecture.svg
 Keep Cursor validation separate from Gemini validation. Cursor uses
 `.cursor-plugin/`, `agents/`, `skills/`, and `assets/logo.svg`; Gemini CLI uses
 `plugins/gemini/endor-labs-agent-kit/`.
+
+Cursor SDK automation:
+
+```bash
+python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
+python3 -m py_compile cursor-sdk/run_cursor_agent.py
+test -f cursor-sdk/requirements.txt
+test -f cursor-sdk/agents/endor-agent-kit-setup-agent.md
+test -f cursor-sdk/agents/endor-probe-droid-agent.md
+```
+
+Do not run Cursor SDK local or cloud smoke tests without explicit approval for
+`CURSOR_API_KEY` use, target repository, namespace provenance, and any possible
+workflow side effects.

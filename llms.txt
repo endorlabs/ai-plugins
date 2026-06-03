@@ -1,7 +1,7 @@
 # Endor Labs AI Plugins
 
 > Public distribution repository for Endor Labs Agent Kit packages across
-> Claude Code, Codex, Gemini CLI, Antigravity CLI, Cursor, and root
+> Claude Code, Codex, Gemini CLI, Antigravity CLI, Cursor, Cursor SDK, and root
 > skill-compatible hosts.
 
 ## Start Here
@@ -19,6 +19,7 @@
 - Public mirror: `/Users/mattbrown/AURI/ai-plugins`
 - Generated package tree: `plugins/`
 - Cursor package: `.cursor-plugin/`, `agents/`, `skills/`, `assets/logo.svg`
+- Cursor SDK automation: `cursor-sdk/`
 - Root skill-compatible compatibility: `GEMINI.md`, `gemini-extension.json`,
   `skills/`
 
@@ -36,6 +37,7 @@ publication output. Behavior changes belong in the source repo first.
 - Gemini CLI: `plugins/gemini/endor-labs-agent-kit/`
 - Antigravity CLI: `plugins/antigravity/endor-labs-agent-kit/`
 - Cursor: `.cursor-plugin/`, `agents/`, `skills/`, `assets/logo.svg`
+- Cursor SDK: `cursor-sdk/`
 - Root compatibility: `GEMINI.md`, `gemini-extension.json`, `skills/`
 
 ## Common Validation
@@ -52,6 +54,7 @@ test ! -e plugins/gemini/endor-labs-agent-kit.zip
 diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/plugins ./plugins
 diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
 diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/agents ./agents
+diff -qr /Users/mattbrown/AURI/endor-labs-agent-kit/cursor-sdk ./cursor-sdk
 git diff --check
 ```
 

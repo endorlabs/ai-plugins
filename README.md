@@ -162,22 +162,24 @@ vulnerability explanation, and remediation planning.
 
 Do not change generated Agent Kit behavior by editing package files in this
 repo. Make behavior changes in the Agent Kit source repo, regenerate there,
-then sync generated artifacts here.
+then let the Agent Kit publish workflow open a generated PR here.
+
+Generated sync PRs should include:
+
+- source Agent Kit commit in the PR body
+- `provenance/agent-kit-catalog.intoto.json`
+- `provenance/manifest.sha256`
+- validation evidence for root skills, JSON metadata, Cursor SDK, Gemini no-zip,
+  byte-for-byte generated-surface diffs, and `git diff --check`
+
+Manual fallback uses the Agent Kit sync script:
 
 ```bash
 AGENT_KIT_REPO="/path/to/endor-labs-agent-kit"
 
-rsync -a --delete "$AGENT_KIT_REPO/plugins/" ./plugins/
-cp "$AGENT_KIT_REPO/.claude-plugin/marketplace.json" .claude-plugin/marketplace.json
-cp "$AGENT_KIT_REPO/.agents/plugins/marketplace.json" .agents/plugins/marketplace.json
-rsync -a --delete "$AGENT_KIT_REPO/.cursor-plugin/" ./.cursor-plugin/
-rsync -a --delete "$AGENT_KIT_REPO/agents/" ./agents/
-rsync -a --delete "$AGENT_KIT_REPO/cursor-sdk/" ./cursor-sdk/
-for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
-  rsync -a --delete "$AGENT_KIT_REPO/skills/$skill/" "./skills/$skill/"
-done
-mkdir -p assets
-cp "$AGENT_KIT_REPO/assets/logo.svg" assets/logo.svg
+python3 "$AGENT_KIT_REPO/scripts/sync_ai_plugins_distribution.py" \
+  --source "$AGENT_KIT_REPO" \
+  --target .
 ```
 
 ## ✅ Validation
@@ -189,7 +191,11 @@ python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
-python3 -m py_compile cursor-sdk/run_cursor_agent.py
+python3 - <<'PY'
+import py_compile
+
+py_compile.compile("cursor-sdk/run_cursor_agent.py", cfile="/tmp/run_cursor_agent.pyc", doraise=True)
+PY
 python3 -m json.tool gemini-extension.json >/dev/null
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
@@ -208,6 +214,7 @@ diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
 for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
   diff -qr "$AGENT_KIT_REPO/skills/$skill" "./skills/$skill"
 done
+diff -q "$AGENT_KIT_REPO/assets/logo.svg" assets/logo.svg
 ```
 
 ## 🗂️ Repository Reference

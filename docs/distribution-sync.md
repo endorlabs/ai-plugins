@@ -1,7 +1,8 @@
 # Distribution Sync
 
 Use this guide when refreshing public Agent Kit distribution artifacts from the
-source repo.
+source repo. Normal refreshes are generated PRs from the Agent Kit publish
+workflow. Use these commands for local validation or manual fallback.
 
 ## Repo Boundary
 
@@ -15,6 +16,23 @@ Normal package sync should make `ai-plugins/plugins/` byte-for-byte identical to
 `ai-plugins/.cursor-plugin/`, generated root workflow `agents/`, generated root
 workflow `skills/`, and `assets/logo.svg` match the source repo. Cursor SDK
 sync should make `ai-plugins/cursor-sdk/` match the source repo.
+
+## Automated Publication
+
+New agents, skills, hooks, action contracts, and generated package behavior are
+authored in Agent Kit. After an Agent Kit maintainer merges to `main`, the
+source workflow validates, regenerates, verifies provenance, syncs generated
+distribution surfaces, and opens or updates an `ai-plugins` PR.
+
+Generated PRs should include:
+
+- source Agent Kit commit
+- `provenance/agent-kit-catalog.intoto.json`
+- `provenance/manifest.sha256`
+- validation evidence in the PR body
+
+Direct PRs that change generated behavior here should be redirected to Agent
+Kit source first.
 
 ## Regenerate Source Artifacts
 
@@ -41,17 +59,9 @@ after source regeneration and validation are clean:
 ```bash
 AGENT_KIT_REPO="/path/to/endor-labs-agent-kit"
 
-rsync -a --delete "$AGENT_KIT_REPO/plugins/" ./plugins/
-cp "$AGENT_KIT_REPO/.claude-plugin/marketplace.json" .claude-plugin/marketplace.json
-cp "$AGENT_KIT_REPO/.agents/plugins/marketplace.json" .agents/plugins/marketplace.json
-rsync -a --delete "$AGENT_KIT_REPO/.cursor-plugin/" ./.cursor-plugin/
-rsync -a --delete "$AGENT_KIT_REPO/agents/" ./agents/
-rsync -a --delete "$AGENT_KIT_REPO/cursor-sdk/" ./cursor-sdk/
-for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
-  rsync -a --delete "$AGENT_KIT_REPO/skills/$skill/" "./skills/$skill/"
-done
-mkdir -p assets
-cp "$AGENT_KIT_REPO/assets/logo.svg" assets/logo.svg
+python3 "$AGENT_KIT_REPO/scripts/sync_ai_plugins_distribution.py" \
+  --source "$AGENT_KIT_REPO" \
+  --target .
 ```
 
 Do not copy the Agent Kit root README into this repo. The mirror root README is
@@ -76,7 +86,11 @@ python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
-python3 -m py_compile cursor-sdk/run_cursor_agent.py
+python3 - <<'PY'
+import py_compile
+
+py_compile.compile("cursor-sdk/run_cursor_agent.py", cfile="/tmp/run_cursor_agent.pyc", doraise=True)
+PY
 python3 -m json.tool gemini-extension.json >/dev/null
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip

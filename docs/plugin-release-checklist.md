@@ -23,6 +23,11 @@ Distribution roots:
 - Root skill-compatible compatibility: `gemini-extension.json`, `GEMINI.md`,
   and generated root workflow `skills/`
 
+Package versions are not bumped automatically by Agent Kit maintainer merges.
+The source `pyproject.toml` version is the release version for generated package
+metadata; maintainers update it intentionally, regenerate artifacts, and keep
+`CHANGELOG.md` current.
+
 ## Source Sync
 
 Agent behavior is source-owned by `endorlabs/endor-labs-agent-kit`.
@@ -45,6 +50,7 @@ Then sync generated artifacts into `ai-plugins`:
 rsync -a --delete /path/to/endor-labs-agent-kit/plugins/ ./plugins/
 cp /path/to/endor-labs-agent-kit/.claude-plugin/marketplace.json .claude-plugin/marketplace.json
 cp /path/to/endor-labs-agent-kit/.agents/plugins/marketplace.json .agents/plugins/marketplace.json
+cp /path/to/endor-labs-agent-kit/CHANGELOG.md CHANGELOG.md
 rsync -a --delete /path/to/endor-labs-agent-kit/.cursor-plugin/ ./.cursor-plugin/
 rsync -a --delete /path/to/endor-labs-agent-kit/agents/ ./agents/
 rsync -a --delete /path/to/endor-labs-agent-kit/cursor-sdk/ ./cursor-sdk/
@@ -85,6 +91,7 @@ test -f agents/endor-probe-droid-agent.md
 test -f agents/endor-sca-remediation-agent.md
 test -f skills/ai-sast-triage/architecture.svg
 test -f skills/sca-remediation/actions.yaml
+test -f CHANGELOG.md
 git diff --check
 ```
 
@@ -102,7 +109,8 @@ done
 
 Normal provider package sync should be byte-for-byte identical, and Cursor
 metadata/root workflow agents and support skills should match the
-source-generated Cursor package.
+source-generated Cursor package. The root `CHANGELOG.md` should also match the
+source repo so release notes travel with generated distribution PRs.
 
 ## Safety Gates
 

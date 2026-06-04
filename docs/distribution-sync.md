@@ -15,7 +15,9 @@ Normal package sync should make `ai-plugins/plugins/` byte-for-byte identical to
 `endor-labs-agent-kit/plugins/`. Cursor package sync should make
 `ai-plugins/.cursor-plugin/`, generated root workflow `agents/`, generated root
 workflow `skills/`, and `assets/logo.svg` match the source repo. Cursor SDK
-sync should make `ai-plugins/cursor-sdk/` match the source repo.
+sync should make `ai-plugins/cursor-sdk/` match the source repo. The root
+`CHANGELOG.md` is also synced so release notes travel with generated
+distribution PRs.
 
 ## Automated Publication
 
@@ -24,9 +26,14 @@ authored in Agent Kit. After an Agent Kit maintainer merges to `main`, the
 source workflow validates, regenerates, verifies provenance, syncs generated
 distribution surfaces, and opens or updates an `ai-plugins` PR.
 
+That workflow does not automatically increment package versions. The source
+`pyproject.toml` version changes only when maintainers intentionally bump it for
+a release.
+
 Generated PRs should include:
 
 - source Agent Kit commit
+- `CHANGELOG.md`
 - `provenance/agent-kit-catalog.intoto.json`
 - `provenance/manifest.sha256`
 - validation evidence in the PR body
@@ -71,6 +78,8 @@ and the source boundary.
 Do not copy the Agent Kit root `skills/create-endor-labs-agent/` helper into
 `ai-plugins`. Do not treat root `GEMINI.md` or root `gemini-extension.json` as
 Cursor package files; Gemini CLI uses `plugins/gemini/endor-labs-agent-kit/`.
+The sync script does copy `CHANGELOG.md`; update it in Agent Kit source before
+release-oriented syncs.
 
 ## Validate The Mirror
 
@@ -102,6 +111,7 @@ for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-dro
   diff -qr "$AGENT_KIT_REPO/skills/$skill" "./skills/$skill"
 done
 diff -q "$AGENT_KIT_REPO/assets/logo.svg" assets/logo.svg
+diff -q "$AGENT_KIT_REPO/CHANGELOG.md" CHANGELOG.md
 git diff --check
 ```
 
@@ -113,6 +123,7 @@ refs. Use `docs/plugin-release-checklist.md` for the full release matrix.
 A normal documentation sync may include:
 
 - root `README.md`
+- root `CHANGELOG.md`
 - `docs/`
 - `llms.txt`
 - package READMEs generated from Agent Kit

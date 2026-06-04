@@ -9,13 +9,17 @@ skill-compatible hosts.
 > shape, guardrails, tests, and source documentation are owned by
 > [🐙 The Endor Labs Agent Kit](https://github.com/endorlabs/endor-labs-agent-kit/tree/main).
 
-Current generated Agent Kit package version: `0.1.0`.
+Current generated Agent Kit package version: `0.1.0`. Agent Kit maintainer
+merges open or update generated distribution PRs in this repo, but they do not
+automatically bump package versions. Version bumps are intentional release
+actions from the source repo.
 
 ## 🚦 Start Here
 
 | I want to... | Go here |
 | --- | --- |
 | 🚀 Install a host package | [Quick Start](#-quick-start) |
+| 🧾 See what changed | [`CHANGELOG.md`](CHANGELOG.md) |
 | 🖱️ Use Cursor IDE agents | [Cursor IDE](#cursor-ide) |
 | 🐍 Run Cursor SDK automation | [`cursor-sdk/README.md`](cursor-sdk/README.md) |
 | 🤖 Ask an agent to review this mirror | [`docs/for-agents.md`](docs/for-agents.md) |
@@ -68,6 +72,13 @@ Existing Claude Code users pinned to the historical id can keep using:
 Do not enable `endor-labs-agent-kit@endorlabs` and `ai-plugins@endorlabs` in
 the same Claude profile for normal use. They expose the same setup skill and
 agents.
+
+The legacy package ID is Claude-specific. Cursor users installing from this
+repository root continue to receive the current `.cursor-plugin/`, root
+`agents/`, root `skills/`, and `assets/logo.svg` package. Gemini CLI users
+should install `plugins/gemini/endor-labs-agent-kit/` or the tagged GitHub repo;
+root `GEMINI.md` and `gemini-extension.json` remain compatibility files, and no
+Gemini zip artifact is generated.
 
 ### Cursor IDE
 

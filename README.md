@@ -43,7 +43,8 @@ A machine-readable index is available in [`llms.txt`](llms.txt).
 
 ## 🚀 Quick Start
 
-Run setup first after installing any package:
+Pick your host, install the package, then run setup. Setup checks local
+readiness and does not run scans.
 
 ```text
 Use the endor-agent-kit-setup skill to check Endor Agent Kit readiness. Do not run scans.
@@ -51,7 +52,7 @@ Use the endor-agent-kit-setup skill to check Endor Agent Kit readiness. Do not r
 
 ### Claude Code
 
-New users should install the preferred package id:
+Install the preferred package id:
 
 ```text
 /plugin marketplace add endorlabs/ai-plugins
@@ -73,32 +74,86 @@ Do not enable `endor-labs-agent-kit@endorlabs` and `ai-plugins@endorlabs` in
 the same Claude profile for normal use. They expose the same setup skill and
 agents.
 
-The legacy package ID is Claude-specific. Cursor users installing from this
-repository root continue to receive the current `.cursor-plugin/`, root
-`agents/`, root `skills/`, and `assets/logo.svg` package. Gemini CLI users
-should install `plugins/gemini/endor-labs-agent-kit/` or the tagged GitHub repo;
-root `GEMINI.md` and `gemini-extension.json` remain compatibility files, and no
-Gemini zip artifact is generated.
+Details: [`plugins/claude/endor-labs-agent-kit/README.md`](plugins/claude/endor-labs-agent-kit/README.md).
+
+### Codex
+
+Add the Endor Labs marketplace, restart Codex, then install **Endor Labs Agent
+Kit** from the Codex plugin directory:
+
+```bash
+codex plugin marketplace add endorlabs/ai-plugins \
+  --sparse .agents/plugins \
+  --sparse plugins/codex/endor-labs-agent-kit
+```
+
+After installation, start a new Codex thread and ask setup to install or update
+the bundled Endor custom agents:
+
+```text
+Use the endor-agent-kit-setup skill to check readiness and install the bundled Codex custom agents.
+```
+
+Details: [`plugins/codex/endor-labs-agent-kit/README.md`](plugins/codex/endor-labs-agent-kit/README.md).
 
 ### Cursor IDE
 
-Cursor uses this repository root as the package source:
+Install the current public Cursor Marketplace package from Cursor Agent chat:
 
 ```text
-.cursor-plugin/
-agents/
-skills/
-assets/logo.svg
+/add-plugin endorlabs
 ```
 
-Install the Cursor package into Cursor, open the target project folder, reload
-Cursor, then invoke a generated agent:
+Marketplace page: [`cursor.com/marketplace/endorlabs`](https://cursor.com/marketplace/endorlabs).
+
+Open the target project folder, reload Cursor if prompted, then run setup:
 
 ```text
-Use the endor-probe-droid-agent to explain what evidence you need to assess GitHub onboarding gaps. Keep it read-only.
+Use the endor-setup skill to set up endorctl.
 ```
 
-Root `GEMINI.md` and `gemini-extension.json` are not Cursor package metadata.
+The current marketplace package exposes `endor-setup` and
+`endor-upgrade-impact`. The generated Agent Kit Cursor package in this
+repository uses `.cursor-plugin/`, root `agents/`, root `skills/`, and
+`assets/logo.svg`; root `GEMINI.md` and `gemini-extension.json` are not Cursor
+package metadata.
+
+### Gemini CLI
+
+Install the extension from the public repository:
+
+```bash
+gemini extensions install https://github.com/endorlabs/ai-plugins
+gemini extensions list
+```
+
+For local validation from a checkout, install the generated extension directory:
+
+```bash
+gemini extensions install ./plugins/gemini/endor-labs-agent-kit
+```
+
+Restart Gemini CLI after installing or reinstalling the extension.
+
+Details: [`plugins/gemini/endor-labs-agent-kit/README.md`](plugins/gemini/endor-labs-agent-kit/README.md).
+
+### Antigravity CLI
+
+Clone the distribution repo, then install the generated plugin directory:
+
+```bash
+git clone https://github.com/endorlabs/ai-plugins
+cd ai-plugins
+agy plugin validate ./plugins/antigravity/endor-labs-agent-kit
+agy plugin install ./plugins/antigravity/endor-labs-agent-kit
+agy plugin list
+```
+
+Some Antigravity installs expose the command as `antigravity` instead of `agy`;
+use the same `plugin validate`, `plugin install`, and `plugin list` subcommands.
+Restart Antigravity CLI if newly installed skills or subagents are not visible.
+
+Details: [`plugins/antigravity/endor-labs-agent-kit/README.md`](plugins/antigravity/endor-labs-agent-kit/README.md).
 
 ### Cursor SDK
 
@@ -123,13 +178,12 @@ python cursor-sdk/run_cursor_agent.py endor-sca-remediation-agent \
   "Prepare a remediation plan only. Do not edit files or open a PR."
 ```
 
-### Other Hosts
-
-| Host | First file |
-| --- | --- |
-| Codex | [`plugins/codex/endor-labs-agent-kit/README.md`](plugins/codex/endor-labs-agent-kit/README.md) |
-| Gemini CLI | [`plugins/gemini/endor-labs-agent-kit/README.md`](plugins/gemini/endor-labs-agent-kit/README.md) |
-| Antigravity CLI | [`plugins/antigravity/endor-labs-agent-kit/README.md`](plugins/antigravity/endor-labs-agent-kit/README.md) |
+The legacy Claude package ID is Claude-specific. Cursor users installing from
+this repository root continue to receive the current `.cursor-plugin/`, root
+`agents/`, root `skills/`, and `assets/logo.svg` package. Gemini CLI users
+should install `plugins/gemini/endor-labs-agent-kit/` or the public GitHub repo;
+root `GEMINI.md` and `gemini-extension.json` remain compatibility files, and no
+Gemini zip artifact is generated.
 
 ## ⚡ Agent Quick Starts
 

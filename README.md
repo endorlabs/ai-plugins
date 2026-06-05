@@ -112,11 +112,28 @@ Open the target project folder, reload Cursor if prompted, then run setup:
 Use the endor-setup skill to set up endorctl.
 ```
 
-The current marketplace package exposes `endor-setup` and
-`endor-upgrade-impact`. The generated Agent Kit Cursor package in this
-repository uses `.cursor-plugin/`, root `agents/`, root `skills/`, and
-`assets/logo.svg`; root `GEMINI.md` and `gemini-extension.json` are not Cursor
-package metadata.
+### Cursor SDK
+
+Use the SDK lane for Python automation, CI, orchestration, backend services, or
+Cursor cloud agents:
+
+```bash
+python3 -m pip install -r cursor-sdk/requirements.txt
+export CURSOR_API_KEY="crsr_..."
+python cursor-sdk/run_cursor_agent.py endor-probe-droid-agent \
+  --workspace /path/to/repo \
+  "Explain what evidence you need to assess GitHub onboarding gaps. Keep it read-only."
+```
+
+Cloud run shape:
+
+```bash
+python cursor-sdk/run_cursor_agent.py endor-sca-remediation-agent \
+  --mode cloud \
+  --repo-url https://github.com/your-org/your-repo \
+  --ref main \
+  "Prepare a remediation plan only. Do not edit files or open a PR."
+```
 
 ### Gemini CLI
 
@@ -154,36 +171,6 @@ use the same `plugin validate`, `plugin install`, and `plugin list` subcommands.
 Restart Antigravity CLI if newly installed skills or subagents are not visible.
 
 Details: [`plugins/antigravity/endor-labs-agent-kit/README.md`](plugins/antigravity/endor-labs-agent-kit/README.md).
-
-### Cursor SDK
-
-Use the SDK lane for Python automation, CI, orchestration, backend services, or
-Cursor cloud agents:
-
-```bash
-python3 -m pip install -r cursor-sdk/requirements.txt
-export CURSOR_API_KEY="crsr_..."
-python cursor-sdk/run_cursor_agent.py endor-probe-droid-agent \
-  --workspace /path/to/repo \
-  "Explain what evidence you need to assess GitHub onboarding gaps. Keep it read-only."
-```
-
-Cloud run shape:
-
-```bash
-python cursor-sdk/run_cursor_agent.py endor-sca-remediation-agent \
-  --mode cloud \
-  --repo-url https://github.com/your-org/your-repo \
-  --ref main \
-  "Prepare a remediation plan only. Do not edit files or open a PR."
-```
-
-The legacy Claude package ID is Claude-specific. Cursor users installing from
-this repository root continue to receive the current `.cursor-plugin/`, root
-`agents/`, root `skills/`, and `assets/logo.svg` package. Gemini CLI users
-should install `plugins/gemini/endor-labs-agent-kit/` or the public GitHub repo;
-root `GEMINI.md` and `gemini-extension.json` remain compatibility files, and no
-Gemini zip artifact is generated.
 
 ## ⚡ Agent Quick Starts
 

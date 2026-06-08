@@ -54,8 +54,11 @@ cp /path/to/endor-labs-agent-kit/CHANGELOG.md CHANGELOG.md
 rsync -a --delete /path/to/endor-labs-agent-kit/.cursor-plugin/ ./.cursor-plugin/
 rsync -a --delete /path/to/endor-labs-agent-kit/agents/ ./agents/
 rsync -a --delete /path/to/endor-labs-agent-kit/cursor-sdk/ ./cursor-sdk/
-for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
-  rsync -a --delete "/path/to/endor-labs-agent-kit/skills/$skill/" "./skills/$skill/"
+mkdir -p skills
+for skill in /path/to/endor-labs-agent-kit/skills/*; do
+  name=${skill##*/}
+  [ "$name" = "create-endor-labs-agent" ] && continue
+  rsync -a --delete "$skill/" "./skills/$name/"
 done
 mkdir -p assets
 cp /path/to/endor-labs-agent-kit/assets/logo.svg assets/logo.svg
@@ -87,9 +90,11 @@ python3 -m json.tool gemini-extension.json >/dev/null
 test -f agents/endor-agent-kit-setup-agent.md
 test -f agents/endor-ai-sast-triage-agent.md
 test -f agents/endor-troubleshooter-agent.md
+test -f agents/endor-malware-response-agent.md
 test -f agents/endor-probe-droid-agent.md
 test -f agents/endor-sca-remediation-agent.md
 test -f skills/ai-sast-triage/architecture.svg
+test -f skills/malware-response/architecture.svg
 test -f skills/sca-remediation/actions.yaml
 test -f CHANGELOG.md
 git diff --check
@@ -102,8 +107,10 @@ diff -qr /path/to/endor-labs-agent-kit/plugins ./plugins
 diff -qr /path/to/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
 diff -qr /path/to/endor-labs-agent-kit/agents ./agents
 diff -qr /path/to/endor-labs-agent-kit/cursor-sdk ./cursor-sdk
-for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
-  diff -qr "/path/to/endor-labs-agent-kit/skills/$skill" "./skills/$skill"
+for skill in /path/to/endor-labs-agent-kit/skills/*; do
+  name=${skill##*/}
+  [ "$name" = "create-endor-labs-agent" ] && continue
+  diff -qr "$skill" "./skills/$name"
 done
 ```
 
@@ -179,8 +186,10 @@ for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 test -f agents/endor-agent-kit-setup-agent.md
+test -f agents/endor-malware-response-agent.md
 test -f agents/endor-probe-droid-agent.md
 test -f skills/ai-sast-triage/architecture.svg
+test -f skills/malware-response/architecture.svg
 ```
 
 Keep Cursor validation separate from Gemini validation. Cursor uses
@@ -194,6 +203,7 @@ python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
 python3 -m py_compile cursor-sdk/run_cursor_agent.py
 test -f cursor-sdk/requirements.txt
 test -f cursor-sdk/agents/endor-agent-kit-setup-agent.md
+test -f cursor-sdk/agents/endor-malware-response-agent.md
 test -f cursor-sdk/agents/endor-probe-droid-agent.md
 ```
 

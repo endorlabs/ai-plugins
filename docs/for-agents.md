@@ -88,8 +88,10 @@ test ! -e plugins/gemini/endor-labs-agent-kit.zip
 diff -qr "$AGENT_KIT_REPO/.cursor-plugin" ./.cursor-plugin
 diff -qr "$AGENT_KIT_REPO/agents" ./agents
 diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
-for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
-  diff -qr "$AGENT_KIT_REPO/skills/$skill" "./skills/$skill"
+for skill in "$AGENT_KIT_REPO"/skills/*; do
+  name=${skill##*/}
+  [ "$name" = "create-endor-labs-agent" ] && continue
+  diff -qr "$skill" "./skills/$name"
 done
 git diff --check
 ```

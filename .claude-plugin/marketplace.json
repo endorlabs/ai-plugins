@@ -2,7 +2,7 @@
   "description": "Endor Labs Agent Kit Claude Code plugin marketplace.",
   "name": "endorlabs",
   "owner": {
-    "email": "support@endorlabs.com",
+    "email": "support@endor.ai",
     "name": "Endor Labs"
   },
   "plugins": [

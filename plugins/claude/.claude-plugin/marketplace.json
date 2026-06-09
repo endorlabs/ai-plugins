@@ -26,7 +26,7 @@
         "Upgrade Impact Analysis"
       ],
       "name": "endor-labs-agent-kit",
-      "source": "./plugins/claude/endor-labs-agent-kit",
+      "source": "./endor-labs-agent-kit",
       "tags": [
         "endor-labs",
         "security",
@@ -61,7 +61,7 @@
         "Upgrade Impact Analysis"
       ],
       "name": "ai-plugins",
-      "source": "./plugins/claude/ai-plugins",
+      "source": "./ai-plugins",
       "tags": [
         "endor-labs",
         "security",

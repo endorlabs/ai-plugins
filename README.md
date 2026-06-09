@@ -1,8 +1,8 @@
 # 🧩 Endor Labs AI Plugins
 
 Public distribution repository for Endor Labs Agent Kit packages across Claude
-Code, Codex, Gemini CLI, Antigravity CLI, Cursor IDE, Cursor SDK, and root
-skill-compatible hosts.
+Code, Codex, Gemini CLI, Antigravity CLI, Cursor IDE, Cursor SDK, and root MCP
+support context.
 
 > [!IMPORTANT]
 > This repo is the distribution mirror. Agent behavior, generated package
@@ -38,7 +38,7 @@ A machine-readable index is available in [`llms.txt`](llms.txt).
 | 🛫 Antigravity CLI | `plugins/antigravity/endor-labs-agent-kit/` |
 | 🖱️ Cursor IDE | `.cursor-plugin/`, root `agents/`, root `skills/`, `assets/logo.svg` |
 | 🐍 Cursor SDK | `cursor-sdk/` Python launcher, generated prompts, and agent definitions |
-| 🔁 Root compatibility | `GEMINI.md`, `gemini-extension.json`, root `skills/` |
+| 🔁 Root support | `.mcp.json`, `GEMINI.md` |
 | 🧾 Release docs | `docs/`, `llms.txt`, `plugins/README.md` |
 
 ## 🚀 Quick Start
@@ -197,7 +197,7 @@ vulnerability explanation, and remediation planning.
 | Antigravity CLI | `plugins/antigravity/endor-labs-agent-kit/` | Package directory with root `plugin.json`. |
 | Cursor IDE | `.cursor-plugin/`, `agents/`, `skills/`, `assets/logo.svg` | Source-generated Cursor plugin agents and support skills. |
 | Cursor SDK | `cursor-sdk/` | Python SDK launcher, generated prompts, and local/cloud run instructions. |
-| Root compatibility | `GEMINI.md`, `gemini-extension.json`, `skills/` | Separate compatibility surface, not Cursor metadata. |
+| Root support | `.mcp.json`, `GEMINI.md` | Optional MCP support context; the repository root is not a Gemini extension root. |
 
 ## 🔒 Safety Rules
 
@@ -249,7 +249,7 @@ import py_compile
 
 py_compile.compile("cursor-sdk/run_cursor_agent.py", cfile="/tmp/run_cursor_agent.pyc", doraise=True)
 PY
-python3 -m json.tool gemini-extension.json >/dev/null
+test ! -e gemini-extension.json
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
 git diff --check
@@ -280,8 +280,8 @@ agents/
 assets/logo.svg
 cursor-sdk/
 docs/
+.mcp.json
 GEMINI.md
-gemini-extension.json
 llms.txt
 plugins/
 scripts/

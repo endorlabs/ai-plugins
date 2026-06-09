@@ -2,7 +2,7 @@
 
 > Public distribution repository for Endor Labs Agent Kit packages across
 > Claude Code, Codex, Gemini CLI, Antigravity CLI, Cursor, Cursor SDK, and root
-> skill-compatible hosts.
+> MCP support context.
 
 ## Start Here
 
@@ -20,8 +20,7 @@
 - Generated package tree: `plugins/`
 - Cursor package: `.cursor-plugin/`, `agents/`, `skills/`, `assets/logo.svg`
 - Cursor SDK automation: `cursor-sdk/`
-- Root skill-compatible compatibility: `GEMINI.md`, `gemini-extension.json`,
-  `skills/`
+- Root MCP/Gemini support context: `.mcp.json` and non-installable `GEMINI.md`
 
 Generated provider packages under `plugins/` should come from Agent Kit
 publication output. Cursor package files should also come from Agent Kit
@@ -38,7 +37,7 @@ publication output. Behavior changes belong in the source repo first.
 - Antigravity CLI: `plugins/antigravity/endor-labs-agent-kit/`
 - Cursor: `.cursor-plugin/`, `agents/`, `skills/`, `assets/logo.svg`
 - Cursor SDK: `cursor-sdk/`
-- Root compatibility: `GEMINI.md`, `gemini-extension.json`, `skills/`
+- Root support: `.mcp.json`, `GEMINI.md`
 
 ## Common Validation
 
@@ -50,7 +49,9 @@ python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
 python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
-python3 -m json.tool gemini-extension.json >/dev/null
+python3 -m json.tool .mcp.json >/dev/null
+test -f GEMINI.md
+test ! -e gemini-extension.json
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
 diff -qr "$AGENT_KIT_REPO/plugins" ./plugins

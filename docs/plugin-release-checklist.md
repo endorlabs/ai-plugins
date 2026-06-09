@@ -20,8 +20,7 @@ Distribution roots:
 - Cursor: `.cursor-plugin/`, generated root workflow `agents/`, generated root
   workflow `skills/`, and `assets/logo.svg`
 - Cursor SDK: `cursor-sdk/`
-- Root skill-compatible compatibility: `gemini-extension.json`, `GEMINI.md`,
-  and generated root workflow `skills/`
+- Root MCP/Gemini support context: `.mcp.json` and non-installable `GEMINI.md`
 
 Package versions are not bumped automatically by Agent Kit maintainer merges.
 The source `pyproject.toml` version is the release version for generated package
@@ -64,8 +63,10 @@ mkdir -p assets
 cp /path/to/endor-labs-agent-kit/assets/logo.svg assets/logo.svg
 ```
 
-Do not sync root `GEMINI.md` or root `gemini-extension.json` as Cursor package
-output. They are separate compatibility files.
+Do not sync root `GEMINI.md` as Cursor package output, and do not create a root
+`gemini-extension.json`. Root `.mcp.json` and `GEMINI.md` are support context;
+Gemini CLI uses `plugins/gemini/endor-labs-agent-kit/` as the installable
+extension.
 
 ## Local Validation
 
@@ -86,7 +87,9 @@ python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
 python3 -m py_compile cursor-sdk/run_cursor_agent.py
-python3 -m json.tool gemini-extension.json >/dev/null
+python3 -m json.tool .mcp.json >/dev/null
+test -f GEMINI.md
+test ! -e gemini-extension.json
 test -f agents/endor-agent-kit-setup-agent.md
 test -f agents/endor-ai-sast-triage-agent.md
 test -f agents/endor-troubleshooter-agent.md
@@ -180,7 +183,7 @@ antigravity plugin list
 antigravity plugin uninstall endor-labs-agent-kit
 ```
 
-Cursor and root skill-compatible hosts:
+Cursor package and root workflow skills:
 
 ```bash
 for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done

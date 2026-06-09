@@ -109,7 +109,7 @@ Marketplace page: [`cursor.com/marketplace/endorlabs`](https://cursor.com/market
 Open the target project folder, reload Cursor if prompted, then run setup:
 
 ```text
-Use the endor-setup skill to set up endorctl.
+Use the endor-agent-kit-setup skill to set up endorctl.
 ```
 
 ### Cursor SDK

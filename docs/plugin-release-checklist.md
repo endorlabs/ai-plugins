@@ -166,7 +166,8 @@ codex plugin remove endor-labs-agent-kit@endor-labs-agent-kit
 Gemini CLI:
 
 ```bash
-gemini extensions install https://github.com/endorlabs/ai-plugins --ref <tag>
+git clone --depth 1 --branch <tag> https://github.com/endorlabs/ai-plugins ai-plugins-gemini-release
+gemini extensions install ./ai-plugins-gemini-release/plugins/gemini/endor-labs-agent-kit
 gemini extensions list
 gemini extensions uninstall endor-labs-agent-kit
 ```

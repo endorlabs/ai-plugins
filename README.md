@@ -137,10 +137,11 @@ python cursor-sdk/run_cursor_agent.py endor-sca-remediation-agent \
 
 ### Gemini CLI
 
-Install the extension from the public repository:
+Install the generated Gemini extension package from the public repository:
 
 ```bash
-gemini extensions install https://github.com/endorlabs/ai-plugins
+git clone https://github.com/endorlabs/ai-plugins
+gemini extensions install ./ai-plugins/plugins/gemini/endor-labs-agent-kit
 gemini extensions list
 ```
 

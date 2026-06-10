@@ -1,0 +1,60 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Install validation dependencies
+        run: python3 -m pip install pyyaml
+
+      - name: Validate root skill frontmatter
+        run: |
+          for skill in skills/*; do
+            python3 scripts/quick_validate.py "$skill"
+          done
+
+      - name: Validate JSON metadata
+        run: |
+          python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
+          python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
+          python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
+          python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+          python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
+          python3 -m json.tool .mcp.json >/dev/null
+
+      - name: Compile Cursor SDK launcher
+        run: python3 -m py_compile cursor-sdk/run_cursor_agent.py
+
+      - name: Check Gemini extension layout
+        run: |
+          test ! -e gemini-extension.json
+          test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
+          test ! -e plugins/gemini/endor-labs-agent-kit.zip
+
+      - name: Check README package version matches Claude marketplace
+        run: |
+          python3 - <<'PY'
+          import json
+          import sys
+
+          plugins = json.load(open(".claude-plugin/marketplace.json"))["plugins"]
+          version = next(
+              plugin["version"]
+              for plugin in plugins
+              if plugin["name"] == "endor-labs-agent-kit"
+          )
+          marker = f"package version: `{version}`"
+          if marker not in open("README.md").read():
+              sys.exit(f"README.md does not state '{marker}'")
+          print(f"README.md states '{marker}'")
+          PY

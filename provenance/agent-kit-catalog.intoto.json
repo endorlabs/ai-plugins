@@ -1,0 +1,360 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "predicate": {
+    "builder": {
+      "id": "https://github.com/endorlabs/endor-labs-agent-kit"
+    },
+    "catalog": [
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "ai-sast-triage",
+        "source_recipe": "source/agents/ai-sast-triage/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "dependency-decision-helper",
+        "source_recipe": "source/agents/dependency-decision-helper/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "endor-troubleshooter",
+        "source_recipe": "source/agents/endor-troubleshooter/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "malware-response",
+        "source_recipe": "source/agents/malware-response/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "package-risk-summary",
+        "source_recipe": "source/agents/package-risk-summary/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "probe-droid",
+        "source_recipe": "source/agents/probe-droid/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "remediation-planner",
+        "source_recipe": "source/agents/remediation-planner/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "repository-dependency-reviewer",
+        "source_recipe": "source/agents/repository-dependency-reviewer/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "sca-remediation",
+        "source_recipe": "source/agents/sca-remediation/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "upgrade-impact-analysis",
+        "source_recipe": "source/agents/upgrade-impact-analysis/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
+        "id": "vulnerability-explainer",
+        "source_recipe": "source/agents/vulnerability-explainer/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-managed-agents",
+        "id": "dependency-decision-helper",
+        "source_recipe": "source/agents/dependency-decision-helper/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-managed-agents",
+        "id": "endor-troubleshooter",
+        "source_recipe": "source/agents/endor-troubleshooter/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-managed-agents",
+        "id": "malware-response",
+        "source_recipe": "source/agents/malware-response/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-managed-agents",
+        "id": "package-risk-summary",
+        "source_recipe": "source/agents/package-risk-summary/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-managed-agents",
+        "id": "probe-droid",
+        "source_recipe": "source/agents/probe-droid/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-managed-agents",
+        "id": "upgrade-impact-analysis",
+        "source_recipe": "source/agents/upgrade-impact-analysis/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-managed-agents",
+        "id": "vulnerability-explainer",
+        "source_recipe": "source/agents/vulnerability-explainer/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
+        "id": "ai-sast-triage",
+        "source_recipe": "source/agents/ai-sast-triage/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
+        "id": "endor-troubleshooter",
+        "source_recipe": "source/agents/endor-troubleshooter/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
+        "id": "malware-response",
+        "source_recipe": "source/agents/malware-response/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
+        "id": "probe-droid",
+        "source_recipe": "source/agents/probe-droid/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
+        "id": "sca-remediation",
+        "source_recipe": "source/agents/sca-remediation/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
+        "id": "ai-sast-triage",
+        "source_recipe": "source/agents/ai-sast-triage/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
+        "id": "endor-troubleshooter",
+        "source_recipe": "source/agents/endor-troubleshooter/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
+        "id": "malware-response",
+        "source_recipe": "source/agents/malware-response/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
+        "id": "probe-droid",
+        "source_recipe": "source/agents/probe-droid/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
+        "id": "sca-remediation",
+        "source_recipe": "source/agents/sca-remediation/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "ai-sast-triage",
+        "source_recipe": "source/agents/ai-sast-triage/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "dependency-decision-helper",
+        "source_recipe": "source/agents/dependency-decision-helper/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "endor-troubleshooter",
+        "source_recipe": "source/agents/endor-troubleshooter/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "malware-response",
+        "source_recipe": "source/agents/malware-response/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "package-risk-summary",
+        "source_recipe": "source/agents/package-risk-summary/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "probe-droid",
+        "source_recipe": "source/agents/probe-droid/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "remediation-planner",
+        "source_recipe": "source/agents/remediation-planner/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "repository-dependency-reviewer",
+        "source_recipe": "source/agents/repository-dependency-reviewer/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "sca-remediation",
+        "source_recipe": "source/agents/sca-remediation/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "upgrade-impact-analysis",
+        "source_recipe": "source/agents/upgrade-impact-analysis/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "vulnerability-explainer",
+        "source_recipe": "source/agents/vulnerability-explainer/recipe.yaml"
+      }
+    ],
+    "generator": "endor-agent-kit",
+    "manifest_schema_version": 1,
+    "plugin_packages": [
+      {
+        "host": "antigravity",
+        "included_agents": [
+          "ai-sast-triage",
+          "endor-troubleshooter",
+          "malware-response",
+          "probe-droid",
+          "sca-remediation"
+        ],
+        "name": "endor-labs-agent-kit",
+        "path": "plugins/antigravity/endor-labs-agent-kit",
+        "version": "2.0.0"
+      },
+      {
+        "host": "claude-code",
+        "included_agents": [
+          "ai-sast-triage",
+          "dependency-decision-helper",
+          "endor-troubleshooter",
+          "malware-response",
+          "package-risk-summary",
+          "probe-droid",
+          "remediation-planner",
+          "repository-dependency-reviewer",
+          "sca-remediation",
+          "upgrade-impact-analysis",
+          "vulnerability-explainer"
+        ],
+        "name": "ai-plugins",
+        "path": "plugins/claude/ai-plugins",
+        "version": "1.1.1"
+      },
+      {
+        "host": "claude-code",
+        "included_agents": [
+          "ai-sast-triage",
+          "dependency-decision-helper",
+          "endor-troubleshooter",
+          "malware-response",
+          "package-risk-summary",
+          "probe-droid",
+          "remediation-planner",
+          "repository-dependency-reviewer",
+          "sca-remediation",
+          "upgrade-impact-analysis",
+          "vulnerability-explainer"
+        ],
+        "name": "endor-labs-agent-kit",
+        "path": "plugins/claude/endor-labs-agent-kit",
+        "version": "2.0.0"
+      },
+      {
+        "host": "codex",
+        "included_agents": [
+          "ai-sast-triage",
+          "endor-troubleshooter",
+          "malware-response",
+          "probe-droid",
+          "sca-remediation"
+        ],
+        "name": "endor-labs-agent-kit",
+        "path": "plugins/codex/endor-labs-agent-kit",
+        "version": "2.0.0"
+      },
+      {
+        "host": "cursor",
+        "included_agents": [
+          "ai-sast-triage",
+          "endor-troubleshooter",
+          "malware-response",
+          "probe-droid",
+          "sca-remediation"
+        ],
+        "name": "endorlabs",
+        "path": ".",
+        "version": "2.0.0"
+      },
+      {
+        "host": "cursor-sdk",
+        "included_agents": [
+          "ai-sast-triage",
+          "endor-troubleshooter",
+          "malware-response",
+          "probe-droid",
+          "sca-remediation"
+        ],
+        "name": "endor-labs-agent-kit-cursor-sdk",
+        "path": "cursor-sdk",
+        "version": "2.0.0"
+      },
+      {
+        "host": "gemini",
+        "included_agents": [
+          "ai-sast-triage",
+          "endor-troubleshooter",
+          "malware-response",
+          "probe-droid",
+          "sca-remediation"
+        ],
+        "name": "endor-labs-agent-kit",
+        "path": "plugins/gemini/endor-labs-agent-kit",
+        "version": "2.0.0"
+      }
+    ]
+  },
+  "predicateType": "https://endorlabs.com/agent-kit/catalog-provenance/v1",
+  "subject": [
+    {
+      "digest": {
+        "sha256": "8f2eb0e9016b5ef8f39b2a0f79e6e6c83b602fab5fbf088c06b69bbe1d56f7f8"
+      },
+      "name": "manifest.json"
+    }
+  ]
+}

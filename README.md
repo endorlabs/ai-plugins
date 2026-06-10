@@ -255,6 +255,9 @@ test ! -e plugins/gemini/endor-labs-agent-kit.zip
 git diff --check
 ```
 
+These checks also run automatically on every pull request via
+[`.github/workflows/validate.yml`](.github/workflows/validate.yml).
+
 Generated drift checks:
 
 ```bash
@@ -264,7 +267,7 @@ diff -qr "$AGENT_KIT_REPO/plugins" ./plugins
 diff -qr "$AGENT_KIT_REPO/.cursor-plugin" ./.cursor-plugin
 diff -qr "$AGENT_KIT_REPO/agents" ./agents
 diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
-for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter probe-droid sca-remediation; do
+for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter malware-response probe-droid sca-remediation; do
   diff -qr "$AGENT_KIT_REPO/skills/$skill" "./skills/$skill"
 done
 diff -q "$AGENT_KIT_REPO/assets/logo.svg" assets/logo.svg

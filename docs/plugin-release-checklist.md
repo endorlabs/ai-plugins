@@ -136,6 +136,25 @@ source repo so release notes travel with generated distribution PRs.
 - Project lookup failures in a proven namespace must retry with `--traverse`
   before reporting project-not-found.
 
+## Tag The Release
+
+The release tag is created on `endorlabs/ai-plugins` (this repository), not on
+the Agent Kit source repository. Public Codex and Gemini CLI installs resolve
+the tag directly, so create it only after the release content is merged to
+`main`:
+
+```bash
+VERSION="$(python3 -c "import json; print(next(p['version'] for p in json.load(open('.claude-plugin/marketplace.json'))['plugins'] if p['name'] == 'endor-labs-agent-kit'))")"
+gh release create "$VERSION" --repo endorlabs/ai-plugins --target main \
+  --title "Endor Labs Agent Kit $VERSION" --notes "See CHANGELOG.md."
+```
+
+The tag is the exact package version with no `v` prefix. Deriving `VERSION`
+from this repository's `.claude-plugin/marketplace.json` keeps the tag equal to
+the generated package metadata; do not compute it from an Agent Kit checkout,
+and do not run `gh release create` from an Agent Kit checkout without
+`--repo endorlabs/ai-plugins` (it would tag the private source repository).
+
 ## Public Release Checks
 
 Run public host install checks only after the branch and tag exist.
@@ -199,6 +218,14 @@ test -f skills/malware-response/architecture.svg
 Keep Cursor validation separate from Gemini validation. Cursor uses
 `.cursor-plugin/`, `agents/`, `skills/`, and `assets/logo.svg`; Gemini CLI uses
 `plugins/gemini/endor-labs-agent-kit/`.
+
+The public Cursor Marketplace listing
+([cursor.com/marketplace/endorlabs](https://cursor.com/marketplace/endorlabs))
+is not updated automatically by pushes or tags on this repository. After
+tagging, refresh or resubmit the listing through the Cursor marketplace
+submission process, then verify from Cursor Agent chat that
+`/add-plugin endorlabs` installs the released package version. A stale listing
+is invisible to the drift checks above, so do not skip this step.
 
 Cursor SDK automation:
 

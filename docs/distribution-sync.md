@@ -14,10 +14,10 @@ workflow. Use these commands for local validation or manual fallback.
 Normal package sync should make `ai-plugins/plugins/` byte-for-byte identical to
 `endor-labs-agent-kit/plugins/`. Cursor package sync should make
 `ai-plugins/.cursor-plugin/`, generated root workflow `agents/`, generated root
-workflow `skills/`, and `assets/logo.svg` match the source repo. Cursor SDK
-sync should make `ai-plugins/cursor-sdk/` match the source repo. The root
-`CHANGELOG.md` is also synced so release notes travel with generated
-distribution PRs.
+workflow `skills/`, generated root advisory `hooks/`, and `assets/logo.svg`
+match the source repo. Cursor SDK sync should make `ai-plugins/cursor-sdk/`
+match the source repo. The root `CHANGELOG.md` is also synced so release notes
+travel with generated distribution PRs.
 
 ## Automated Publication
 
@@ -97,6 +97,13 @@ python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
+python3 -m json.tool hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/claude/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/codex/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/gemini/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/antigravity/endor-labs-agent-kit/hooks.json >/dev/null
+test ! -e plugins/claude/ai-plugins/hooks
+for hook_script in hooks/*.sh plugins/*/*/hooks/*.sh; do bash -n "$hook_script"; done
 python3 - <<'PY'
 import py_compile
 
@@ -109,6 +116,7 @@ diff -qr "$AGENT_KIT_REPO/plugins" ./plugins
 diff -qr "$AGENT_KIT_REPO/.cursor-plugin" ./.cursor-plugin
 diff -qr "$AGENT_KIT_REPO/agents" ./agents
 diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
+diff -qr "$AGENT_KIT_REPO/hooks" ./hooks
 for skill in "$AGENT_KIT_REPO"/skills/*; do
   name=${skill##*/}
   [ "$name" = "create-endor-labs-agent" ] && continue
@@ -132,7 +140,8 @@ A normal documentation sync may include:
 - `llms.txt`
 - package READMEs generated from Agent Kit
 - `.cursor-plugin/`, generated root workflow `agents/`, generated root workflow
-  `skills/`, `cursor-sdk/`, and `assets/logo.svg`
+  `skills/`, generated root advisory `hooks/`, `cursor-sdk/`, and
+  `assets/logo.svg`
 - package manifest checksum updates from Agent Kit
 
 A normal generated package sync should not include hand-edited differences

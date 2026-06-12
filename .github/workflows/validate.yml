@@ -35,6 +35,38 @@ jobs:
       - name: Compile Cursor SDK launcher
         run: python3 -m py_compile cursor-sdk/run_cursor_agent.py
 
+      - name: Validate advisory plugin hooks
+        run: |
+          python3 -m json.tool hooks/hooks.json >/dev/null
+          python3 -m json.tool plugins/claude/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+          python3 -m json.tool plugins/codex/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+          python3 -m json.tool plugins/gemini/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+          python3 -m json.tool plugins/antigravity/endor-labs-agent-kit/hooks.json >/dev/null
+          test ! -e plugins/claude/ai-plugins/hooks
+          shopt -s nullglob
+          for hook_script in hooks/*.sh plugins/*/*/hooks/*.sh; do
+            bash -n "$hook_script"
+          done
+          shopt -u nullglob
+
+      - name: Check Cursor plugin manifest references resolve
+        run: |
+          python3 - <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          manifest = json.loads(pathlib.Path(".cursor-plugin/plugin.json").read_text(encoding="utf-8"))
+          missing = sorted(
+              value
+              for value in manifest.values()
+              if isinstance(value, str) and value.startswith("./") and not pathlib.Path(value).exists()
+          )
+          if missing:
+              sys.exit(f"dangling .cursor-plugin/plugin.json references: {missing}")
+          print("all .cursor-plugin/plugin.json relative references resolve")
+          PY
+
       - name: Check Gemini extension layout
         run: |
           test ! -e gemini-extension.json

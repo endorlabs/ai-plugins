@@ -18,7 +18,7 @@ Distribution roots:
 - Gemini CLI: `plugins/gemini/endor-labs-agent-kit/`
 - Antigravity CLI: `plugins/antigravity/endor-labs-agent-kit/`
 - Cursor: `.cursor-plugin/`, generated root workflow `agents/`, generated root
-  workflow `skills/`, and `assets/logo.svg`
+  workflow `skills/`, generated root advisory `hooks/`, and `assets/logo.svg`
 - Cursor SDK: `cursor-sdk/`
 - Root MCP/Gemini support context: `.mcp.json` and non-installable `GEMINI.md`
 
@@ -52,6 +52,7 @@ cp /path/to/endor-labs-agent-kit/.agents/plugins/marketplace.json .agents/plugin
 cp /path/to/endor-labs-agent-kit/CHANGELOG.md CHANGELOG.md
 rsync -a --delete /path/to/endor-labs-agent-kit/.cursor-plugin/ ./.cursor-plugin/
 rsync -a --delete /path/to/endor-labs-agent-kit/agents/ ./agents/
+rsync -a --delete /path/to/endor-labs-agent-kit/hooks/ ./hooks/
 rsync -a --delete /path/to/endor-labs-agent-kit/cursor-sdk/ ./cursor-sdk/
 mkdir -p skills
 for skill in /path/to/endor-labs-agent-kit/skills/*; do
@@ -93,12 +94,17 @@ test ! -e gemini-extension.json
 test -f agents/endor-agent-kit-setup-agent.md
 test -f agents/endor-ai-sast-triage-agent.md
 test -f agents/endor-troubleshooter-agent.md
+test -f agents/endor-findings-browser-agent.md
 test -f agents/endor-malware-response-agent.md
 test -f agents/endor-probe-droid-agent.md
 test -f agents/endor-sca-remediation-agent.md
 test -f skills/ai-sast-triage/architecture.svg
 test -f skills/malware-response/architecture.svg
 test -f skills/sca-remediation/actions.yaml
+test -f hooks/hooks.json
+python3 -m json.tool hooks/hooks.json >/dev/null
+test ! -e plugins/claude/ai-plugins/hooks
+for hook_script in hooks/*.sh plugins/*/*/hooks/*.sh; do bash -n "$hook_script"; done
 test -f CHANGELOG.md
 git diff --check
 ```
@@ -110,6 +116,7 @@ diff -qr /path/to/endor-labs-agent-kit/plugins ./plugins
 diff -qr /path/to/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
 diff -qr /path/to/endor-labs-agent-kit/agents ./agents
 diff -qr /path/to/endor-labs-agent-kit/cursor-sdk ./cursor-sdk
+diff -qr /path/to/endor-labs-agent-kit/hooks ./hooks
 for skill in /path/to/endor-labs-agent-kit/skills/*; do
   name=${skill##*/}
   [ "$name" = "create-endor-labs-agent" ] && continue

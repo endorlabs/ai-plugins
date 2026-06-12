@@ -26,6 +26,12 @@
       {
         "bundles": 1,
         "host": "claude-code",
+        "id": "findings-browser",
+        "source_recipe": "source/agents/findings-browser/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-code",
         "id": "malware-response",
         "source_recipe": "source/agents/malware-response/recipe.yaml"
       },
@@ -86,6 +92,12 @@
       {
         "bundles": 1,
         "host": "claude-managed-agents",
+        "id": "findings-browser",
+        "source_recipe": "source/agents/findings-browser/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "claude-managed-agents",
         "id": "malware-response",
         "source_recipe": "source/agents/malware-response/recipe.yaml"
       },
@@ -128,6 +140,12 @@
       {
         "bundles": 1,
         "host": "codex",
+        "id": "findings-browser",
+        "source_recipe": "source/agents/findings-browser/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
         "id": "malware-response",
         "source_recipe": "source/agents/malware-response/recipe.yaml"
       },
@@ -154,6 +172,12 @@
         "host": "gemini",
         "id": "endor-troubleshooter",
         "source_recipe": "source/agents/endor-troubleshooter/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
+        "id": "findings-browser",
+        "source_recipe": "source/agents/findings-browser/recipe.yaml"
       },
       {
         "bundles": 1,
@@ -190,6 +214,12 @@
         "host": "portable",
         "id": "endor-troubleshooter",
         "source_recipe": "source/agents/endor-troubleshooter/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "portable",
+        "id": "findings-browser",
+        "source_recipe": "source/agents/findings-browser/recipe.yaml"
       },
       {
         "bundles": 1,
@@ -248,6 +278,7 @@
         "included_agents": [
           "ai-sast-triage",
           "endor-troubleshooter",
+          "findings-browser",
           "malware-response",
           "probe-droid",
           "sca-remediation"
@@ -262,6 +293,7 @@
           "ai-sast-triage",
           "dependency-decision-helper",
           "endor-troubleshooter",
+          "findings-browser",
           "malware-response",
           "package-risk-summary",
           "probe-droid",
@@ -281,6 +313,7 @@
           "ai-sast-triage",
           "dependency-decision-helper",
           "endor-troubleshooter",
+          "findings-browser",
           "malware-response",
           "package-risk-summary",
           "probe-droid",
@@ -299,6 +332,7 @@
         "included_agents": [
           "ai-sast-triage",
           "endor-troubleshooter",
+          "findings-browser",
           "malware-response",
           "probe-droid",
           "sca-remediation"
@@ -312,6 +346,7 @@
         "included_agents": [
           "ai-sast-triage",
           "endor-troubleshooter",
+          "findings-browser",
           "malware-response",
           "probe-droid",
           "sca-remediation"
@@ -325,6 +360,7 @@
         "included_agents": [
           "ai-sast-triage",
           "endor-troubleshooter",
+          "findings-browser",
           "malware-response",
           "probe-droid",
           "sca-remediation"
@@ -338,6 +374,7 @@
         "included_agents": [
           "ai-sast-triage",
           "endor-troubleshooter",
+          "findings-browser",
           "malware-response",
           "probe-droid",
           "sca-remediation"
@@ -352,7 +389,7 @@
   "subject": [
     {
       "digest": {
-        "sha256": "8f2eb0e9016b5ef8f39b2a0f79e6e6c83b602fab5fbf088c06b69bbe1d56f7f8"
+        "sha256": "a8da1fad686c3c40c10f9198140e0e1670a3c23f87d6712d721a32431a31a311"
       },
       "name": "manifest.json"
     }

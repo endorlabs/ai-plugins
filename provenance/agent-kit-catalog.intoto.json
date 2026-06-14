@@ -152,6 +152,12 @@
       {
         "bundles": 1,
         "host": "codex",
+        "id": "dependency-decision-helper",
+        "source_recipe": "source/agents/dependency-decision-helper/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
         "id": "endor-troubleshooter",
         "source_recipe": "source/agents/endor-troubleshooter/recipe.yaml"
       },
@@ -170,14 +176,44 @@
       {
         "bundles": 1,
         "host": "codex",
+        "id": "package-risk-summary",
+        "source_recipe": "source/agents/package-risk-summary/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
         "id": "probe-droid",
         "source_recipe": "source/agents/probe-droid/recipe.yaml"
       },
       {
         "bundles": 1,
         "host": "codex",
+        "id": "remediation-planner",
+        "source_recipe": "source/agents/remediation-planner/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
+        "id": "repository-dependency-reviewer",
+        "source_recipe": "source/agents/repository-dependency-reviewer/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
         "id": "sca-remediation",
         "source_recipe": "source/agents/sca-remediation/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
+        "id": "upgrade-impact-analysis",
+        "source_recipe": "source/agents/upgrade-impact-analysis/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "codex",
+        "id": "vulnerability-explainer",
+        "source_recipe": "source/agents/vulnerability-explainer/recipe.yaml"
       },
       {
         "bundles": 1,
@@ -194,6 +230,12 @@
       {
         "bundles": 1,
         "host": "gemini",
+        "id": "dependency-decision-helper",
+        "source_recipe": "source/agents/dependency-decision-helper/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
         "id": "endor-troubleshooter",
         "source_recipe": "source/agents/endor-troubleshooter/recipe.yaml"
       },
@@ -212,14 +254,44 @@
       {
         "bundles": 1,
         "host": "gemini",
+        "id": "package-risk-summary",
+        "source_recipe": "source/agents/package-risk-summary/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
         "id": "probe-droid",
         "source_recipe": "source/agents/probe-droid/recipe.yaml"
       },
       {
         "bundles": 1,
         "host": "gemini",
+        "id": "remediation-planner",
+        "source_recipe": "source/agents/remediation-planner/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
+        "id": "repository-dependency-reviewer",
+        "source_recipe": "source/agents/repository-dependency-reviewer/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
         "id": "sca-remediation",
         "source_recipe": "source/agents/sca-remediation/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
+        "id": "upgrade-impact-analysis",
+        "source_recipe": "source/agents/upgrade-impact-analysis/recipe.yaml"
+      },
+      {
+        "bundles": 1,
+        "host": "gemini",
+        "id": "vulnerability-explainer",
+        "source_recipe": "source/agents/vulnerability-explainer/recipe.yaml"
       },
       {
         "bundles": 1,
@@ -308,11 +380,17 @@
         "included_agents": [
           "ai-sast-triage",
           "cicd-posture",
+          "dependency-decision-helper",
           "endor-troubleshooter",
           "findings-browser",
           "malware-response",
+          "package-risk-summary",
           "probe-droid",
-          "sca-remediation"
+          "remediation-planner",
+          "repository-dependency-reviewer",
+          "sca-remediation",
+          "upgrade-impact-analysis",
+          "vulnerability-explainer"
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/antigravity/endor-labs-agent-kit",
@@ -365,11 +443,17 @@
         "included_agents": [
           "ai-sast-triage",
           "cicd-posture",
+          "dependency-decision-helper",
           "endor-troubleshooter",
           "findings-browser",
           "malware-response",
+          "package-risk-summary",
           "probe-droid",
-          "sca-remediation"
+          "remediation-planner",
+          "repository-dependency-reviewer",
+          "sca-remediation",
+          "upgrade-impact-analysis",
+          "vulnerability-explainer"
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/codex/endor-labs-agent-kit",
@@ -380,11 +464,17 @@
         "included_agents": [
           "ai-sast-triage",
           "cicd-posture",
+          "dependency-decision-helper",
           "endor-troubleshooter",
           "findings-browser",
           "malware-response",
+          "package-risk-summary",
           "probe-droid",
-          "sca-remediation"
+          "remediation-planner",
+          "repository-dependency-reviewer",
+          "sca-remediation",
+          "upgrade-impact-analysis",
+          "vulnerability-explainer"
         ],
         "name": "endorlabs",
         "path": ".",
@@ -395,11 +485,17 @@
         "included_agents": [
           "ai-sast-triage",
           "cicd-posture",
+          "dependency-decision-helper",
           "endor-troubleshooter",
           "findings-browser",
           "malware-response",
+          "package-risk-summary",
           "probe-droid",
-          "sca-remediation"
+          "remediation-planner",
+          "repository-dependency-reviewer",
+          "sca-remediation",
+          "upgrade-impact-analysis",
+          "vulnerability-explainer"
         ],
         "name": "endor-labs-agent-kit-cursor-sdk",
         "path": "cursor-sdk",
@@ -410,11 +506,17 @@
         "included_agents": [
           "ai-sast-triage",
           "cicd-posture",
+          "dependency-decision-helper",
           "endor-troubleshooter",
           "findings-browser",
           "malware-response",
+          "package-risk-summary",
           "probe-droid",
-          "sca-remediation"
+          "remediation-planner",
+          "repository-dependency-reviewer",
+          "sca-remediation",
+          "upgrade-impact-analysis",
+          "vulnerability-explainer"
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/gemini/endor-labs-agent-kit",
@@ -426,7 +528,7 @@
   "subject": [
     {
       "digest": {
-        "sha256": "4b2ea7b23a06d19271a1c1674d496640b9213d163f46f359042f59cfbd437847"
+        "sha256": "adbc4bef650b352e2dcfc65e5888e42b80cb06b7a89e72ff8205735cd3c01276"
       },
       "name": "manifest.json"
     }

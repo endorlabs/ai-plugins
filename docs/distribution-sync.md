@@ -9,15 +9,15 @@ workflow. Use these commands for local validation or manual fallback.
 | Repo | Owns |
 | --- | --- |
 | [🐙 The Endor Labs Agent Kit](https://github.com/endorlabs/endor-labs-agent-kit/tree/main) | Source recipes, compiler and publication code, guardrails, tests, provenance, generated catalog, and source documentation. |
-| [🐙 Endor Labs AI Plugins](https://github.com/endorlabs/ai-plugins/tree/main) | Public host metadata, Cursor package metadata, root Cursor agents and support skills, Cursor SDK automation package, release-facing README, and checked-in distribution artifacts. |
+| [🐙 Endor Labs AI Plugins](https://github.com/endorlabs/ai-plugins/tree/main) | Public host metadata, Cursor package metadata, root Cursor agents, support skills, advisory hooks, Cursor SDK automation package, release-facing README, and checked-in distribution artifacts. |
 
 Normal package sync should make `ai-plugins/plugins/` byte-for-byte identical to
 `endor-labs-agent-kit/plugins/`. Cursor package sync should make
 `ai-plugins/.cursor-plugin/`, generated root workflow `agents/`, generated root
-workflow `skills/`, and `assets/logo.svg` match the source repo. Cursor SDK
-sync should make `ai-plugins/cursor-sdk/` match the source repo. The root
-`CHANGELOG.md` is also synced so release notes travel with generated
-distribution PRs.
+workflow `skills/`, generated root advisory `hooks/`, and `assets/logo.png`
+match the source repo. Cursor SDK sync should make `ai-plugins/cursor-sdk/`
+match the source repo. The root `CHANGELOG.md` is also synced so release notes
+travel with generated distribution PRs.
 
 ## Automated Publication
 
@@ -97,6 +97,13 @@ python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
+python3 -m json.tool hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/claude/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/codex/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/gemini/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/antigravity/endor-labs-agent-kit/hooks.json >/dev/null
+test ! -e plugins/claude/ai-plugins/hooks
+for hook_script in hooks/*.sh plugins/*/*/hooks/*.sh; do bash -n "$hook_script"; done
 python3 - <<'PY'
 import py_compile
 
@@ -109,12 +116,13 @@ diff -qr "$AGENT_KIT_REPO/plugins" ./plugins
 diff -qr "$AGENT_KIT_REPO/.cursor-plugin" ./.cursor-plugin
 diff -qr "$AGENT_KIT_REPO/agents" ./agents
 diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
+diff -qr "$AGENT_KIT_REPO/hooks" ./hooks
 for skill in "$AGENT_KIT_REPO"/skills/*; do
   name=${skill##*/}
   [ "$name" = "create-endor-labs-agent" ] && continue
   diff -qr "$skill" "./skills/$name"
 done
-diff -q "$AGENT_KIT_REPO/assets/logo.svg" assets/logo.svg
+diff -q "$AGENT_KIT_REPO/assets/logo.png" assets/logo.png
 diff -q "$AGENT_KIT_REPO/CHANGELOG.md" CHANGELOG.md
 git diff --check
 ```
@@ -132,7 +140,8 @@ A normal documentation sync may include:
 - `llms.txt`
 - package READMEs generated from Agent Kit
 - `.cursor-plugin/`, generated root workflow `agents/`, generated root workflow
-  `skills/`, `cursor-sdk/`, and `assets/logo.svg`
+  `skills/`, generated root advisory `hooks/`, `cursor-sdk/`, and
+  `assets/logo.png`
 - package manifest checksum updates from Agent Kit
 
 A normal generated package sync should not include hand-edited differences

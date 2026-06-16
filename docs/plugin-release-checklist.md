@@ -18,7 +18,7 @@ Distribution roots:
 - Gemini CLI: `plugins/gemini/endor-labs-agent-kit/`
 - Antigravity CLI: `plugins/antigravity/endor-labs-agent-kit/`
 - Cursor: `.cursor-plugin/`, generated root workflow `agents/`, generated root
-  workflow `skills/`, and `assets/logo.svg`
+  workflow `skills/`, generated root advisory `hooks/`, and `assets/logo.png`
 - Cursor SDK: `cursor-sdk/`
 - Root MCP/Gemini support context: `.mcp.json` and non-installable `GEMINI.md`
 
@@ -43,24 +43,15 @@ endor-agent-kit verify-provenance --catalog-root .
 git diff --check
 ```
 
-Then sync generated artifacts into `ai-plugins`:
+Then sync generated artifacts into `ai-plugins` with the source-owned mirror
+sync script:
 
 ```bash
-rsync -a --delete /path/to/endor-labs-agent-kit/plugins/ ./plugins/
-cp /path/to/endor-labs-agent-kit/.claude-plugin/marketplace.json .claude-plugin/marketplace.json
-cp /path/to/endor-labs-agent-kit/.agents/plugins/marketplace.json .agents/plugins/marketplace.json
-cp /path/to/endor-labs-agent-kit/CHANGELOG.md CHANGELOG.md
-rsync -a --delete /path/to/endor-labs-agent-kit/.cursor-plugin/ ./.cursor-plugin/
-rsync -a --delete /path/to/endor-labs-agent-kit/agents/ ./agents/
-rsync -a --delete /path/to/endor-labs-agent-kit/cursor-sdk/ ./cursor-sdk/
-mkdir -p skills
-for skill in /path/to/endor-labs-agent-kit/skills/*; do
-  name=${skill##*/}
-  [ "$name" = "create-endor-labs-agent" ] && continue
-  rsync -a --delete "$skill/" "./skills/$name/"
-done
-mkdir -p assets
-cp /path/to/endor-labs-agent-kit/assets/logo.svg assets/logo.svg
+AGENT_KIT_REPO="/path/to/endor-labs-agent-kit"
+
+python3 "$AGENT_KIT_REPO/scripts/sync_ai_plugins_distribution.py" \
+  --source "$AGENT_KIT_REPO" \
+  --target .
 ```
 
 Do not sync root `GEMINI.md` as Cursor package output, and do not create a root
@@ -86,17 +77,35 @@ python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
-python3 -m py_compile cursor-sdk/run_cursor_agent.py
+python3 -m json.tool hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/claude/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/codex/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/gemini/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/antigravity/endor-labs-agent-kit/hooks.json >/dev/null
+test ! -e plugins/claude/ai-plugins/hooks
+for hook_script in hooks/*.sh plugins/*/*/hooks/*.sh; do bash -n "$hook_script"; done
+python3 - <<'PY'
+import py_compile
+
+py_compile.compile("cursor-sdk/run_cursor_agent.py", cfile="/tmp/run_cursor_agent.pyc", doraise=True)
+PY
 python3 -m json.tool .mcp.json >/dev/null
 test -f GEMINI.md
 test ! -e gemini-extension.json
-test -f agents/endor-agent-kit-setup-agent.md
-test -f agents/endor-ai-sast-triage-agent.md
-test -f agents/endor-troubleshooter-agent.md
-test -f agents/endor-malware-response-agent.md
-test -f agents/endor-probe-droid-agent.md
-test -f agents/endor-sca-remediation-agent.md
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+definitions = json.loads(Path("cursor-sdk/agent_definitions.json").read_text(encoding="utf-8"))
+for agent in definitions["agents"]:
+    agent_name = agent["agent_name"]
+    skill_id = agent["id"]
+    assert Path("agents", f"{agent_name}.md").is_file(), agent_name
+    assert Path("skills", skill_id, "SKILL.md").is_file(), skill_id
+    assert Path("cursor-sdk", agent["prompt_file"]).is_file(), agent["prompt_file"]
+PY
 test -f skills/ai-sast-triage/architecture.svg
+test -f skills/findings-browser/architecture.svg
 test -f skills/malware-response/architecture.svg
 test -f skills/sca-remediation/actions.yaml
 test -f CHANGELOG.md
@@ -110,17 +119,19 @@ diff -qr /path/to/endor-labs-agent-kit/plugins ./plugins
 diff -qr /path/to/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
 diff -qr /path/to/endor-labs-agent-kit/agents ./agents
 diff -qr /path/to/endor-labs-agent-kit/cursor-sdk ./cursor-sdk
+diff -qr /path/to/endor-labs-agent-kit/hooks ./hooks
 for skill in /path/to/endor-labs-agent-kit/skills/*; do
   name=${skill##*/}
   [ "$name" = "create-endor-labs-agent" ] && continue
   diff -qr "$skill" "./skills/$name"
 done
+diff -q /path/to/endor-labs-agent-kit/assets/logo.png assets/logo.png
 ```
 
 Normal provider package sync should be byte-for-byte identical, and Cursor
-metadata/root workflow agents and support skills should match the
-source-generated Cursor package. The root `CHANGELOG.md` should also match the
-source repo so release notes travel with generated distribution PRs.
+metadata/root workflow agents, support skills, and advisory hooks should match
+the source-generated Cursor package. The root `CHANGELOG.md` should also match
+the source repo so release notes travel with generated distribution PRs.
 
 ## Safety Gates
 
@@ -194,6 +205,12 @@ gemini extensions list
 gemini extensions uninstall endor-labs-agent-kit
 ```
 
+As of 2026-06-16, Google documents that Gemini CLI access for unpaid, Google
+One, Google AI Pro, and Google AI Ultra consumer users transitions to
+Antigravity CLI on 2026-06-18. Keep Gemini package validation for supported
+enterprise/API-key users and extension compatibility, and run the Antigravity
+validation below as the forward-path CLI check for affected consumer users.
+
 Antigravity CLI:
 
 ```bash
@@ -208,16 +225,28 @@ Cursor package and root workflow skills:
 for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
-test -f agents/endor-agent-kit-setup-agent.md
-test -f agents/endor-malware-response-agent.md
-test -f agents/endor-probe-droid-agent.md
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+definitions = json.loads(Path("cursor-sdk/agent_definitions.json").read_text(encoding="utf-8"))
+for agent in definitions["agents"]:
+    agent_name = agent["agent_name"]
+    skill_id = agent["id"]
+    assert Path("agents", f"{agent_name}.md").is_file(), agent_name
+    assert Path("skills", skill_id, "SKILL.md").is_file(), skill_id
+PY
 test -f skills/ai-sast-triage/architecture.svg
+test -f skills/findings-browser/architecture.svg
 test -f skills/malware-response/architecture.svg
+test -f skills/sca-remediation/actions.yaml
+test -f hooks/hooks.json
+test -f assets/logo.png
 ```
 
 Keep Cursor validation separate from Gemini validation. Cursor uses
-`.cursor-plugin/`, `agents/`, `skills/`, and `assets/logo.svg`; Gemini CLI uses
-`plugins/gemini/endor-labs-agent-kit/`.
+`.cursor-plugin/`, `agents/`, `skills/`, `hooks/`, and `assets/logo.png`;
+Gemini CLI uses `plugins/gemini/endor-labs-agent-kit/`.
 
 The public Cursor Marketplace listing
 ([cursor.com/marketplace/endorlabs](https://cursor.com/marketplace/endorlabs))
@@ -231,7 +260,11 @@ Cursor SDK automation:
 
 ```bash
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
-python3 -m py_compile cursor-sdk/run_cursor_agent.py
+python3 - <<'PY'
+import py_compile
+
+py_compile.compile("cursor-sdk/run_cursor_agent.py", cfile="/tmp/run_cursor_agent.pyc", doraise=True)
+PY
 test -f cursor-sdk/requirements.txt
 test -f cursor-sdk/agents/endor-agent-kit-setup-agent.md
 test -f cursor-sdk/agents/endor-malware-response-agent.md

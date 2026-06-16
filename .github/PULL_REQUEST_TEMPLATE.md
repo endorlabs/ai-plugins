@@ -19,7 +19,7 @@
 ## Generated Sync Checks
 
 - [ ] `plugins/` mirrors Agent Kit generated `plugins/`
-- [ ] `.cursor-plugin/`, root `agents/`, root `skills/`, `cursor-sdk/`, and `assets/logo.svg` mirror Agent Kit generated output
+- [ ] `.cursor-plugin/`, root `agents/`, root `skills/`, root `hooks/`, `cursor-sdk/`, and `assets/logo.png` mirror Agent Kit generated output
 - [ ] `provenance/agent-kit-catalog.intoto.json` is present for generated sync PRs
 - [ ] `provenance/manifest.sha256` is present for generated sync PRs
 - [ ] No agent behavior was edited directly in this repo

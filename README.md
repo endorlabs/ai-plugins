@@ -36,7 +36,7 @@ A machine-readable index is available in [`llms.txt`](llms.txt).
 | 🧠 Codex | `.agents/plugins/marketplace.json`, `plugins/codex/endor-labs-agent-kit/` |
 | 💎 Gemini CLI | `plugins/gemini/endor-labs-agent-kit/` |
 | 🛫 Antigravity CLI | `plugins/antigravity/endor-labs-agent-kit/` |
-| 🖱️ Cursor IDE | `.cursor-plugin/`, root `agents/`, root `skills/`, `assets/logo.svg` |
+| 🖱️ Cursor IDE | `.cursor-plugin/`, root `agents/`, root `skills/`, root advisory `hooks/`, `assets/logo.png` |
 | 🐍 Cursor SDK | `cursor-sdk/` Python launcher, generated prompts, and agent definitions |
 | 🔁 Root support | `.mcp.json`, `GEMINI.md` |
 | 🧾 Release docs | `docs/`, `llms.txt`, `plugins/README.md` |
@@ -153,6 +153,11 @@ gemini extensions install ./plugins/gemini/endor-labs-agent-kit
 
 Restart Gemini CLI after installing or reinstalling the extension.
 
+Google documents Antigravity CLI as the consumer transition path for Gemini
+CLI. Use the Gemini package for supported Gemini CLI environments and
+compatibility checks; use the Antigravity package below for affected Gemini CLI
+consumer accounts.
+
 Details: [`plugins/gemini/endor-labs-agent-kit/README.md`](plugins/gemini/endor-labs-agent-kit/README.md).
 
 ### Antigravity CLI
@@ -178,14 +183,23 @@ Details: [`plugins/antigravity/endor-labs-agent-kit/README.md`](plugins/antigrav
 | Agent | Best for | Cursor / SDK name | Safety | First prompt |
 | --- | --- | --- | --- | --- |
 | 🔎 AI SAST Triage | Triage Endor AI SAST findings and prepare approved change requests | `endor-ai-sast-triage-agent` | approval-gated mutating | `Triage AI SAST findings for this repository. Do not edit files, open a PR/MR, create a ticket, or write an Endor policy until I approve the specific gate.` |
+| 🧭 CI/CD And Supply Chain Posture | Assess CI/CD and supply chain posture from existing Endor findings and read-only GitHub configuration evidence | `endor-cicd-posture-agent` | read-only | `Assess CI/CD and supply chain posture for namespace <namespace>. Keep it read-only and validate the deterministic score.` |
+| ⚖️ Dependency Decision Helper | Decide whether to add, upgrade to, or keep a specific package version | `endor-dependency-decision-helper-agent` | read-only | `Assess whether we should use npm lodash version 4.17.20. Keep it read-only.` |
+| 📊 Package Risk Summary | Summarize the risk profile of a specific package version | `endor-package-risk-summary-agent` | read-only | `Summarize npm lodash version 4.17.20 with verified Endor evidence. Keep it read-only.` |
+| 📚 Repository Dependency Reviewer | Review local dependency manifests with read-only file inspection and Endor evidence | `endor-repository-dependency-reviewer-agent` | read-only | `Review this repository's dependency manifests with read-only evidence only.` |
+| ⬆️ Upgrade Impact Analysis | Analyze Endor platform upgrade impact with VersionUpgrade, CIA, findings, and manifest context | `endor-upgrade-impact-analysis-agent` | read-only | `Show the safest upgrade path for repository <owner>/<repo> package lodash. Keep it read-only.` |
+| 💬 Vulnerability Explainer | Understand a specific CVE, GHSA, or Endor vulnerability and what to do next | `endor-vulnerability-explainer-agent` | read-only | `Explain CVE-2021-44228 using verified Endor evidence. Keep it read-only.` |
 | 🧯 Endor Troubleshooter | Diagnose setup, scan, auth, policy, or integration issues | `endor-troubleshooter-agent` | read-only | `Diagnose this Endor issue from redacted error text and read-only tenant evidence. Keep it read-only.` |
+| 🔍 Findings Browser | Browse, filter, and summarize existing Endor findings | `endor-findings-browser-agent` | read-only | `Show the critical and high reachable findings for namespace <namespace>. Keep it read-only.` |
+| 🤖 Malware Response | Correlate supply-chain malware intelligence against tenant inventory | `endor-malware-response-agent` | read-only | `Use the malware-response workflow. Keep it within its generated safety contract.` |
 | 📡 Probe Droid | Assess GitHub onboarding and monitored-branch coverage gaps | `endor-probe-droid-agent` | read-only | `Explain what evidence you need to assess GitHub onboarding gaps for this repository. Keep it read-only.` |
+| 🗺️ Remediation Planner | Preview safe dependency remediation options without opening PRs | `endor-remediation-planner-agent` | read-only | `Preview remediation options for this repository. Do not edit files or open a PR/MR.` |
 | 🛠️ SCA Remediation | Find safe dependency remediation paths with Endor SCA evidence | `endor-sca-remediation-agent` | approval-gated mutating | `Inspect this repository and prepare a remediation plan only. Do not edit files, create branches, push, open a PR/MR, create a ticket, or write Endor policy.` |
 | 🧰 Setup | Check host, auth, namespace, `endorctl`, `gh`, and workflow readiness | `endor-agent-kit-setup-agent` | read-only | `Check Endor Agent Kit readiness for this repository. Do not run scans.` |
 
-Claude Code also includes read-only helper agents for dependency decisions,
-package risk summaries, repository dependency review, upgrade impact analysis,
-vulnerability explanation, and remediation planning.
+The provider packages expose the same generated workflow set from Agent Kit
+source recipes. Use the host package README for exact install and invocation
+syntax.
 
 ## 📦 Distribution Paths
 
@@ -195,7 +209,7 @@ vulnerability explanation, and remediation planning.
 | Codex | `.agents/plugins/marketplace.json`, `plugins/codex/endor-labs-agent-kit/` | Skills, custom-agent TOML files, and installer script. |
 | Gemini CLI | `plugins/gemini/endor-labs-agent-kit/` | Directory install locally; tagged GitHub repo for public installs. |
 | Antigravity CLI | `plugins/antigravity/endor-labs-agent-kit/` | Package directory with root `plugin.json`. |
-| Cursor IDE | `.cursor-plugin/`, `agents/`, `skills/`, `assets/logo.svg` | Source-generated Cursor plugin agents and support skills. |
+| Cursor IDE | `.cursor-plugin/`, `agents/`, `skills/`, `hooks/`, `assets/logo.png` | Source-generated Cursor plugin agents, support skills, and advisory hooks. |
 | Cursor SDK | `cursor-sdk/` | Python SDK launcher, generated prompts, and local/cloud run instructions. |
 | Root support | `.mcp.json`, `GEMINI.md` | Optional MCP support context; the repository root is not a Gemini extension root. |
 
@@ -222,8 +236,9 @@ Generated sync PRs should include:
 - source Agent Kit commit in the PR body
 - `provenance/agent-kit-catalog.intoto.json`
 - `provenance/manifest.sha256`
-- validation evidence for root skills, JSON metadata, Cursor SDK, Gemini no-zip,
-  byte-for-byte generated-surface diffs, and `git diff --check`
+- validation evidence for root skills, advisory hooks, JSON metadata, Cursor
+  SDK, Gemini no-zip, byte-for-byte generated-surface diffs, and
+  `git diff --check`
 
 Manual fallback uses the Agent Kit sync script:
 
@@ -244,6 +259,13 @@ python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
+python3 -m json.tool hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/claude/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/codex/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/gemini/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+python3 -m json.tool plugins/antigravity/endor-labs-agent-kit/hooks.json >/dev/null
+test ! -e plugins/claude/ai-plugins/hooks
+for hook_script in hooks/*.sh plugins/*/*/hooks/*.sh; do bash -n "$hook_script"; done
 python3 - <<'PY'
 import py_compile
 
@@ -267,10 +289,13 @@ diff -qr "$AGENT_KIT_REPO/plugins" ./plugins
 diff -qr "$AGENT_KIT_REPO/.cursor-plugin" ./.cursor-plugin
 diff -qr "$AGENT_KIT_REPO/agents" ./agents
 diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
-for skill in ai-sast-triage endor-agent-kit-setup endor-troubleshooter malware-response probe-droid sca-remediation; do
-  diff -qr "$AGENT_KIT_REPO/skills/$skill" "./skills/$skill"
+diff -qr "$AGENT_KIT_REPO/hooks" ./hooks
+for skill in "$AGENT_KIT_REPO"/skills/*; do
+  name=${skill##*/}
+  [ "$name" = "create-endor-labs-agent" ] && continue
+  diff -qr "$skill" "./skills/$name"
 done
-diff -q "$AGENT_KIT_REPO/assets/logo.svg" assets/logo.svg
+diff -q "$AGENT_KIT_REPO/assets/logo.png" assets/logo.png
 ```
 
 ## 🗂️ Repository Reference
@@ -280,9 +305,10 @@ diff -q "$AGENT_KIT_REPO/assets/logo.svg" assets/logo.svg
 .claude-plugin/marketplace.json
 .cursor-plugin/
 agents/
-assets/logo.svg
+assets/logo.png
 cursor-sdk/
 docs/
+hooks/
 .mcp.json
 GEMINI.md
 llms.txt

@@ -394,7 +394,7 @@
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/antigravity/endor-labs-agent-kit",
-        "version": "2.0.0"
+        "version": "2.1.0"
       },
       {
         "host": "claude-code",
@@ -436,7 +436,7 @@
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/claude/endor-labs-agent-kit",
-        "version": "2.0.0"
+        "version": "2.1.0"
       },
       {
         "host": "codex",
@@ -457,7 +457,7 @@
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/codex/endor-labs-agent-kit",
-        "version": "2.0.0"
+        "version": "2.1.0"
       },
       {
         "host": "cursor",
@@ -478,7 +478,7 @@
         ],
         "name": "endorlabs",
         "path": ".",
-        "version": "2.0.0"
+        "version": "2.1.0"
       },
       {
         "host": "cursor-sdk",
@@ -499,7 +499,7 @@
         ],
         "name": "endor-labs-agent-kit-cursor-sdk",
         "path": "cursor-sdk",
-        "version": "2.0.0"
+        "version": "2.1.0"
       },
       {
         "host": "gemini",
@@ -520,7 +520,7 @@
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/gemini/endor-labs-agent-kit",
-        "version": "2.0.0"
+        "version": "2.1.0"
       }
     ]
   },
@@ -528,7 +528,7 @@
   "subject": [
     {
       "digest": {
-        "sha256": "011dd32b394004617ab53477092e5f3b536a3a43fc91e89f118cc5704bf642f8"
+        "sha256": "95687fcde4c74e8fc0407133283cc229a118686d71c035d4544f51427a2751b5"
       },
       "name": "manifest.json"
     }

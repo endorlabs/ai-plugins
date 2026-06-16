@@ -9,7 +9,7 @@ support context.
 > shape, guardrails, tests, and source documentation are owned by
 > [🐙 The Endor Labs Agent Kit](https://github.com/endorlabs/endor-labs-agent-kit/tree/main).
 
-Current generated Agent Kit package version: `2.0.0`. Agent Kit maintainer
+Current generated Agent Kit package version: `2.1.0`. Agent Kit maintainer
 merges open or update generated distribution PRs in this repo, but they do not
 automatically bump package versions. Version bumps are intentional release
 actions from the source repo.

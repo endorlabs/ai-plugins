@@ -17,6 +17,12 @@ jobs:
       - name: Install validation dependencies
         run: python3 -m pip install pyyaml
 
+      - name: Check repository hygiene
+        run: python3 scripts/check_repository_hygiene.py
+
+      - name: Validate Agent Kit provenance
+        run: python3 scripts/validate_mirror_provenance.py
+
       - name: Validate root skill frontmatter
         run: |
           for skill in skills/*; do

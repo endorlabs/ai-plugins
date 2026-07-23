@@ -147,8 +147,8 @@ Every SCA output that includes `evidence_queries[]` must include at least one
 `Finding` row, or top-level `data_gaps[]` saying Finding evidence was
 unavailable or not queried. For selection-plan/read-only gates, this is still
 required after VersionUpgrade/UIA narrowing: record the selected-candidate
-Finding lookup, a no-results Finding lookup, or an explicit Finding data gap in
-the final JSON.
+Finding lookup. When that lookup returns zero rows, also add a precise Finding
+evidence gap to top-level `data_gaps`.
 
 When a remediation candidate is selected, include the proposed branch even if
 mutation is not approved. Put `remediation/sca/<package>-<target-version>` in
@@ -157,6 +157,16 @@ mutation is not approved. Put `remediation/sca/<package>-<target-version>` in
 `change_requests: []` merely because no PR/MR was created.
 
 For plan-only requests that mention a PR/MR plan, include a `change_requests` entry with status `not_created`, reason `plan_only_awaiting_approval` or equivalent, proposed base branch, proposed branch, proposed title, and a reference to the included PR/MR body draft. Do not return an empty `change_requests` array when a PR/MR is part of the requested plan.
+
+At the `selection-plan` gate, return exactly one `change_requests` entry and always populate its deterministic `inventory`. Use this exact nested contract:
+
+- `inventory.status`: exactly `none_found`, `exact_duplicate`, `different_target`, or `unavailable`.
+- `inventory.lookup_method`, `inventory.checked_at`, and boolean `inventory.fresh_recheck`.
+- `inventory.key`: non-empty `repository`, `base_branch`, `ecosystem`, `normalized_package`, `manifest`, `current_version`, and `target_version`, plus array `finding_set`. Both versions must exactly match `selected_remediation`.
+- `inventory.candidates`: an array; use `[]` when none or unavailable.
+- `inventory.reconciliation`: an object with non-empty `status` and `reason`; use `status: "not_needed"` for `none_found` and a fail-closed status for unavailable or divergent evidence.
+
+Do not flatten the key or reconciliation into strings such as `repository_base_branch_key` or `reconciliation_status`, and use `checked_at`, never `check_time`. If source-provider lookup is unavailable, set `inventory.status: "unavailable"`, preserve the complete key above, set `candidates: []`, explain the blocker in reconciliation and top-level `data_gaps`, and fail closed before push or PR/MR creation.
 
 For ticket requests, include a `tickets` entry with status `not_created`, `created`, `failed`, or `unavailable`. Include proposed ticket title/body for `not_created`, ticket ID or URL for `created`, and the exact blocker in `data_gaps` for `failed` or `unavailable`. Do not claim ticket creation unless the ticket adapter returns a ticket ID or URL.
 
@@ -266,7 +276,7 @@ Resolve namespace: user request; `ENDOR_NAMESPACE`; `ENDOR_NAMESPACE` from the d
 
 ## Endor Project Resolution Preflight
 
-Resolve live Project scope before Endor reads. Try clone URL, HTTP URL, provider full name, `meta.name`, basename; record selectors. Use explicit `-n <namespace>`. Parent miss -> retry `--traverse`; use child namespace if found or keep traverse. Return project_resolution status/uuid/namespace/provenance/selectors/traverse. Branch proof: Repository, ScanResult, PackageVersion suffix, local git context. Missing proof -> `data_gaps`; never guess.
+Resolve live Project scope before Endor reads. Try clone URL, HTTP URL, provider full name, `meta.name`, basename; record selectors. Use explicit `-n <namespace>`. Parent miss -> retry `--traverse`; use child namespace if found or keep traverse. If `project_resolution.status` is `resolved`, populate project UUID, namespace, namespace provenance, normalized repository identity, attempted selectors, and boolean traverse state; never label partial scope resolved. Branch proof: Repository, ScanResult, PackageVersion suffix, local git context. Missing proof -> unresolved/ambiguous/lookup_unavailable plus `data_gaps`; never guess.
 
 ## Endor Knowledge Pack
 
@@ -274,7 +284,8 @@ These notes augment this generated recipe. Workflow output contracts, hard guard
 
 ### Global Rules
 
-- Context first; Namespace provenance; Efficient Endor queries; Verified evidence only; Evidence ledger; Data gaps.
+- Context first; Namespace provenance; Efficient Endor queries; Large result delivery; Verified evidence only; Evidence ledger; Data gaps.
+- `runtime.large_result_artifact_required` for `--list-all`/complete/>64 KiB/truncated: run `python3 runtime/summarize_endor_artifact.py capture -- <attributed list argv>` once; no separate API/artifact check/`--count`. Preserve shapes; put `artifact_ref=<ref>;sha256=<digest>;format=<format>;bytes=<n>` in `evidence_queries[].reason` with `result_count`.
 
 ### Evidence Gate Contract
 
@@ -322,7 +333,7 @@ Required top-level fields, in order:
 `summary`, `remediation_candidates`, `project_resolution`, `evidence_queries`, `selected_remediation`, `uia_evidence`, `risk_decision`, `patch_plan`, `validation`, `change_requests`, `tickets`, `data_gaps`, `policy_context`, `policy_evaluations`
 Optional fields when verified:
 `task_state`:object
-`evidence_queries`: only name/resource/source/status/query_template_id/filter/field_mask/result_count/reason; no raw commands; put gaps in top-level `data_gaps`.
+`evidence_queries`: only name/resource/source/status/query_template_id/filter_summary/field_mask_summary/result_count/reason; source=adapter, not command/path; no raw commands; current claims need >=1 row; gaps -> `data_gaps`.
 `data_gaps`: prefix task/profile skips with `out_of_scope:` and missing sought evidence with `unavailable:`; source tag optional.
 Types: arrays stay arrays, counts int/null, objects null only with `data_gaps`; missing inputs return JSON.
 Do not omit required fields. Use [] for unavailable list evidence and `data_gaps` for missing evidence.

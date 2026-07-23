@@ -20,6 +20,18 @@ Content releases require a package version bump. If a host still shows old promp
 
 This package is host-specific for Claude Code. Use the root README when choosing between hosts.
 
+## Recommended Model
+
+This is a release-QA target, not a requirement or model allowlist.
+Agent Kit does not block compatible customer-selected host models.
+
+- Recommended model: `sonnet`.
+- Selection mode: `pinned`.
+- Recommended reasoning/effort: `host default`.
+- Generated behavior: agent frontmatter defaults to sonnet.
+- Override behavior: Claude environment or per-invocation subagent override wins.
+- Provider guidance: <https://code.claude.com/docs/en/sub-agents>.
+
 ## Install And Upgrade Notice
 
 - `ai-plugins@endorlabs` is retained for existing Claude Code users and pinned installs.
@@ -52,6 +64,16 @@ From the Agent Kit repository root:
 /plugin marketplace add ./
 /plugin install ai-plugins@endorlabs
 ```
+
+For one-off development, point Claude Code at this host-specific package:
+
+```bash
+claude --plugin-dir plugins/claude/ai-plugins
+```
+
+Do not run `claude --plugin-dir .`. The repository root contains Cursor
+agents, workflow skills, MCP metadata, and Cursor hook events that are not
+a Claude Code plugin package.
 
 Start a new Claude Code session or run `/reload-plugins` after installing
 or reinstalling the plugin.

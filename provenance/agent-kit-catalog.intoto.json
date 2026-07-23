@@ -322,6 +322,7 @@
     "manifest_schema_version": 1,
     "plugin_packages": [
       {
+        "distribution_channel": "repository",
         "host": "antigravity",
         "included_agents": [
           "ai-sast-remediation",
@@ -341,6 +342,7 @@
         "version": "2.1.0"
       },
       {
+        "distribution_channel": "repository",
         "host": "claude-code",
         "included_agents": [
           "ai-sast-remediation",
@@ -360,6 +362,7 @@
         "version": "1.2.0"
       },
       {
+        "distribution_channel": "repository",
         "host": "claude-code",
         "included_agents": [
           "ai-sast-remediation",
@@ -379,6 +382,27 @@
         "version": "2.1.0"
       },
       {
+        "distribution_channel": "official-directory",
+        "host": "codex",
+        "included_agents": [
+          "ai-sast-remediation",
+          "cicd-posture",
+          "configuration-automation",
+          "dependency-reviewer",
+          "findings-browser",
+          "malware-responder",
+          "oss-upgrade-investigator",
+          "remediation-planning",
+          "sca-remediation",
+          "troubleshooting",
+          "vulnerability-explainer"
+        ],
+        "name": "endor-labs-agent-kit",
+        "path": "plugins/codex-directory/endor-labs-agent-kit",
+        "version": "2.1.0"
+      },
+      {
+        "distribution_channel": "repository",
         "host": "codex",
         "included_agents": [
           "ai-sast-remediation",
@@ -398,6 +422,7 @@
         "version": "2.1.0"
       },
       {
+        "distribution_channel": "repository",
         "host": "cursor",
         "included_agents": [
           "ai-sast-remediation",
@@ -417,6 +442,7 @@
         "version": "2.1.0"
       },
       {
+        "distribution_channel": "repository",
         "host": "cursor-sdk",
         "included_agents": [
           "ai-sast-remediation",
@@ -436,6 +462,7 @@
         "version": "2.1.0"
       },
       {
+        "distribution_channel": "repository",
         "host": "gemini",
         "included_agents": [
           "ai-sast-remediation",
@@ -460,7 +487,7 @@
   "subject": [
     {
       "digest": {
-        "sha256": "5b7e7fa7a716e86f973c60350a9a384654da249ca60cd1a1da96a20b70dea199"
+        "sha256": "91ca526262feebca139f220ac1e8418287da760ad7fc0e8b4da824b815c58b48"
       },
       "name": "manifest.json"
     }

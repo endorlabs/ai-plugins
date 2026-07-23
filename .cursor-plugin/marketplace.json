@@ -25,7 +25,7 @@
         "AppSec"
       ],
       "name": "endorlabs",
-      "source": "./",
+      "source": "./plugins/cursor/endor-labs-agent-kit",
       "version": "2.1.0"
     }
   ]

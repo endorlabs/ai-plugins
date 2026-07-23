@@ -1,0 +1,5 @@
+{
+  "agent_kit_repository": "endorlabs/endor-labs-agent-kit",
+  "agent_kit_sha": "db41d3c2104bd60e3acef3f3594894c0058aff8d",
+  "kind": "endor.agent-kit-source/v1"
+}

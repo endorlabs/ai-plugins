@@ -117,6 +117,10 @@ focus.
   additional setup, skip enrichment, set `risk_posture` to `UNKNOWN`, preserve the
   manifest and dependency inventory gathered so far, add a precise `data_gaps`
   entry, and return final JSON.
+- When required package evidence is unavailable for `package-decision`, return
+  `NOT_RECOMMENDED` as an evidence-limited adoption decision with precise
+  `data_gaps`; do not emit an undeclared `UNKNOWN` verdict or imply the package
+  is proven unsafe. For `package-risk` and `repository-review`, use `UNKNOWN`.
 - In unattended profiles, the final answer must be exactly one parseable JSON
   object with the required dependency-review fields. Do not return Markdown
   file content, a host setup guide, a task plan, a `CLAUDE.md` draft, or a
@@ -162,9 +166,15 @@ exploitability evidence is at least `NOT_RECOMMENDED`; weaker vulnerabilities,
 scores, or license concerns produce `SAFE_WITH_CONDITIONS`. Missing evidence is
 a `data_gaps` entry, never fabricated proof.
 
+When the exact risk response validates the coordinate and reports multiple
+vulnerabilities plus a recommended fixed or newer version, return at least
+`NOT_RECOMMENDED`; reserve `SAFE_WITH_CONDITIONS` for isolated weaker concerns
+that do not have a clearly safer version. Never return `SAFE` when required
+risk evidence is unavailable.
+
 ## Endor Namespace Preflight
 
-Resolve namespace: user request; `ENDOR_NAMESPACE`; `ENDOR_NAMESPACE` from the default `~/.endorctl/config.yaml` only; resolved Project metadata. `ENDOR_NAMESPACE` and `ENDOR_API_CREDENTIALS_*` are supported inputs. Use explicit `-n`/`--namespace` for each scoped `endorctl agent api --agent-id dependency-reviewer` lookup. If env/config conflict, surface both values with provenance and stop for user confirmation. Never dump/`cat` config; read only namespace key and never echo credentials. Avoid tenant-specific, customer-specific, production, backup, or other non-default Endor config paths.
+Resolve namespace: user request; `ENDOR_NAMESPACE`; `ENDOR_NAMESPACE` from the default `~/.endorctl/config.yaml` only; current Project metadata. `ENDOR_NAMESPACE` and `ENDOR_API_CREDENTIALS_*` are supported inputs. Namespace is scope, not auth: let `endorctl` consume config/env internally; never parse credentials into model context. User scope is authoritative; inspect env/config only after an auth/namespace/not-found conflict. Without it, surface both values with provenance and stop for user confirmation on conflict. Use explicit `-n`/`--namespace` for every scoped `endorctl agent api --agent-id dependency-reviewer` lookup. Success proves auth; otherwise report a redacted gap. Never dump/`cat` config, echo credentials, or ask users to paste config. Avoid tenant-specific, customer-specific, production, backup, or other non-default Endor config paths.
 
 ## Endor Knowledge Pack
 
@@ -184,6 +194,7 @@ These notes augment this generated recipe. Workflow output contracts, hard guard
 - Record `namespace_provenance`, repo, branch, traverse, `data_gaps`.
 - Missing inputs in noninteractive/final answer: return required JSON with `data_gaps`.
 - Read-only: no edits/scans/PRs/comments/writes.
+- No default scan/rescan advice; only a proven freshness gap may produce an optional human-approved follow-up.
 - No raw commands in final.
 
 ### Dependency Reviewer Evidence Contract
@@ -193,6 +204,7 @@ Route once to an exact package decision, exact package risk summary, or bounded 
 ### Agent Task Profiles
 
 - Profiles: `package-decision`, `package-risk`, `repository-review`. Profile bounds workflow; obey stop; full only on request.
+- Select the smallest profile before tools. Its evidence order is the normal route, not a universal call limit. Broaden only for an allowed named evidence gap or explicit request. Do not add unrelated or repeated cross-check reads.
 ### Evidence Query Plans
 
 - Plans: `package-decision`, `package-risk`, `repository-review`. Exact/ranked evidence first; selected detail only; skipped lanes -> `data_gaps`.
@@ -209,19 +221,6 @@ If the runtime provides a trusted Agent Policy Pack and fact bag, use its evalua
 
 Return `policy_context` with status, pack id, version, SHA-256 when known, and source. Copy trusted evaluator `policy_evaluations` exactly and completely. `deny` blocks recommendations and mutation. `require_review` permits planning only until runtime approval evidence is returned. For every effect, missing or invalid facts follow `on_missing_facts`; its default `deny` blocks unless explicitly overridden. Record unavailable policy packs, adapters, or required facts in `data_gaps`.
 
-## Structured Output Contract
-
-Return exactly one parseable JSON object in the final answer.
-Required top-level fields, in order:
-`profile`, `summary`, `evidence_queries`, `data_gaps`, `policy_context`, `policy_evaluations`
-Optional fields when verified:
-`verdict`:enum, `conditions`:list[string], `alternatives`:list[string], `risk_posture`:enum, `manifests`:list[object], `dependencies_reviewed`:list[object], `findings`:list[object], `strengths`:list[string], `next_checks`:list[string], `recommended_actions`:list[string]
-`evidence_queries`: only name/resource/source/status/query_template_id/filter_summary/field_mask_summary/result_count/reason; source=adapter, not command/path; no raw commands; current claims need >=1 row; gaps -> `data_gaps`.
-`data_gaps`: prefix task/profile skips with `out_of_scope:` and missing sought evidence with `unavailable:`; source tag optional.
-Types: arrays stay arrays, counts int/null, objects null only with `data_gaps`; missing inputs return JSON.
-Do not omit required fields. Use [] for unavailable list evidence and `data_gaps` for missing evidence.
-Object fields may be `{}` or `null` only when `data_gaps` explains why.
-
 # Enterprise Edition Workflow: Bounded Agent-Attributed Endor Evidence
 
 Use Endor MCP tools, host read-only file tools, and only documented
@@ -233,10 +232,12 @@ agent-attributed read-only Endor API commands. Never use a bare Endor API comman
    read-only host tools and select bounded exact direct dependencies.
 3. For each selected exact coordinate, call `check_dependency_for_risks` with
    `ecosystem`, `dependency_name`, and `version`.
-4. If the risk result does not include vulnerability ids, call
+4. If the risk result does not include vulnerability ids and that detail can
+   change the selected profile result, call
    `check_dependency_for_vulnerabilities` with the same coordinate.
-5. For each vulnerability id, call `get_endor_vulnerability`. Capture CVSS,
-   EPSS, CISA KEV, CWE ids, fix versions, and summaries when present.
+5. Enrich at most two selected vulnerability ids with `get_endor_vulnerability`
+   only when severity, EPSS, CISA KEV, or fixed-version detail can change the
+   result. Do not enrich every returned id.
 6. If MCP risk lookup is unavailable and an exact coordinate is known, run the
    bounded `PackageVersion` lookup documented in Developer Edition. Resolve the
    project by Git only when the request requires tenant scope; use the Knowledge
@@ -247,5 +248,20 @@ agent-attributed read-only Endor API commands. Never use a bare Endor API comman
 
 For noninteractive runs, steps 4-6 are optional enrichment, not blockers. If the
 first selected dependency risk lookup is unavailable or slow, stop immediately
-with `UNKNOWN`, the manifest/dependency evidence already gathered, and a
-`data_gaps` entry such as `endor_mcp_package_risk_unavailable`.
+with `NOT_RECOMMENDED` for `package-decision` or `UNKNOWN` for a risk profile,
+the manifest/dependency evidence already gathered, and a `data_gaps` entry such
+as `endor_mcp_package_risk_unavailable`.
+
+## Structured Output Contract
+
+Return exactly one parseable JSON object in the final answer.
+Required top-level fields and types:
+enum: `profile`; string: `summary`; list[object]: `evidence_queries`, `policy_evaluations`; list[string]: `data_gaps`; object: `policy_context`
+Optional fields when verified:
+enum: `verdict`, `risk_posture`; list[string]: `conditions`, `alternatives`, `strengths`, `next_checks`, `recommended_actions`; list[object]: `manifests`, `dependencies_reviewed`, `findings`
+`evidence_queries`: only name/resource/source/status/query_template_id/filter_summary/field_mask_summary/result_count/reason; one row per attempted lookup, including zero-result, failed, and retry attempts; one API invocation yields one row, and local projection or summarization does not create another row; source=endorctl_agent_api for Endor CLI API reads, even via adapters, never adapter/command/path; no raw commands; current claims need >=1 row; gaps -> `data_gaps`.
+`data_gaps`: prefix task/profile skips with `out_of_scope:` and missing sought evidence with `unavailable:`; source tag optional.
+Types: arrays stay arrays, counts int/null, objects null only with `data_gaps`; missing inputs return JSON.
+Do not omit required fields. Use [] for unavailable list evidence and `data_gaps` for missing evidence.
+Object fields may be `{}` or `null` only when `data_gaps` explains why.
+FINAL FORMAT: emit `{` as the first character and `}` as the last. No status preamble, heading, Markdown fence, or outside prose.

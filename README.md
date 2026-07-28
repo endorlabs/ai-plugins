@@ -9,7 +9,7 @@ support context.
 > shape, guardrails, tests, and source documentation are owned by
 > [🐙 The Endor Labs Agent Kit](https://github.com/endorlabs/endor-labs-agent-kit/tree/main).
 
-Current generated Agent Kit package version: `2.1.0`. Agent Kit maintainer
+Current generated Agent Kit package version: `2.2.0`. Agent Kit maintainer
 merges open or update generated distribution PRs in this repo, but they do not
 automatically bump package versions. Version bumps are intentional release
 actions from the source repo.
@@ -36,9 +36,9 @@ A machine-readable index is available in [`llms.txt`](llms.txt).
 | 🧠 Codex | `.agents/plugins/marketplace.json`, `plugins/codex/endor-labs-agent-kit/` |
 | 💎 Gemini CLI | `plugins/gemini/endor-labs-agent-kit/` |
 | 🛫 Antigravity CLI | `plugins/antigravity/endor-labs-agent-kit/` |
-| 🖱️ Cursor IDE | `.cursor-plugin/`, root `agents/`, root `skills/`, root advisory `hooks/`, `assets/logo.png` |
+| 🖱️ Cursor IDE | `.cursor-plugin/marketplace.json`, `plugins/cursor/endor-labs-agent-kit/` |
 | 🐍 Cursor SDK | `cursor-sdk/` Python launcher, generated prompts, and agent definitions |
-| 🔁 Root support | `.mcp.json`, `GEMINI.md` |
+| 🔁 Root support | Claude compatibility surfaces and non-installable `GEMINI.md` context |
 | 🧾 Release docs | `docs/`, `llms.txt`, `plugins/README.md` |
 
 ## 🚀 Quick Start
@@ -209,9 +209,9 @@ syntax.
 | Codex | `.agents/plugins/marketplace.json`, `plugins/codex/endor-labs-agent-kit/` | Skills, custom-agent TOML files, and installer script. |
 | Gemini CLI | `plugins/gemini/endor-labs-agent-kit/` | Directory install locally; tagged GitHub repo for public installs. |
 | Antigravity CLI | `plugins/antigravity/endor-labs-agent-kit/` | Package directory with root `plugin.json`. |
-| Cursor IDE | `.cursor-plugin/`, `agents/`, `skills/`, `hooks/`, `assets/logo.png` | Source-generated Cursor plugin agents, support skills, and advisory hooks. |
+| Cursor IDE | `.cursor-plugin/marketplace.json`, `plugins/cursor/endor-labs-agent-kit/` | Marketplace index plus a self-contained Cursor package. |
 | Cursor SDK | `cursor-sdk/` | Python SDK launcher, generated prompts, and local/cloud run instructions. |
-| Root support | `.mcp.json`, `GEMINI.md` | Optional MCP support context; the repository root is not a Gemini extension root. |
+| Root support | `agents/`, `skills/`, `hooks/`, `runtime/`, `GEMINI.md` | Claude compatibility surfaces plus non-installable Gemini support context. |
 
 ## 🔒 Safety Rules
 
@@ -253,11 +253,14 @@ python3 "$AGENT_KIT_REPO/scripts/sync_ai_plugins_distribution.py" \
 ## ✅ Validation
 
 ```bash
-for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
+for skill in skills/* plugins/cursor/endor-labs-agent-kit/skills/*; do
+  python3 scripts/quick_validate.py "$skill"
+done
 python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
 python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
-python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+python3 -m json.tool plugins/cursor/endor-labs-agent-kit/.cursor-plugin/plugin.json >/dev/null
+python3 scripts/validate_marketplace_host_boundaries.py --root .
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
 python3 -m json.tool hooks/hooks.json >/dev/null
 python3 -m json.tool plugins/claude/endor-labs-agent-kit/hooks/hooks.json >/dev/null
@@ -285,17 +288,12 @@ Generated drift checks:
 ```bash
 AGENT_KIT_REPO="/path/to/endor-labs-agent-kit"
 
-diff -qr "$AGENT_KIT_REPO/plugins" ./plugins
-diff -qr "$AGENT_KIT_REPO/.cursor-plugin" ./.cursor-plugin
-diff -qr "$AGENT_KIT_REPO/agents" ./agents
-diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
-diff -qr "$AGENT_KIT_REPO/hooks" ./hooks
-for skill in "$AGENT_KIT_REPO"/skills/*; do
-  name=${skill##*/}
-  [ "$name" = "create-endor-labs-agent" ] && continue
-  diff -qr "$skill" "./skills/$name"
+for host in antigravity claude codex codex-directory gemini; do
+  diff -qr "$AGENT_KIT_REPO/plugins/$host" "./plugins/$host"
 done
+diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
 diff -q "$AGENT_KIT_REPO/assets/logo.png" assets/logo.png
+python3 scripts/validate_marketplace_host_boundaries.py --root .
 ```
 
 ## 🗂️ Repository Reference
@@ -309,7 +307,6 @@ assets/logo.png
 cursor-sdk/
 docs/
 hooks/
-.mcp.json
 GEMINI.md
 llms.txt
 plugins/

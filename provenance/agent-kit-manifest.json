@@ -649,66 +649,66 @@
             {
               "bytes": 5295,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f4926c24102efa90f696a0a5f7e9b1040675066c1dc3f6a8f93a6b755c21966d",
+              "evidence_plan_digest": "4d6c1076d8bfec0281e654d3d6230e74825ab8e899e45cb6adee16e9aff68f39",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "claude-code/findings-browser/evidence-plans/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "613ec9dd3acb35a246f9619eeb45546d8fcd6645e29c37f867cbcb16df8f3241"
+              "sha256": "dfb4f41c8dfdff1c01acf5332f568a19cc1ba0c990b04c7fb6bb4d4c272f0b3c"
             },
             {
-              "bytes": 28750,
+              "bytes": 29308,
               "path": "claude-code/findings-browser/findings-browser-browse.md",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "711ddd9ea7f9666e702c6ce9da98b7c6620a9509e8397d7f4496ad8c0c3e40ae"
+              "sha256": "5064efb916eb2f8253c6ff966c87c36a223df1d72c4260225b74481ee71a1429"
             },
             {
-              "bytes": 33953,
+              "bytes": 34511,
               "path": "claude-code/findings-browser/findings-browser.md",
-              "sha256": "ae60f2ab01b93c47fb5f557c588410a9745922fc090aa03a171432e178767a80"
+              "sha256": "700122e2b28cf9d11139f8bd7a3558f1b755c6bf57d0601ef3d4e7b67734323b"
             },
             {
               "bytes": 6352,
               "path": "claude-code/findings-browser/profile-contracts/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "c1f754a984a975873c4888699ce084539d4cd26627c1a12528daac25349c1b7d"
+              "sha256": "078003ab2aeee8ce2ac86c3499788bd22fc88cf9eb1ca1386cf34129f284e8e9"
             },
             {
               "bytes": 33414,
               "path": "claude-code/findings-browser/profile-contracts/exact-finding.json",
-              "profile_contract_digest": "3aeef1a3cbc8bc652b4578be8cf80d70714816628a3ece3bf4dab4450172bbb9",
+              "profile_contract_digest": "ac45201fab841843d9b3b6b7e154fbd54c9dba02d2089bb25099e30353672875",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "exact-finding",
-              "sha256": "038693d05018345226d2982cb6efe629e56d1a11273f09204c7b4c10f3b27620"
+              "sha256": "dc11ae2901f13558ec3621e887788cc2f054e82bb339ddbf049f8650ac36e3a4"
             },
             {
               "bytes": 33414,
               "path": "claude-code/findings-browser/profile-contracts/resolve-scope.json",
-              "profile_contract_digest": "56364be7a66a5323067ccea0072e7c8a3ea9a9eb1ee03f9524eee59f1d42fa74",
+              "profile_contract_digest": "f796b945cb52fd45069294f4b248e3d8fd7e436c3e34966a83ad3d6de408a0e2",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "resolve-scope",
-              "sha256": "b26937a00158c7362cac4243690e9f03625ed0843521ba4756d4a03e9cab6ea2"
+              "sha256": "2bbccd9277becacda2d56fcf384c0927f61b290bd9e5c40c39eab463e1682055"
             },
             {
               "bytes": 34235,
@@ -753,73 +753,73 @@
               "sha256": "2a576832f28f57dde1e475efd79f7001cfb8ce6bbeabc8dab779af89f908a58d"
             },
             {
-              "bytes": 2013,
+              "bytes": 2050,
               "path": "claude-code/malware-responder/endorctl-setup.md",
-              "sha256": "f0d8c8e0c107acf325659f0ad826edcc6f96522904f25e991727c85704ba43c4"
+              "sha256": "718407bff197592c0bf7eb5a37511277c00b1814b6a7f281023c12c4f130a297"
             },
             {
               "bytes": 10661,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f6ec8e7044ae09fecae9f123d93da97114310a86dfdc7112cb98c05f534fb0bd",
+              "evidence_plan_digest": "cb96854630ef8ff1d8882e4c75ff4b6b2c038188f09ba007a7662abd50b272bd",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "claude-code/malware-responder/evidence-plans/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "b8ac1ef54b7e047f012eb88001a956bdb5d2918b5d57b02cc0524284c1b7ba66"
+              "sha256": "41462821541006eb44e8d0b2682652b6dedbe7eeb5a1222e51790c398086f53d"
             },
             {
-              "bytes": 44483,
+              "bytes": 47203,
               "path": "claude-code/malware-responder/malware-responder-exposure-check.md",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "84c2044fdf50360191370d80b04c185aa7b1907fe621a964cd9c7a8d6b540be2"
+              "sha256": "2aafb470b1eea46983ccbac6ae5bf6de841213c2aa0d59d99f7324b307c491f0"
             },
             {
-              "bytes": 52828,
+              "bytes": 55712,
               "path": "claude-code/malware-responder/malware-responder.md",
-              "sha256": "59f3cd14fd55446bac032ca9113a89bac11ac3fe27b0828cf62dbb2f9522eb5d"
+              "sha256": "de83fe1e2aefa1b01aecc328c868892469602fda9bcc11f50b5a2db84cc56411"
             },
             {
               "bytes": 33481,
               "path": "claude-code/malware-responder/profile-contracts/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "63e41d9baeca00b17ee80b65ae200c37d045795e7abb1322aaa531900d94404d"
+              "sha256": "89e2fc3c727b72c3892c2dfb6a0dc32c9cdd73fe50efe9f29cc9d26ab08b7d53"
             },
             {
               "bytes": 70238,
               "path": "claude-code/malware-responder/profile-contracts/intake-brief.json",
-              "profile_contract_digest": "e4c2432780ec88ed8101e320b04c2a5fc0142482e2105c70df32f2118ac27f05",
+              "profile_contract_digest": "4035fe259a22be1190e3b82de621142f94fce6ca3be54f55f2ad51119aba58d2",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "intake-brief",
-              "sha256": "639b59afd7749c12666f06160b657f1f285992dff2fc106339560336b1014f22"
+              "sha256": "8364d9f2b44412f22bddab2932f76ba606f3c650a31d2a8a1039dd7997183f73"
             },
             {
               "bytes": 70239,
               "path": "claude-code/malware-responder/profile-contracts/response-plan.json",
-              "profile_contract_digest": "d2a2f7ae87915ccf853056182dc8e39b914f5317257433690c3612c3020fa5f8",
+              "profile_contract_digest": "f72ff8db2e960101287355f5ce9f7497ba087864417cb2d483712d72630286ef",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "response-plan",
-              "sha256": "36b489c5f3fd9b319ef5b478d31be4110068099c98342ceeb351e7c0d0b5fad4"
+              "sha256": "69595c25d69c95f08b0a973742e8b9ad3bedc3b840cb22a6df31a874ba9c0132"
             },
             {
               "bytes": 34235,
@@ -1129,65 +1129,65 @@
             {
               "bytes": 5291,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "ece4db3b28f5ad452ae225f3afdfe4581801b0bb382f1b7f9efeddc51c98f216",
+              "evidence_plan_digest": "3880e5151a90742d6f6c65ef181b85b098f4bcac62bb7b55c998c725b1c513f6",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "claude-code/sca-remediation/evidence-plans/evidence-check.json",
-              "profile_contract_digest": "369dcbfba543e1966380d2c3bef925d2118644b553118ec195c61941289eefc1",
+              "profile_contract_digest": "97f4ffb5a85e302f3415e56151637469f5ff203f122598cfefc60daeffaad37f",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "evidence-check",
-              "sha256": "f0ca06c3193630999f6935d2ff939bab7861cdd4190c1872c95508f41a95e684"
+              "sha256": "3fdc7126404d30ffc714f02da2cb19a83541015f6275745a8753df8bd0a561ba"
             },
             {
               "bytes": 10775,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "66e776a973ed0397770148d5c9aef37d40c7053dc6fccb8ae4c0989928c2e384",
+              "evidence_plan_digest": "fb2da0d0bacf3c560362c50efd40ffc34f1ab3815c9d4215f02cf28be7c35016",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "claude-code/sca-remediation/evidence-plans/selection-plan.json",
-              "profile_contract_digest": "3e7b0e4334f1df9a59de0b634376806104fafe7d1fd90408f288be1e389a9b1a",
+              "profile_contract_digest": "dd7dedc7a084f596f0cbd837752641ad3e19ba3c32d636927a17a2380802c979",
               "profile_gate_validator": {
                 "id": "sca-remediation.structured-output",
                 "version": "1"
               },
               "profile_id": "selection-plan",
-              "sha256": "e8d8a8627724e78e2377d288fe6e44edafc8b84ea76a4215ebea2ad6e0f2a9bf"
+              "sha256": "5921464e0998319226a7e07d2bffb65e23323ff4ac072603f65b2912cb556dd6"
             },
             {
               "bytes": 4671,
               "path": "claude-code/sca-remediation/profile-contracts/evidence-check.json",
-              "profile_contract_digest": "369dcbfba543e1966380d2c3bef925d2118644b553118ec195c61941289eefc1",
+              "profile_contract_digest": "97f4ffb5a85e302f3415e56151637469f5ff203f122598cfefc60daeffaad37f",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "evidence-check",
-              "sha256": "4e4414289d32fa87851d46d0a162366b99d00c10731e9d1c19ae0dd5e438c1d3"
+              "sha256": "8b0c8c371da9e0af4b7344c100dd3623e756f86078bbaf60b591c2e2f285c4db"
             },
             {
               "bytes": 4670,
               "path": "claude-code/sca-remediation/profile-contracts/resolve-scope.json",
-              "profile_contract_digest": "1b42602c316479adf0034aa9569c153ce952c246d25bfb1e020a062848c710bc",
+              "profile_contract_digest": "fb9f83a7c86a6f099bb8a0dfa4e94761f6540cb24356a2d138151fe222ba22a5",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "resolve-scope",
-              "sha256": "7b3df1e034ec5ab3e0434a264f05c6607ed5e998cf416487726864be29d2f52d"
+              "sha256": "892776992de09bc5c64380d8e7a20a06fc5f452a02057ee5b4337776db8f4f19"
             },
             {
               "bytes": 10659,
               "path": "claude-code/sca-remediation/profile-contracts/selection-plan.json",
-              "profile_contract_digest": "3e7b0e4334f1df9a59de0b634376806104fafe7d1fd90408f288be1e389a9b1a",
+              "profile_contract_digest": "dd7dedc7a084f596f0cbd837752641ad3e19ba3c32d636927a17a2380802c979",
               "profile_gate_validator": {
                 "id": "sca-remediation.structured-output",
                 "version": "1"
               },
               "profile_id": "selection-plan",
-              "sha256": "4a043a2d01e2f63e5d78cd99e39ccf377de33dc16847ed7f4fc75c2c814e6547"
+              "sha256": "27de8ca281884ba305e0eedc58dc7d90b9ca51543ea8ce435cc028f86e054205"
             },
             {
               "bytes": 34235,
@@ -1195,20 +1195,20 @@
               "sha256": "c226ee88f123538a43cd729a6e9bf1ddb9059d541f123e4f1efe3d0958b5d26f"
             },
             {
-              "bytes": 24339,
+              "bytes": 24577,
               "path": "claude-code/sca-remediation/sca-remediation-evidence-check.md",
-              "profile_contract_digest": "369dcbfba543e1966380d2c3bef925d2118644b553118ec195c61941289eefc1",
+              "profile_contract_digest": "97f4ffb5a85e302f3415e56151637469f5ff203f122598cfefc60daeffaad37f",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "evidence-check",
-              "sha256": "4842a74eec49683e185cbdca8d7728c53b31c6ae52934ebab57066bcbfd003e2"
+              "sha256": "1655341b734557293590eb1be7513626fd6516ca1922f7597356bec824e8e2cf"
             },
             {
               "bytes": 24048,
               "path": "claude-code/sca-remediation/sca-remediation-resolve-scope.md",
-              "profile_contract_digest": "1b42602c316479adf0034aa9569c153ce952c246d25bfb1e020a062848c710bc",
+              "profile_contract_digest": "fb9f83a7c86a6f099bb8a0dfa4e94761f6540cb24356a2d138151fe222ba22a5",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
@@ -1217,20 +1217,20 @@
               "sha256": "93214ff0c46a26238c4d268b219bd9eb74f044ebfa82a00968fd9dbe0260a1d5"
             },
             {
-              "bytes": 53135,
+              "bytes": 53373,
               "path": "claude-code/sca-remediation/sca-remediation-selection-plan.md",
-              "profile_contract_digest": "3e7b0e4334f1df9a59de0b634376806104fafe7d1fd90408f288be1e389a9b1a",
+              "profile_contract_digest": "dd7dedc7a084f596f0cbd837752641ad3e19ba3c32d636927a17a2380802c979",
               "profile_gate_validator": {
                 "id": "sca-remediation.structured-output",
                 "version": "1"
               },
               "profile_id": "selection-plan",
-              "sha256": "6a7f6c195238394fb39c9112e926071cfc2497f42b4c94797b8916ecd7378505"
+              "sha256": "fb8ba77397b5e9129d5815dbbed1d5835bdb823e4075f3b5b04e0087db821f66"
             },
             {
-              "bytes": 107171,
+              "bytes": 108411,
               "path": "claude-code/sca-remediation/sca-remediation.md",
-              "sha256": "f7c52cf1b3e9f8c3774a78250a7ead614b12ca0a2184b475b1aa20cc1443f384"
+              "sha256": "f323b821941ff544c407bcc10546825286cd4731093f4c85fd284e95a54aa732"
             }
           ],
           "id": "enterprise-edition",
@@ -1786,9 +1786,9 @@
               "sha256": "fb5ab81fa3ef3020d3f7b18574729c38e3d84a08d2a23f9d3a44f6d27ae63869"
             },
             {
-              "bytes": 35179,
+              "bytes": 35753,
               "path": "claude-managed-agents/findings-browser/agent.yaml",
-              "sha256": "ba3fcc7a9bf70d9af17d58e260c9088a0cab22fce72d0a685f0dcd53a522a70d"
+              "sha256": "a0254a34795e3be9d07b3fe9a34686c194c5f91be1faa1bef3aad45cfad70592"
             },
             {
               "bytes": 8272,
@@ -1808,50 +1808,50 @@
             {
               "bytes": 5295,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f4926c24102efa90f696a0a5f7e9b1040675066c1dc3f6a8f93a6b755c21966d",
+              "evidence_plan_digest": "4d6c1076d8bfec0281e654d3d6230e74825ab8e899e45cb6adee16e9aff68f39",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "claude-managed-agents/findings-browser/evidence-plans/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "613ec9dd3acb35a246f9619eeb45546d8fcd6645e29c37f867cbcb16df8f3241"
+              "sha256": "dfb4f41c8dfdff1c01acf5332f568a19cc1ba0c990b04c7fb6bb4d4c272f0b3c"
             },
             {
               "bytes": 6352,
               "path": "claude-managed-agents/findings-browser/profile-contracts/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "c1f754a984a975873c4888699ce084539d4cd26627c1a12528daac25349c1b7d"
+              "sha256": "078003ab2aeee8ce2ac86c3499788bd22fc88cf9eb1ca1386cf34129f284e8e9"
             },
             {
               "bytes": 33414,
               "path": "claude-managed-agents/findings-browser/profile-contracts/exact-finding.json",
-              "profile_contract_digest": "3aeef1a3cbc8bc652b4578be8cf80d70714816628a3ece3bf4dab4450172bbb9",
+              "profile_contract_digest": "ac45201fab841843d9b3b6b7e154fbd54c9dba02d2089bb25099e30353672875",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "exact-finding",
-              "sha256": "038693d05018345226d2982cb6efe629e56d1a11273f09204c7b4c10f3b27620"
+              "sha256": "dc11ae2901f13558ec3621e887788cc2f054e82bb339ddbf049f8650ac36e3a4"
             },
             {
               "bytes": 33414,
               "path": "claude-managed-agents/findings-browser/profile-contracts/resolve-scope.json",
-              "profile_contract_digest": "56364be7a66a5323067ccea0072e7c8a3ea9a9eb1ee03f9524eee59f1d42fa74",
+              "profile_contract_digest": "f796b945cb52fd45069294f4b248e3d8fd7e436c3e34966a83ad3d6de408a0e2",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "resolve-scope",
-              "sha256": "b26937a00158c7362cac4243690e9f03625ed0843521ba4756d4a03e9cab6ea2"
+              "sha256": "2bbccd9277becacda2d56fcf384c0927f61b290bd9e5c40c39eab463e1682055"
             },
             {
               "bytes": 34235,
@@ -1896,9 +1896,9 @@
               "sha256": "fda782dffa1bb2801abd3e9fc9667dba5508be08ce8c5beb464035df2fdea010"
             },
             {
-              "bytes": 54661,
+              "bytes": 57607,
               "path": "claude-managed-agents/malware-responder/agent.yaml",
-              "sha256": "ab30869852df6e0d440aa204c516cc02acdeac911ec926dba43381563ec0a7c8"
+              "sha256": "abcf9328222fcdeffe2cf18f3c9a7710bc8f6a492e82ace2a3ebb38128e573ad"
             },
             {
               "bytes": 9751,
@@ -1906,9 +1906,9 @@
               "sha256": "2a576832f28f57dde1e475efd79f7001cfb8ce6bbeabc8dab779af89f908a58d"
             },
             {
-              "bytes": 2013,
+              "bytes": 2050,
               "path": "claude-managed-agents/malware-responder/endorctl-setup.md",
-              "sha256": "f0d8c8e0c107acf325659f0ad826edcc6f96522904f25e991727c85704ba43c4"
+              "sha256": "718407bff197592c0bf7eb5a37511277c00b1814b6a7f281023c12c4f130a297"
             },
             {
               "bytes": 233,
@@ -1918,50 +1918,50 @@
             {
               "bytes": 10661,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f6ec8e7044ae09fecae9f123d93da97114310a86dfdc7112cb98c05f534fb0bd",
+              "evidence_plan_digest": "cb96854630ef8ff1d8882e4c75ff4b6b2c038188f09ba007a7662abd50b272bd",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "claude-managed-agents/malware-responder/evidence-plans/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "b8ac1ef54b7e047f012eb88001a956bdb5d2918b5d57b02cc0524284c1b7ba66"
+              "sha256": "41462821541006eb44e8d0b2682652b6dedbe7eeb5a1222e51790c398086f53d"
             },
             {
               "bytes": 33481,
               "path": "claude-managed-agents/malware-responder/profile-contracts/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "63e41d9baeca00b17ee80b65ae200c37d045795e7abb1322aaa531900d94404d"
+              "sha256": "89e2fc3c727b72c3892c2dfb6a0dc32c9cdd73fe50efe9f29cc9d26ab08b7d53"
             },
             {
               "bytes": 70238,
               "path": "claude-managed-agents/malware-responder/profile-contracts/intake-brief.json",
-              "profile_contract_digest": "e4c2432780ec88ed8101e320b04c2a5fc0142482e2105c70df32f2118ac27f05",
+              "profile_contract_digest": "4035fe259a22be1190e3b82de621142f94fce6ca3be54f55f2ad51119aba58d2",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "intake-brief",
-              "sha256": "639b59afd7749c12666f06160b657f1f285992dff2fc106339560336b1014f22"
+              "sha256": "8364d9f2b44412f22bddab2932f76ba606f3c650a31d2a8a1039dd7997183f73"
             },
             {
               "bytes": 70239,
               "path": "claude-managed-agents/malware-responder/profile-contracts/response-plan.json",
-              "profile_contract_digest": "d2a2f7ae87915ccf853056182dc8e39b914f5317257433690c3612c3020fa5f8",
+              "profile_contract_digest": "f72ff8db2e960101287355f5ce9f7497ba087864417cb2d483712d72630286ef",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "response-plan",
-              "sha256": "36b489c5f3fd9b319ef5b478d31be4110068099c98342ceeb351e7c0d0b5fad4"
+              "sha256": "69595c25d69c95f08b0a973742e8b9ad3bedc3b840cb22a6df31a874ba9c0132"
             },
             {
               "bytes": 34235,
@@ -2734,9 +2734,9 @@
               "sha256": "36aa35724cfa8882279c04ad044e1ab179d6945e74f37ca9e89aff3193fdf09c"
             },
             {
-              "bytes": 34591,
+              "bytes": 35149,
               "path": "codex/findings-browser/SKILL.md",
-              "sha256": "477862f1de935f200646e9f7b068e8b8af66f0997799c90deb267849af3abe0e"
+              "sha256": "51298f93c1aa12f711962e8f745e415f02edb14d668dfbd938a9804f93094e73"
             },
             {
               "bytes": 8272,
@@ -2751,50 +2751,50 @@
             {
               "bytes": 5295,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f4926c24102efa90f696a0a5f7e9b1040675066c1dc3f6a8f93a6b755c21966d",
+              "evidence_plan_digest": "4d6c1076d8bfec0281e654d3d6230e74825ab8e899e45cb6adee16e9aff68f39",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "codex/findings-browser/evidence-plans/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "613ec9dd3acb35a246f9619eeb45546d8fcd6645e29c37f867cbcb16df8f3241"
+              "sha256": "dfb4f41c8dfdff1c01acf5332f568a19cc1ba0c990b04c7fb6bb4d4c272f0b3c"
             },
             {
               "bytes": 6352,
               "path": "codex/findings-browser/profile-contracts/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "c1f754a984a975873c4888699ce084539d4cd26627c1a12528daac25349c1b7d"
+              "sha256": "078003ab2aeee8ce2ac86c3499788bd22fc88cf9eb1ca1386cf34129f284e8e9"
             },
             {
               "bytes": 33414,
               "path": "codex/findings-browser/profile-contracts/exact-finding.json",
-              "profile_contract_digest": "3aeef1a3cbc8bc652b4578be8cf80d70714816628a3ece3bf4dab4450172bbb9",
+              "profile_contract_digest": "ac45201fab841843d9b3b6b7e154fbd54c9dba02d2089bb25099e30353672875",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "exact-finding",
-              "sha256": "038693d05018345226d2982cb6efe629e56d1a11273f09204c7b4c10f3b27620"
+              "sha256": "dc11ae2901f13558ec3621e887788cc2f054e82bb339ddbf049f8650ac36e3a4"
             },
             {
               "bytes": 33414,
               "path": "codex/findings-browser/profile-contracts/resolve-scope.json",
-              "profile_contract_digest": "56364be7a66a5323067ccea0072e7c8a3ea9a9eb1ee03f9524eee59f1d42fa74",
+              "profile_contract_digest": "f796b945cb52fd45069294f4b248e3d8fd7e436c3e34966a83ad3d6de408a0e2",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "resolve-scope",
-              "sha256": "b26937a00158c7362cac4243690e9f03625ed0843521ba4756d4a03e9cab6ea2"
+              "sha256": "2bbccd9277becacda2d56fcf384c0927f61b290bd9e5c40c39eab463e1682055"
             },
             {
               "bytes": 34235,
@@ -2834,9 +2834,9 @@
               "sha256": "e166bf910d5554a514507687047b3e1bb7797a45e7049682b6069948cfc8e155"
             },
             {
-              "bytes": 53466,
+              "bytes": 56350,
               "path": "codex/malware-responder/SKILL.md",
-              "sha256": "d8b8e8d559ad8c8cd902f971799989aadddb531e2e59ea1c888d0667318c1e33"
+              "sha256": "badb7db759be8b29bc739f63ad7053834ea548bbd0002467c774749945e373bd"
             },
             {
               "bytes": 9751,
@@ -2844,57 +2844,57 @@
               "sha256": "2a576832f28f57dde1e475efd79f7001cfb8ce6bbeabc8dab779af89f908a58d"
             },
             {
-              "bytes": 2013,
+              "bytes": 2050,
               "path": "codex/malware-responder/endorctl-setup.md",
-              "sha256": "f0d8c8e0c107acf325659f0ad826edcc6f96522904f25e991727c85704ba43c4"
+              "sha256": "718407bff197592c0bf7eb5a37511277c00b1814b6a7f281023c12c4f130a297"
             },
             {
               "bytes": 10661,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f6ec8e7044ae09fecae9f123d93da97114310a86dfdc7112cb98c05f534fb0bd",
+              "evidence_plan_digest": "cb96854630ef8ff1d8882e4c75ff4b6b2c038188f09ba007a7662abd50b272bd",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "codex/malware-responder/evidence-plans/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "b8ac1ef54b7e047f012eb88001a956bdb5d2918b5d57b02cc0524284c1b7ba66"
+              "sha256": "41462821541006eb44e8d0b2682652b6dedbe7eeb5a1222e51790c398086f53d"
             },
             {
               "bytes": 33481,
               "path": "codex/malware-responder/profile-contracts/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "63e41d9baeca00b17ee80b65ae200c37d045795e7abb1322aaa531900d94404d"
+              "sha256": "89e2fc3c727b72c3892c2dfb6a0dc32c9cdd73fe50efe9f29cc9d26ab08b7d53"
             },
             {
               "bytes": 70238,
               "path": "codex/malware-responder/profile-contracts/intake-brief.json",
-              "profile_contract_digest": "e4c2432780ec88ed8101e320b04c2a5fc0142482e2105c70df32f2118ac27f05",
+              "profile_contract_digest": "4035fe259a22be1190e3b82de621142f94fce6ca3be54f55f2ad51119aba58d2",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "intake-brief",
-              "sha256": "639b59afd7749c12666f06160b657f1f285992dff2fc106339560336b1014f22"
+              "sha256": "8364d9f2b44412f22bddab2932f76ba606f3c650a31d2a8a1039dd7997183f73"
             },
             {
               "bytes": 70239,
               "path": "codex/malware-responder/profile-contracts/response-plan.json",
-              "profile_contract_digest": "d2a2f7ae87915ccf853056182dc8e39b914f5317257433690c3612c3020fa5f8",
+              "profile_contract_digest": "f72ff8db2e960101287355f5ce9f7497ba087864417cb2d483712d72630286ef",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "response-plan",
-              "sha256": "36b489c5f3fd9b319ef5b478d31be4110068099c98342ceeb351e7c0d0b5fad4"
+              "sha256": "69595c25d69c95f08b0a973742e8b9ad3bedc3b840cb22a6df31a874ba9c0132"
             },
             {
               "bytes": 34235,
@@ -3143,9 +3143,9 @@
               "sha256": "1f52afd9a571bcc6674e6677894beeb4817a95142f86fb51640230c912a8c54d"
             },
             {
-              "bytes": 107900,
+              "bytes": 109140,
               "path": "codex/sca-remediation/SKILL.md",
-              "sha256": "2f884a3532cafc76ebe4019565d4ce67b6c5642f3766faeb62d02b48c71d0fbe"
+              "sha256": "e0dd74517389e9dabf5e3b2b022442e039af01bcb69c4bb7b8c1f29077db4f42"
             },
             {
               "bytes": 6758,
@@ -3165,65 +3165,65 @@
             {
               "bytes": 5291,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "ece4db3b28f5ad452ae225f3afdfe4581801b0bb382f1b7f9efeddc51c98f216",
+              "evidence_plan_digest": "3880e5151a90742d6f6c65ef181b85b098f4bcac62bb7b55c998c725b1c513f6",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "codex/sca-remediation/evidence-plans/evidence-check.json",
-              "profile_contract_digest": "369dcbfba543e1966380d2c3bef925d2118644b553118ec195c61941289eefc1",
+              "profile_contract_digest": "97f4ffb5a85e302f3415e56151637469f5ff203f122598cfefc60daeffaad37f",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "evidence-check",
-              "sha256": "f0ca06c3193630999f6935d2ff939bab7861cdd4190c1872c95508f41a95e684"
+              "sha256": "3fdc7126404d30ffc714f02da2cb19a83541015f6275745a8753df8bd0a561ba"
             },
             {
               "bytes": 10775,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "66e776a973ed0397770148d5c9aef37d40c7053dc6fccb8ae4c0989928c2e384",
+              "evidence_plan_digest": "fb2da0d0bacf3c560362c50efd40ffc34f1ab3815c9d4215f02cf28be7c35016",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "codex/sca-remediation/evidence-plans/selection-plan.json",
-              "profile_contract_digest": "3e7b0e4334f1df9a59de0b634376806104fafe7d1fd90408f288be1e389a9b1a",
+              "profile_contract_digest": "dd7dedc7a084f596f0cbd837752641ad3e19ba3c32d636927a17a2380802c979",
               "profile_gate_validator": {
                 "id": "sca-remediation.structured-output",
                 "version": "1"
               },
               "profile_id": "selection-plan",
-              "sha256": "e8d8a8627724e78e2377d288fe6e44edafc8b84ea76a4215ebea2ad6e0f2a9bf"
+              "sha256": "5921464e0998319226a7e07d2bffb65e23323ff4ac072603f65b2912cb556dd6"
             },
             {
               "bytes": 4671,
               "path": "codex/sca-remediation/profile-contracts/evidence-check.json",
-              "profile_contract_digest": "369dcbfba543e1966380d2c3bef925d2118644b553118ec195c61941289eefc1",
+              "profile_contract_digest": "97f4ffb5a85e302f3415e56151637469f5ff203f122598cfefc60daeffaad37f",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "evidence-check",
-              "sha256": "4e4414289d32fa87851d46d0a162366b99d00c10731e9d1c19ae0dd5e438c1d3"
+              "sha256": "8b0c8c371da9e0af4b7344c100dd3623e756f86078bbaf60b591c2e2f285c4db"
             },
             {
               "bytes": 4670,
               "path": "codex/sca-remediation/profile-contracts/resolve-scope.json",
-              "profile_contract_digest": "1b42602c316479adf0034aa9569c153ce952c246d25bfb1e020a062848c710bc",
+              "profile_contract_digest": "fb9f83a7c86a6f099bb8a0dfa4e94761f6540cb24356a2d138151fe222ba22a5",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "resolve-scope",
-              "sha256": "7b3df1e034ec5ab3e0434a264f05c6607ed5e998cf416487726864be29d2f52d"
+              "sha256": "892776992de09bc5c64380d8e7a20a06fc5f452a02057ee5b4337776db8f4f19"
             },
             {
               "bytes": 10659,
               "path": "codex/sca-remediation/profile-contracts/selection-plan.json",
-              "profile_contract_digest": "3e7b0e4334f1df9a59de0b634376806104fafe7d1fd90408f288be1e389a9b1a",
+              "profile_contract_digest": "dd7dedc7a084f596f0cbd837752641ad3e19ba3c32d636927a17a2380802c979",
               "profile_gate_validator": {
                 "id": "sca-remediation.structured-output",
                 "version": "1"
               },
               "profile_id": "selection-plan",
-              "sha256": "4a043a2d01e2f63e5d78cd99e39ccf377de33dc16847ed7f4fc75c2c814e6547"
+              "sha256": "27de8ca281884ba305e0eedc58dc7d90b9ca51543ea8ce435cc028f86e054205"
             },
             {
               "bytes": 34235,
@@ -3875,9 +3875,9 @@
               "sha256": "6e895885b4592f1350340f59e59169e42b5b0ba332b1f66912fcf1380bb7d819"
             },
             {
-              "bytes": 34620,
+              "bytes": 35178,
               "path": "gemini/findings-browser/SKILL.md",
-              "sha256": "1d64bdb721859b6b968541555f16e1021c997b1d53e16948b88eb519c724b72a"
+              "sha256": "985f9c198eefa6792b7c551c2db32bd88017d8b42ca6511fd2f3bb404123e837"
             },
             {
               "bytes": 8272,
@@ -3892,55 +3892,55 @@
             {
               "bytes": 5295,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f4926c24102efa90f696a0a5f7e9b1040675066c1dc3f6a8f93a6b755c21966d",
+              "evidence_plan_digest": "4d6c1076d8bfec0281e654d3d6230e74825ab8e899e45cb6adee16e9aff68f39",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "gemini/findings-browser/evidence-plans/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "613ec9dd3acb35a246f9619eeb45546d8fcd6645e29c37f867cbcb16df8f3241"
+              "sha256": "dfb4f41c8dfdff1c01acf5332f568a19cc1ba0c990b04c7fb6bb4d4c272f0b3c"
             },
             {
-              "bytes": 34880,
+              "bytes": 35438,
               "path": "gemini/findings-browser/findings-browser.md",
-              "sha256": "ada26687969102138a03d0a656dbc297f0730a07c6b30bca2665f045d90f88ab"
+              "sha256": "559054829ffc97609b9478601ad8dd1b49b6d8cccedb84f85be4d1a340df190d"
             },
             {
               "bytes": 6352,
               "path": "gemini/findings-browser/profile-contracts/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "c1f754a984a975873c4888699ce084539d4cd26627c1a12528daac25349c1b7d"
+              "sha256": "078003ab2aeee8ce2ac86c3499788bd22fc88cf9eb1ca1386cf34129f284e8e9"
             },
             {
               "bytes": 33414,
               "path": "gemini/findings-browser/profile-contracts/exact-finding.json",
-              "profile_contract_digest": "3aeef1a3cbc8bc652b4578be8cf80d70714816628a3ece3bf4dab4450172bbb9",
+              "profile_contract_digest": "ac45201fab841843d9b3b6b7e154fbd54c9dba02d2089bb25099e30353672875",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "exact-finding",
-              "sha256": "038693d05018345226d2982cb6efe629e56d1a11273f09204c7b4c10f3b27620"
+              "sha256": "dc11ae2901f13558ec3621e887788cc2f054e82bb339ddbf049f8650ac36e3a4"
             },
             {
               "bytes": 33414,
               "path": "gemini/findings-browser/profile-contracts/resolve-scope.json",
-              "profile_contract_digest": "56364be7a66a5323067ccea0072e7c8a3ea9a9eb1ee03f9524eee59f1d42fa74",
+              "profile_contract_digest": "f796b945cb52fd45069294f4b248e3d8fd7e436c3e34966a83ad3d6de408a0e2",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "resolve-scope",
-              "sha256": "b26937a00158c7362cac4243690e9f03625ed0843521ba4756d4a03e9cab6ea2"
+              "sha256": "2bbccd9277becacda2d56fcf384c0927f61b290bd9e5c40c39eab463e1682055"
             },
             {
               "bytes": 34235,
@@ -3980,9 +3980,9 @@
               "sha256": "fcedc7964cd73fc232986f4e189afbe677c48f9bde5059a256be22d430d127ad"
             },
             {
-              "bytes": 53495,
+              "bytes": 56379,
               "path": "gemini/malware-responder/SKILL.md",
-              "sha256": "d8a4cf8dc57b91c6e4b4e12f88cd60b7236e22d5bdc2081f69f15e158538c948"
+              "sha256": "170fdc82816d27c2f1a12b8faf1c9ffec40a321f0dc01c1345db55de89144449"
             },
             {
               "bytes": 9751,
@@ -3990,62 +3990,62 @@
               "sha256": "2a576832f28f57dde1e475efd79f7001cfb8ce6bbeabc8dab779af89f908a58d"
             },
             {
-              "bytes": 2013,
+              "bytes": 2050,
               "path": "gemini/malware-responder/endorctl-setup.md",
-              "sha256": "f0d8c8e0c107acf325659f0ad826edcc6f96522904f25e991727c85704ba43c4"
+              "sha256": "718407bff197592c0bf7eb5a37511277c00b1814b6a7f281023c12c4f130a297"
             },
             {
               "bytes": 10661,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f6ec8e7044ae09fecae9f123d93da97114310a86dfdc7112cb98c05f534fb0bd",
+              "evidence_plan_digest": "cb96854630ef8ff1d8882e4c75ff4b6b2c038188f09ba007a7662abd50b272bd",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "gemini/malware-responder/evidence-plans/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "b8ac1ef54b7e047f012eb88001a956bdb5d2918b5d57b02cc0524284c1b7ba66"
+              "sha256": "41462821541006eb44e8d0b2682652b6dedbe7eeb5a1222e51790c398086f53d"
             },
             {
-              "bytes": 53756,
+              "bytes": 56640,
               "path": "gemini/malware-responder/malware-responder.md",
-              "sha256": "ab2ec84182ec1cd399f81ddcd399f93dbed3adf42c35c6687d640ddae0287367"
+              "sha256": "d0ecd7015c683d79a58589467f2e48a7fc4e852f9fd178e1f764bd9df0b2699d"
             },
             {
               "bytes": 33481,
               "path": "gemini/malware-responder/profile-contracts/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "63e41d9baeca00b17ee80b65ae200c37d045795e7abb1322aaa531900d94404d"
+              "sha256": "89e2fc3c727b72c3892c2dfb6a0dc32c9cdd73fe50efe9f29cc9d26ab08b7d53"
             },
             {
               "bytes": 70238,
               "path": "gemini/malware-responder/profile-contracts/intake-brief.json",
-              "profile_contract_digest": "e4c2432780ec88ed8101e320b04c2a5fc0142482e2105c70df32f2118ac27f05",
+              "profile_contract_digest": "4035fe259a22be1190e3b82de621142f94fce6ca3be54f55f2ad51119aba58d2",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "intake-brief",
-              "sha256": "639b59afd7749c12666f06160b657f1f285992dff2fc106339560336b1014f22"
+              "sha256": "8364d9f2b44412f22bddab2932f76ba606f3c650a31d2a8a1039dd7997183f73"
             },
             {
               "bytes": 70239,
               "path": "gemini/malware-responder/profile-contracts/response-plan.json",
-              "profile_contract_digest": "d2a2f7ae87915ccf853056182dc8e39b914f5317257433690c3612c3020fa5f8",
+              "profile_contract_digest": "f72ff8db2e960101287355f5ce9f7497ba087864417cb2d483712d72630286ef",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "response-plan",
-              "sha256": "36b489c5f3fd9b319ef5b478d31be4110068099c98342ceeb351e7c0d0b5fad4"
+              "sha256": "69595c25d69c95f08b0a973742e8b9ad3bedc3b840cb22a6df31a874ba9c0132"
             },
             {
               "bytes": 34235,
@@ -4304,9 +4304,9 @@
               "sha256": "5e2e422aeb490f3d3f026ba92d198e7004929394fa4942bf188e7d9ae10f24d4"
             },
             {
-              "bytes": 107942,
+              "bytes": 109182,
               "path": "gemini/sca-remediation/SKILL.md",
-              "sha256": "d74ac5f85784b10e676a0c7e9e19e8c3bcc0dd028c98d3d7fc7b4cd7bab16c11"
+              "sha256": "238090e456d77403bd2baaf617731219ba584a633114d8b4ec9c1e63e3e464d5"
             },
             {
               "bytes": 6758,
@@ -4326,65 +4326,65 @@
             {
               "bytes": 5291,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "ece4db3b28f5ad452ae225f3afdfe4581801b0bb382f1b7f9efeddc51c98f216",
+              "evidence_plan_digest": "3880e5151a90742d6f6c65ef181b85b098f4bcac62bb7b55c998c725b1c513f6",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "gemini/sca-remediation/evidence-plans/evidence-check.json",
-              "profile_contract_digest": "369dcbfba543e1966380d2c3bef925d2118644b553118ec195c61941289eefc1",
+              "profile_contract_digest": "97f4ffb5a85e302f3415e56151637469f5ff203f122598cfefc60daeffaad37f",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "evidence-check",
-              "sha256": "f0ca06c3193630999f6935d2ff939bab7861cdd4190c1872c95508f41a95e684"
+              "sha256": "3fdc7126404d30ffc714f02da2cb19a83541015f6275745a8753df8bd0a561ba"
             },
             {
               "bytes": 10775,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "66e776a973ed0397770148d5c9aef37d40c7053dc6fccb8ae4c0989928c2e384",
+              "evidence_plan_digest": "fb2da0d0bacf3c560362c50efd40ffc34f1ab3815c9d4215f02cf28be7c35016",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "gemini/sca-remediation/evidence-plans/selection-plan.json",
-              "profile_contract_digest": "3e7b0e4334f1df9a59de0b634376806104fafe7d1fd90408f288be1e389a9b1a",
+              "profile_contract_digest": "dd7dedc7a084f596f0cbd837752641ad3e19ba3c32d636927a17a2380802c979",
               "profile_gate_validator": {
                 "id": "sca-remediation.structured-output",
                 "version": "1"
               },
               "profile_id": "selection-plan",
-              "sha256": "e8d8a8627724e78e2377d288fe6e44edafc8b84ea76a4215ebea2ad6e0f2a9bf"
+              "sha256": "5921464e0998319226a7e07d2bffb65e23323ff4ac072603f65b2912cb556dd6"
             },
             {
               "bytes": 4671,
               "path": "gemini/sca-remediation/profile-contracts/evidence-check.json",
-              "profile_contract_digest": "369dcbfba543e1966380d2c3bef925d2118644b553118ec195c61941289eefc1",
+              "profile_contract_digest": "97f4ffb5a85e302f3415e56151637469f5ff203f122598cfefc60daeffaad37f",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "evidence-check",
-              "sha256": "4e4414289d32fa87851d46d0a162366b99d00c10731e9d1c19ae0dd5e438c1d3"
+              "sha256": "8b0c8c371da9e0af4b7344c100dd3623e756f86078bbaf60b591c2e2f285c4db"
             },
             {
               "bytes": 4670,
               "path": "gemini/sca-remediation/profile-contracts/resolve-scope.json",
-              "profile_contract_digest": "1b42602c316479adf0034aa9569c153ce952c246d25bfb1e020a062848c710bc",
+              "profile_contract_digest": "fb9f83a7c86a6f099bb8a0dfa4e94761f6540cb24356a2d138151fe222ba22a5",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "resolve-scope",
-              "sha256": "7b3df1e034ec5ab3e0434a264f05c6607ed5e998cf416487726864be29d2f52d"
+              "sha256": "892776992de09bc5c64380d8e7a20a06fc5f452a02057ee5b4337776db8f4f19"
             },
             {
               "bytes": 10659,
               "path": "gemini/sca-remediation/profile-contracts/selection-plan.json",
-              "profile_contract_digest": "3e7b0e4334f1df9a59de0b634376806104fafe7d1fd90408f288be1e389a9b1a",
+              "profile_contract_digest": "dd7dedc7a084f596f0cbd837752641ad3e19ba3c32d636927a17a2380802c979",
               "profile_gate_validator": {
                 "id": "sca-remediation.structured-output",
                 "version": "1"
               },
               "profile_id": "selection-plan",
-              "sha256": "4a043a2d01e2f63e5d78cd99e39ccf377de33dc16847ed7f4fc75c2c814e6547"
+              "sha256": "27de8ca281884ba305e0eedc58dc7d90b9ca51543ea8ce435cc028f86e054205"
             },
             {
               "bytes": 34235,
@@ -4392,9 +4392,9 @@
               "sha256": "c226ee88f123538a43cd729a6e9bf1ddb9059d541f123e4f1efe3d0958b5d26f"
             },
             {
-              "bytes": 108246,
+              "bytes": 109486,
               "path": "gemini/sca-remediation/sca-remediation.md",
-              "sha256": "d68e25e5f7044b90b4f2640eca163aca2403649a56a72d1a238f6daccb3eb3d4"
+              "sha256": "ffd8c8848e91fe81b1965840ab4cfa425cba974805e0920bb439f86d1daab5ca"
             }
           ],
           "id": "gemini-cli",
@@ -5076,9 +5076,9 @@
               "sha256": "90f0774d29066e92d6c9104da5b4425c434dbd7caf3211214a8fd6e9cc49a98b"
             },
             {
-              "bytes": 34601,
+              "bytes": 35159,
               "path": "portable/findings-browser/agent.md",
-              "sha256": "c2dc7a6767b512efa233879cf4d62a76e8927edeb37dd96fb42a7761b1667b5b"
+              "sha256": "c7e83f6aa026d72968fab65bb00172491b4e6874047dfd03c69ecbfc804c7b47"
             },
             {
               "bytes": 8272,
@@ -5093,17 +5093,17 @@
             {
               "bytes": 5295,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f4926c24102efa90f696a0a5f7e9b1040675066c1dc3f6a8f93a6b755c21966d",
+              "evidence_plan_digest": "4d6c1076d8bfec0281e654d3d6230e74825ab8e899e45cb6adee16e9aff68f39",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "portable/findings-browser/evidence-plans/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "613ec9dd3acb35a246f9619eeb45546d8fcd6645e29c37f867cbcb16df8f3241"
+              "sha256": "dfb4f41c8dfdff1c01acf5332f568a19cc1ba0c990b04c7fb6bb4d4c272f0b3c"
             },
             {
               "bytes": 6333,
@@ -5113,35 +5113,35 @@
             {
               "bytes": 6352,
               "path": "portable/findings-browser/profile-contracts/browse.json",
-              "profile_contract_digest": "a6354c584d75cb7984f20d9c85a9dca5eae26771440bdbcdc31cc1b05a402696",
+              "profile_contract_digest": "5484a594739cd0dbd42cb469561f5ce0d2381d76aef55ac3479d414c1aab191a",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "browse",
-              "sha256": "c1f754a984a975873c4888699ce084539d4cd26627c1a12528daac25349c1b7d"
+              "sha256": "078003ab2aeee8ce2ac86c3499788bd22fc88cf9eb1ca1386cf34129f284e8e9"
             },
             {
               "bytes": 33414,
               "path": "portable/findings-browser/profile-contracts/exact-finding.json",
-              "profile_contract_digest": "3aeef1a3cbc8bc652b4578be8cf80d70714816628a3ece3bf4dab4450172bbb9",
+              "profile_contract_digest": "ac45201fab841843d9b3b6b7e154fbd54c9dba02d2089bb25099e30353672875",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "exact-finding",
-              "sha256": "038693d05018345226d2982cb6efe629e56d1a11273f09204c7b4c10f3b27620"
+              "sha256": "dc11ae2901f13558ec3621e887788cc2f054e82bb339ddbf049f8650ac36e3a4"
             },
             {
               "bytes": 33414,
               "path": "portable/findings-browser/profile-contracts/resolve-scope.json",
-              "profile_contract_digest": "56364be7a66a5323067ccea0072e7c8a3ea9a9eb1ee03f9524eee59f1d42fa74",
+              "profile_contract_digest": "f796b945cb52fd45069294f4b248e3d8fd7e436c3e34966a83ad3d6de408a0e2",
               "profile_gate_validator": {
                 "id": "findings-browser.structured-output",
                 "version": "1"
               },
               "profile_id": "resolve-scope",
-              "sha256": "b26937a00158c7362cac4243690e9f03625ed0843521ba4756d4a03e9cab6ea2"
+              "sha256": "2bbccd9277becacda2d56fcf384c0927f61b290bd9e5c40c39eab463e1682055"
             },
             {
               "bytes": 34235,
@@ -5181,14 +5181,14 @@
               "sha256": "9dd2888f151f252899e481fa200d056e47dec35c7f62273a341e6a2797cf06d0"
             },
             {
-              "bytes": 15178,
+              "bytes": 15218,
               "path": "portable/malware-responder/agent.manifest.json",
-              "sha256": "bde92c0c1c5efc0996fe0d1f2726f12a69d95f6ff990041c41c141c60021e088"
+              "sha256": "90fddc48549f79d05b3600f8bebeeb76c72f539d927bd5d5b00dd4b7de829e8b"
             },
             {
-              "bytes": 53269,
+              "bytes": 56175,
               "path": "portable/malware-responder/agent.md",
-              "sha256": "44f2717ad868847a550b0715610717cccda288313dfdfdc262da035e67ea95f8"
+              "sha256": "98aa7b77c14fb64eff1745ec07dad46f48e15f8cf433abd9f7049427f8f29c60"
             },
             {
               "bytes": 9751,
@@ -5196,62 +5196,62 @@
               "sha256": "2a576832f28f57dde1e475efd79f7001cfb8ce6bbeabc8dab779af89f908a58d"
             },
             {
-              "bytes": 2013,
+              "bytes": 2050,
               "path": "portable/malware-responder/endorctl-setup.md",
-              "sha256": "f0d8c8e0c107acf325659f0ad826edcc6f96522904f25e991727c85704ba43c4"
+              "sha256": "718407bff197592c0bf7eb5a37511277c00b1814b6a7f281023c12c4f130a297"
             },
             {
               "bytes": 10661,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "f6ec8e7044ae09fecae9f123d93da97114310a86dfdc7112cb98c05f534fb0bd",
+              "evidence_plan_digest": "cb96854630ef8ff1d8882e4c75ff4b6b2c038188f09ba007a7662abd50b272bd",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "portable/malware-responder/evidence-plans/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "b8ac1ef54b7e047f012eb88001a956bdb5d2918b5d57b02cc0524284c1b7ba66"
+              "sha256": "41462821541006eb44e8d0b2682652b6dedbe7eeb5a1222e51790c398086f53d"
             },
             {
-              "bytes": 6548,
+              "bytes": 6584,
               "path": "portable/malware-responder/output-contract.md",
-              "sha256": "4398887d7294c9e7c6f11e42cffa33361825ac08529b117808c0262b5e34e554"
+              "sha256": "030971256e2b174bcf9eca184c46a1b334cfb18a3751be052eb9cf4f1ed751f3"
             },
             {
               "bytes": 33481,
               "path": "portable/malware-responder/profile-contracts/exposure-check.json",
-              "profile_contract_digest": "0508a9eee096aa06d2343b9a7eff62960bee1ce51b433984ce9cd8f77e92b7ee",
+              "profile_contract_digest": "fb223bdcc2ccd47664dd0d6776dd120ff88399dd5485b9e6f7ca0468175e3900",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "exposure-check",
-              "sha256": "63e41d9baeca00b17ee80b65ae200c37d045795e7abb1322aaa531900d94404d"
+              "sha256": "89e2fc3c727b72c3892c2dfb6a0dc32c9cdd73fe50efe9f29cc9d26ab08b7d53"
             },
             {
               "bytes": 70238,
               "path": "portable/malware-responder/profile-contracts/intake-brief.json",
-              "profile_contract_digest": "e4c2432780ec88ed8101e320b04c2a5fc0142482e2105c70df32f2118ac27f05",
+              "profile_contract_digest": "4035fe259a22be1190e3b82de621142f94fce6ca3be54f55f2ad51119aba58d2",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "intake-brief",
-              "sha256": "639b59afd7749c12666f06160b657f1f285992dff2fc106339560336b1014f22"
+              "sha256": "8364d9f2b44412f22bddab2932f76ba606f3c650a31d2a8a1039dd7997183f73"
             },
             {
               "bytes": 70239,
               "path": "portable/malware-responder/profile-contracts/response-plan.json",
-              "profile_contract_digest": "d2a2f7ae87915ccf853056182dc8e39b914f5317257433690c3612c3020fa5f8",
+              "profile_contract_digest": "f72ff8db2e960101287355f5ce9f7497ba087864417cb2d483712d72630286ef",
               "profile_gate_validator": {
                 "id": "malware-responder.structured-output",
                 "version": "1"
               },
               "profile_id": "response-plan",
-              "sha256": "36b489c5f3fd9b319ef5b478d31be4110068099c98342ceeb351e7c0d0b5fad4"
+              "sha256": "69595c25d69c95f08b0a973742e8b9ad3bedc3b840cb22a6df31a874ba9c0132"
             },
             {
               "bytes": 34235,
@@ -5530,9 +5530,9 @@
               "sha256": "372c5addedd1a1fbfd84e6926a06eea3de3ebf413d69d394620a606089976055"
             },
             {
-              "bytes": 108045,
+              "bytes": 109285,
               "path": "portable/sca-remediation/agent.md",
-              "sha256": "053492502ad77dfa535b0c7a028c5e6f0dfb337d4c974ceeb9bb2eee10f2a5a0"
+              "sha256": "5dba6992325f5de7263ff02551ce5fc94ac87754e923da4af03b2bb6ba6c3fe3"
             },
             {
               "bytes": 9869,
@@ -5547,32 +5547,32 @@
             {
               "bytes": 5291,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "ece4db3b28f5ad452ae225f3afdfe4581801b0bb382f1b7f9efeddc51c98f216",
+              "evidence_plan_digest": "3880e5151a90742d6f6c65ef181b85b098f4bcac62bb7b55c998c725b1c513f6",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "portable/sca-remediation/evidence-plans/evidence-check.json",
-              "profile_contract_digest": "369dcbfba543e1966380d2c3bef925d2118644b553118ec195c61941289eefc1",
+              "profile_contract_digest": "97f4ffb5a85e302f3415e56151637469f5ff203f122598cfefc60daeffaad37f",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "evidence-check",
-              "sha256": "f0ca06c3193630999f6935d2ff939bab7861cdd4190c1872c95508f41a95e684"
+              "sha256": "3fdc7126404d30ffc714f02da2cb19a83541015f6275745a8753df8bd0a561ba"
             },
             {
               "bytes": 10775,
               "evidence_execution_mode": "prompt_fallback",
-              "evidence_plan_digest": "66e776a973ed0397770148d5c9aef37d40c7053dc6fccb8ae4c0989928c2e384",
+              "evidence_plan_digest": "fb2da0d0bacf3c560362c50efd40ffc34f1ab3815c9d4215f02cf28be7c35016",
               "evidence_plan_executable": false,
               "evidence_plan_schema_version": "1",
               "path": "portable/sca-remediation/evidence-plans/selection-plan.json",
-              "profile_contract_digest": "3e7b0e4334f1df9a59de0b634376806104fafe7d1fd90408f288be1e389a9b1a",
+              "profile_contract_digest": "dd7dedc7a084f596f0cbd837752641ad3e19ba3c32d636927a17a2380802c979",
               "profile_gate_validator": {
                 "id": "sca-remediation.structured-output",
                 "version": "1"
               },
               "profile_id": "selection-plan",
-              "sha256": "e8d8a8627724e78e2377d288fe6e44edafc8b84ea76a4215ebea2ad6e0f2a9bf"
+              "sha256": "5921464e0998319226a7e07d2bffb65e23323ff4ac072603f65b2912cb556dd6"
             },
             {
               "bytes": 9967,
@@ -5582,35 +5582,35 @@
             {
               "bytes": 4671,
               "path": "portable/sca-remediation/profile-contracts/evidence-check.json",
-              "profile_contract_digest": "369dcbfba543e1966380d2c3bef925d2118644b553118ec195c61941289eefc1",
+              "profile_contract_digest": "97f4ffb5a85e302f3415e56151637469f5ff203f122598cfefc60daeffaad37f",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "evidence-check",
-              "sha256": "4e4414289d32fa87851d46d0a162366b99d00c10731e9d1c19ae0dd5e438c1d3"
+              "sha256": "8b0c8c371da9e0af4b7344c100dd3623e756f86078bbaf60b591c2e2f285c4db"
             },
             {
               "bytes": 4670,
               "path": "portable/sca-remediation/profile-contracts/resolve-scope.json",
-              "profile_contract_digest": "1b42602c316479adf0034aa9569c153ce952c246d25bfb1e020a062848c710bc",
+              "profile_contract_digest": "fb9f83a7c86a6f099bb8a0dfa4e94761f6540cb24356a2d138151fe222ba22a5",
               "profile_gate_validator": {
                 "id": "sca-remediation.read-only-profile",
                 "version": "1"
               },
               "profile_id": "resolve-scope",
-              "sha256": "7b3df1e034ec5ab3e0434a264f05c6607ed5e998cf416487726864be29d2f52d"
+              "sha256": "892776992de09bc5c64380d8e7a20a06fc5f452a02057ee5b4337776db8f4f19"
             },
             {
               "bytes": 10659,
               "path": "portable/sca-remediation/profile-contracts/selection-plan.json",
-              "profile_contract_digest": "3e7b0e4334f1df9a59de0b634376806104fafe7d1fd90408f288be1e389a9b1a",
+              "profile_contract_digest": "dd7dedc7a084f596f0cbd837752641ad3e19ba3c32d636927a17a2380802c979",
               "profile_gate_validator": {
                 "id": "sca-remediation.structured-output",
                 "version": "1"
               },
               "profile_id": "selection-plan",
-              "sha256": "4a043a2d01e2f63e5d78cd99e39ccf377de33dc16847ed7f4fc75c2c814e6547"
+              "sha256": "27de8ca281884ba305e0eedc58dc7d90b9ca51543ea8ce435cc028f86e054205"
             },
             {
               "bytes": 34235,
@@ -5858,14 +5858,14 @@
           "sha256": "1758e7e893e914d4bfe29f93f2f82b36a5e7709f2a07b9e1de0344a2499ee018"
         },
         {
-          "bytes": 14613,
+          "bytes": 15171,
           "path": "plugins/antigravity/endor-labs-agent-kit/agents/findings-browser.md",
-          "sha256": "341746fa1e735adc48ee497f7b18051a87e864aa28f27fcfbe6f04689842dfbc"
+          "sha256": "b27dff23ecf83486c85ff2c66ec7b3bdfce9daab4388d462dc17d853933a3c3c"
         },
         {
-          "bytes": 13052,
+          "bytes": 14015,
           "path": "plugins/antigravity/endor-labs-agent-kit/agents/malware-responder.md",
-          "sha256": "ab7f4b3860e8822a58ec0866c3aae6ae1a82f666a0db67f1463d101d1ed31128"
+          "sha256": "94b67459c87713e328f50e27ef8ed6015bd94634215df3761696b666f4478304"
         },
         {
           "bytes": 17262,
@@ -5878,9 +5878,9 @@
           "sha256": "228e9e0978a1e6371b29a26e032a0920d3d193c0db339c9346f1f10837ecd1bf"
         },
         {
-          "bytes": 50329,
+          "bytes": 50046,
           "path": "plugins/antigravity/endor-labs-agent-kit/agents/sca-remediation.md",
-          "sha256": "1952c857f6efe7e75e70456310e62dc21c50e762ec7805efebc9ef0118d812b5"
+          "sha256": "d1c0acd43e311c3b27eb3d95cfc437be83e281386499b98c1347be4d232f034e"
         },
         {
           "bytes": 27981,
@@ -5908,9 +5908,9 @@
           "sha256": "0c030245d1afdf4e8e204d7b9fbe1af91ad2891f5733117011b680a55447c941"
         },
         {
-          "bytes": 3722,
+          "bytes": 4757,
           "path": "plugins/antigravity/endor-labs-agent-kit/hooks/enforce-agent-api.sh",
-          "sha256": "3ab4e7fe37254f1e88c8447084b7123ff5a6184dcffbfaeb1f840c2bee3a332a"
+          "sha256": "9452088a41185547a9a8de9a5d6bf1546821b426a3a95eedcc6f8d63ad49b502"
         },
         {
           "bytes": 15061,
@@ -5958,14 +5958,14 @@
           "sha256": "d38c6d41c4c744d879961fe5f51dbd0412a892b54ed76969b0b29a9091b371fa"
         },
         {
-          "bytes": 14363,
+          "bytes": 14921,
           "path": "plugins/antigravity/endor-labs-agent-kit/skills/findings-browser/SKILL.md",
-          "sha256": "761737192556b395f66ab8310aec1191ec8cd2db745b1fb93504ced3a2aa3569"
+          "sha256": "b97b81c6e97a5c996f925aa080b7719e45c3bd107d42ecba795b7a2aba566c15"
         },
         {
-          "bytes": 12801,
+          "bytes": 13764,
           "path": "plugins/antigravity/endor-labs-agent-kit/skills/malware-responder/SKILL.md",
-          "sha256": "54353ed2dbe24cc1be402acfcee3c69dc3dc21164633ba07c24be38b71230725"
+          "sha256": "38796bbb5e0e1493f38dcb3e2fd25eb65d5260a5b025990a159e262d9bab8a9e"
         },
         {
           "bytes": 17004,
@@ -5978,9 +5978,9 @@
           "sha256": "c86aa9071e586a458df696d503c2ae01936e0d1b6d638cbf0a969eb9e61ffede"
         },
         {
-          "bytes": 49976,
+          "bytes": 49693,
           "path": "plugins/antigravity/endor-labs-agent-kit/skills/sca-remediation/SKILL.md",
-          "sha256": "395ad99d1c49dc33738cc60dfa5d9a2b2e0d9ee59632b4c152d48d59fe66a3c5"
+          "sha256": "0e55b1c348486817ccbf392b15940f3715236407e7d49107b2b429ab806e6594"
         },
         {
           "bytes": 27732,
@@ -6051,14 +6051,14 @@
           "sha256": "465c430f0e2170a3bb45b77fc705e7d68457d7b1a008cdeee946d91f036ccf5a"
         },
         {
-          "bytes": 13770,
+          "bytes": 14328,
           "path": "plugins/claude/ai-plugins/agents/findings-browser.md",
-          "sha256": "8e871b2be733b4992b39d2ffab2cdc5c3e45e489b7237ae3db29168c779050a8"
+          "sha256": "3e3e3cc4393f61206c0a263a584bf589bea40959696140e3f8f2332c5735c479"
         },
         {
-          "bytes": 12209,
+          "bytes": 13172,
           "path": "plugins/claude/ai-plugins/agents/malware-responder.md",
-          "sha256": "75f1b817d4fbc1ce0954edfee56df16fb70e399f9668e5d008ecd0826ac7d5d6"
+          "sha256": "d56073ea457da263b455b1ec77ccea4745d7ffee62a978ded14e1c916a1ec051"
         },
         {
           "bytes": 16419,
@@ -6071,9 +6071,9 @@
           "sha256": "0b929b94c2214d2f1ea8a6f358be518febaba4c172673769cb29038ae4317c8f"
         },
         {
-          "bytes": 49268,
+          "bytes": 48985,
           "path": "plugins/claude/ai-plugins/agents/sca-remediation.md",
-          "sha256": "94ac2ee8fe0cb3f169f916c669905f837544784547d67bd35760e820a6022c77"
+          "sha256": "c5eaac7cef2c0908ba28e273adf70806a6daff480d1295acffb413b9530f389f"
         },
         {
           "bytes": 27138,
@@ -6185,14 +6185,14 @@
           "sha256": "465c430f0e2170a3bb45b77fc705e7d68457d7b1a008cdeee946d91f036ccf5a"
         },
         {
-          "bytes": 13770,
+          "bytes": 14328,
           "path": "plugins/claude/endor-labs-agent-kit/agents/findings-browser.md",
-          "sha256": "8e871b2be733b4992b39d2ffab2cdc5c3e45e489b7237ae3db29168c779050a8"
+          "sha256": "3e3e3cc4393f61206c0a263a584bf589bea40959696140e3f8f2332c5735c479"
         },
         {
-          "bytes": 12209,
+          "bytes": 13172,
           "path": "plugins/claude/endor-labs-agent-kit/agents/malware-responder.md",
-          "sha256": "75f1b817d4fbc1ce0954edfee56df16fb70e399f9668e5d008ecd0826ac7d5d6"
+          "sha256": "d56073ea457da263b455b1ec77ccea4745d7ffee62a978ded14e1c916a1ec051"
         },
         {
           "bytes": 16419,
@@ -6205,9 +6205,9 @@
           "sha256": "0b929b94c2214d2f1ea8a6f358be518febaba4c172673769cb29038ae4317c8f"
         },
         {
-          "bytes": 49268,
+          "bytes": 48985,
           "path": "plugins/claude/endor-labs-agent-kit/agents/sca-remediation.md",
-          "sha256": "94ac2ee8fe0cb3f169f916c669905f837544784547d67bd35760e820a6022c77"
+          "sha256": "c5eaac7cef2c0908ba28e273adf70806a6daff480d1295acffb413b9530f389f"
         },
         {
           "bytes": 27138,
@@ -6235,9 +6235,9 @@
           "sha256": "0c030245d1afdf4e8e204d7b9fbe1af91ad2891f5733117011b680a55447c941"
         },
         {
-          "bytes": 3722,
+          "bytes": 4757,
           "path": "plugins/claude/endor-labs-agent-kit/hooks/enforce-agent-api.sh",
-          "sha256": "3ab4e7fe37254f1e88c8447084b7123ff5a6184dcffbfaeb1f840c2bee3a332a"
+          "sha256": "9452088a41185547a9a8de9a5d6bf1546821b426a3a95eedcc6f8d63ad49b502"
         },
         {
           "bytes": 1073,
@@ -6316,12 +6316,12 @@
         {
           "bytes": 1295,
           "path": "plugins/codex-directory/endor-labs-agent-kit/.codex-plugin/plugin.json",
-          "sha256": "f338652e89d8e49ea2b92eab15b649a143b61a1c8379513c01352eae97f6b5e9"
+          "sha256": "46013ce35fb755ad8198fcacb65264e15fbd85519c9734d1e4fb4fe8855bfab6"
         },
         {
-          "bytes": 188527,
+          "bytes": 10110,
           "path": "plugins/codex-directory/endor-labs-agent-kit/assets/composer-icon.png",
-          "sha256": "3bc1cce0aa35f12d7de7c537726305f6125692ef5f147774abd683a7b269917e"
+          "sha256": "bf4966324f33f257a2ece0adce4a15cb67bb251b45af46baea6c2768abde32a2"
         },
         {
           "bytes": 188527,
@@ -6389,9 +6389,9 @@
           "sha256": "c226ee88f123538a43cd729a6e9bf1ddb9059d541f123e4f1efe3d0958b5d26f"
         },
         {
-          "bytes": 14100,
+          "bytes": 14658,
           "path": "plugins/codex-directory/endor-labs-agent-kit/skills/findings-browser/SKILL.md",
-          "sha256": "a98c9ad02f29490950a6092b92fdb319a24f061fd660edacaee6fa34fa2870de"
+          "sha256": "5228c6d5002ee975ae0296b4def55d898da35a16a84239c29a3b4ffe27508311"
         },
         {
           "bytes": 319,
@@ -6404,9 +6404,9 @@
           "sha256": "c226ee88f123538a43cd729a6e9bf1ddb9059d541f123e4f1efe3d0958b5d26f"
         },
         {
-          "bytes": 12538,
+          "bytes": 13501,
           "path": "plugins/codex-directory/endor-labs-agent-kit/skills/malware-responder/SKILL.md",
-          "sha256": "e27694419cc1eb597df6e6447c303a99a5bed5521b602f984b27b04381f5e0ec"
+          "sha256": "69bb511acaa903c417687d4c1e767805c146cfe37dc5f66083cbe50e3f55d2c4"
         },
         {
           "bytes": 316,
@@ -6449,9 +6449,9 @@
           "sha256": "c226ee88f123538a43cd729a6e9bf1ddb9059d541f123e4f1efe3d0958b5d26f"
         },
         {
-          "bytes": 49469,
+          "bytes": 49186,
           "path": "plugins/codex-directory/endor-labs-agent-kit/skills/sca-remediation/SKILL.md",
-          "sha256": "bdc9001d844a6bc6f5a036f840f2ac618dc23215f44e899f503337312ac63274"
+          "sha256": "55558bb667bcc994dcec24f7b74baa79feb9c053a07bf20ea08a0a3f9ab668ac"
         },
         {
           "bytes": 316,
@@ -6519,7 +6519,7 @@
         {
           "bytes": 1363,
           "path": "plugins/codex/endor-labs-agent-kit/.codex-plugin/plugin.json",
-          "sha256": "963ab543b1429c0fff0f53dbbd9fca6ba41e143307ffff4da1aa242e7be9d842"
+          "sha256": "24809daf13b6bc018a58c277601b03b069664e9694e186efbb68ee0a2395b0a6"
         },
         {
           "bytes": 151,
@@ -6557,14 +6557,14 @@
           "sha256": "8a68f6a2c2894926c07c84c340e32ac39c5c309ec08218a6ead9f4c91bdb4064"
         },
         {
-          "bytes": 14739,
+          "bytes": 15305,
           "path": "plugins/codex/endor-labs-agent-kit/agents/endor-findings-browser-agent.toml",
-          "sha256": "ad806713836e78769945a11af6195a040835895b92623f38ea78156f6ced956a"
+          "sha256": "47e8907aee41ef38e17879453b5433b6f5ef089be3a0c11054de5eb998047843"
         },
         {
-          "bytes": 13148,
+          "bytes": 14129,
           "path": "plugins/codex/endor-labs-agent-kit/agents/endor-malware-responder-agent.toml",
-          "sha256": "c36c3ee9b5a0d3fe6588d72bfcbb8d29114982d75a9423f62b20be7715a06206"
+          "sha256": "62c738527e4a6b37fc61ce7b87e88844daf0db55a11fd992cb5c31f823aa677d"
         },
         {
           "bytes": 17445,
@@ -6577,9 +6577,9 @@
           "sha256": "d58ad4f520241e04bc3a70ce8d20d344e7d0021f77c930999fa4083d41ebca79"
         },
         {
-          "bytes": 50423,
+          "bytes": 50140,
           "path": "plugins/codex/endor-labs-agent-kit/agents/endor-sca-remediation-agent.toml",
-          "sha256": "0b1319f79a7b23424c8654714dcec430a4b61b0da18ede9949d28f4e62f6e13f"
+          "sha256": "194cc58da1d9892dd14908c175041183adc8a6a0173a60528e615dcce943b1b8"
         },
         {
           "bytes": 28602,
@@ -6617,14 +6617,14 @@
           "sha256": "cda0f3b1c0a214b9549c98b5d953b1f29b5779b3c61436f01b87eaec91d6a361"
         },
         {
-          "bytes": 13784,
+          "bytes": 14342,
           "path": "plugins/codex/endor-labs-agent-kit/bundled-skills/findings-browser/SKILL.md",
-          "sha256": "abe7d76849889ae05aa2de0bded267495b364b0e436e733f09baea593b424db0"
+          "sha256": "92a88e5835de1fc775e3b6c576d02e148af9f5a005a959df916897863b1b5f0d"
         },
         {
-          "bytes": 12222,
+          "bytes": 13185,
           "path": "plugins/codex/endor-labs-agent-kit/bundled-skills/malware-responder/SKILL.md",
-          "sha256": "faaa8ab9499d2e6548a15eba203207c10dbd6daa32c26129a22691e0953a65f0"
+          "sha256": "3a77e52f56e93586930a81c5f1aca0fc8e20b204943a5384aa179ffb20913df0"
         },
         {
           "bytes": 16425,
@@ -6637,9 +6637,9 @@
           "sha256": "6fd3116e157761d308cc35da67a497997ec50985838832c9e3f22dd9da5be702"
         },
         {
-          "bytes": 49153,
+          "bytes": 48870,
           "path": "plugins/codex/endor-labs-agent-kit/bundled-skills/sca-remediation/SKILL.md",
-          "sha256": "45b26e46754d3284d59f6b6fa5f093a13673342478c087cee0a3f844a6d02088"
+          "sha256": "d9befa5f6be2ef2964687b987e694891d7567785f84e64ecfbfe2120f2b881b7"
         },
         {
           "bytes": 27153,
@@ -6662,9 +6662,9 @@
           "sha256": "0c030245d1afdf4e8e204d7b9fbe1af91ad2891f5733117011b680a55447c941"
         },
         {
-          "bytes": 3722,
+          "bytes": 4757,
           "path": "plugins/codex/endor-labs-agent-kit/hooks/enforce-agent-api.sh",
-          "sha256": "3ab4e7fe37254f1e88c8447084b7123ff5a6184dcffbfaeb1f840c2bee3a332a"
+          "sha256": "9452088a41185547a9a8de9a5d6bf1546821b426a3a95eedcc6f8d63ad49b502"
         },
         {
           "bytes": 1099,
@@ -6736,9 +6736,9 @@
           "sha256": "40a984c6f1595b1824d09f22fc0eb5db839d068a04fcefc6248ba232e1eb96c0"
         },
         {
-          "bytes": 690,
+          "bytes": 649,
           "path": ".cursor-plugin/plugin.json",
-          "sha256": "bbbadfe7f4caa43188321791fc7d3f6a73cc0ea06e88c8c7186fad2671f3040c"
+          "sha256": "99e395542c7a22f276ec96946f5bde6209396227b0e9a6e5eca9fd8355369750"
         },
         {
           "bytes": 9713,
@@ -6766,14 +6766,14 @@
           "sha256": "ea3942d2ffff0b66458f070077fe6cb2069318cffe0ffd9b712f2f79bf1846bd"
         },
         {
-          "bytes": 14565,
+          "bytes": 15123,
           "path": "agents/endor-findings-browser-agent.md",
-          "sha256": "ca3fe50806fc49088bc4cde34625844a81912a43009ca8c4df64738db8c8dd3a"
+          "sha256": "fe32a5b5cfa8dbba1dbd15180bb04d374dc7ae828fe8b18e17efe0288cc4fe81"
         },
         {
-          "bytes": 13006,
+          "bytes": 13969,
           "path": "agents/endor-malware-responder-agent.md",
-          "sha256": "c8beafac9affb04a6c63ddf6087f2107b730459408feda62e127430673f26796"
+          "sha256": "5cf25ec3b270317ba0f7521244e352e79cd98c80d5ac15506dbf7853ca208324"
         },
         {
           "bytes": 17230,
@@ -6786,9 +6786,9 @@
           "sha256": "478f5668c3b6667b281c6083a396595706907fe84ef0b0d71be018fe08a0c518"
         },
         {
-          "bytes": 50155,
+          "bytes": 49872,
           "path": "agents/endor-sca-remediation-agent.md",
-          "sha256": "95f6044034d6036c759272a600f6c0ec08ebc6fba81c192f1ed9ac71c14b1b33"
+          "sha256": "0e643fb621fa7b1f028979dc91b7dff0abcf5ae5cbedf1d2a7664957882d2ae6"
         },
         {
           "bytes": 27931,
@@ -6816,9 +6816,9 @@
           "sha256": "0c030245d1afdf4e8e204d7b9fbe1af91ad2891f5733117011b680a55447c941"
         },
         {
-          "bytes": 3722,
+          "bytes": 4757,
           "path": "hooks/enforce-agent-api.sh",
-          "sha256": "3ab4e7fe37254f1e88c8447084b7123ff5a6184dcffbfaeb1f840c2bee3a332a"
+          "sha256": "9452088a41185547a9a8de9a5d6bf1546821b426a3a95eedcc6f8d63ad49b502"
         },
         {
           "bytes": 686,
@@ -6886,9 +6886,9 @@
           "sha256": "9715bc874747442e3c6422b34d0bd6706b6c8bbf9d9457480faf59a88d45dea6"
         },
         {
-          "bytes": 14251,
+          "bytes": 14809,
           "path": "skills/findings-browser/SKILL.md",
-          "sha256": "c2cd4b07c7fb2326e70bf111d7005f73d18fcfc6e1c430c8aa69a95a951ea0a0"
+          "sha256": "e500b268fca971e131024928ca9ba4949f97bd31d04e260e09e11d0fb3f7296f"
         },
         {
           "bytes": 8272,
@@ -6896,9 +6896,9 @@
           "sha256": "5ce4796c90ad90add049aea1a49b60e9919181bb9108d5044564524764978717"
         },
         {
-          "bytes": 12690,
+          "bytes": 13653,
           "path": "skills/malware-responder/SKILL.md",
-          "sha256": "eba6e2dcbbdb5b1f10a38f092c61b5c1c6752a31fed5f363c7df5b885e4474c9"
+          "sha256": "95b8ff22bc8e761540ef8a543430158870e2a28e7b72c5197a8685bb1f3f86ff"
         },
         {
           "bytes": 9751,
@@ -6926,9 +6926,9 @@
           "sha256": "c6b265cbed10f00fecfd065aa14b23e81425730ca03684565db0ebf7992e7de2"
         },
         {
-          "bytes": 49842,
+          "bytes": 49559,
           "path": "skills/sca-remediation/SKILL.md",
-          "sha256": "b05d70d1e341c3ac01ff18ecaa3b24c203d3924b99bd7a5ff38aaddb7d48544b"
+          "sha256": "5651a2b4d146a3cb0365b00de166f678ad949f24cc7df729a6cf3f1649153957"
         },
         {
           "bytes": 6758,
@@ -7045,9 +7045,9 @@
           "sha256": "5ce4796c90ad90add049aea1a49b60e9919181bb9108d5044564524764978717"
         },
         {
-          "bytes": 13964,
+          "bytes": 14522,
           "path": "cursor-sdk/agents/endor-findings-browser-agent.md",
-          "sha256": "08cc9caa32da9378fcf1c5e129f39dae3157a0560f9d798d318efeb995dfafb6"
+          "sha256": "9a578978d8d25a274584998349b88717afa42c6e2d600b061c4e1421acdff1d2"
         },
         {
           "bytes": 9751,
@@ -7055,9 +7055,9 @@
           "sha256": "2a576832f28f57dde1e475efd79f7001cfb8ce6bbeabc8dab779af89f908a58d"
         },
         {
-          "bytes": 12197,
+          "bytes": 13160,
           "path": "cursor-sdk/agents/endor-malware-responder-agent.md",
-          "sha256": "301514d28b2315ec7ddc2a76334c3f72cd0ef495c1951a81f183011ebeac6a9d"
+          "sha256": "e9e1e47485ba57f4dcb4720ac457bc538e495a4dd6ae606a29299fe649093eac"
         },
         {
           "bytes": 9936,
@@ -7090,9 +7090,9 @@
           "sha256": "f2553d3a62cb44ddae0605fe0b7fbcca69424daea158b7dc9f88b4295e9556ae"
         },
         {
-          "bytes": 49462,
+          "bytes": 49179,
           "path": "cursor-sdk/agents/endor-sca-remediation-agent.md",
-          "sha256": "187cf19c75cc01a56b2e838a31417bfe408d636174b0cb0898c9b1046c81984b"
+          "sha256": "a673cbb1965d88be3b6d5ac9fd5b63bba78b6bd8a8e70e54f4cae1203cbe3112"
         },
         {
           "bytes": 9829,
@@ -7178,14 +7178,14 @@
           "sha256": "0c7724b13c71e536df7d9bc29a4b7aff3edde8ee8b42053cb139b8ea3752c504"
         },
         {
-          "bytes": 14277,
+          "bytes": 14835,
           "path": "plugins/gemini/endor-labs-agent-kit/agents/findings-browser.md",
-          "sha256": "d938ba0e176cd030eec4cd15d9883da3c94a17206201e8e7a8540e63b2db32ee"
+          "sha256": "7a2fdb647165bbcbb7ad154b4a4daaff90fc6eba7cda20847263e13022ada0d0"
         },
         {
-          "bytes": 12716,
+          "bytes": 13679,
           "path": "plugins/gemini/endor-labs-agent-kit/agents/malware-responder.md",
-          "sha256": "e434b49a56913edebd97a3a3f4d3c1973017164cd275ed3570057644b6700994"
+          "sha256": "a5b1c7c0bb7ae005f4b41742fecc6dc5687b149ac76e613086fd7d6e22bc3b05"
         },
         {
           "bytes": 16926,
@@ -7198,9 +7198,9 @@
           "sha256": "72b57bb1bbe3b796b3524deb1850fdda94eec5fd523466e08fa52f90f6f938b4"
         },
         {
-          "bytes": 49924,
+          "bytes": 49641,
           "path": "plugins/gemini/endor-labs-agent-kit/agents/sca-remediation.md",
-          "sha256": "6c42c6621f8b50dd9c7e7c61db25f2e1df73fbfcb99101c1b049bb88319e2935"
+          "sha256": "40a3e14245855b9a92e575f979235d0c853d99786ab7242e2144fb8eef58cb50"
         },
         {
           "bytes": 27645,
@@ -7233,9 +7233,9 @@
           "sha256": "0c030245d1afdf4e8e204d7b9fbe1af91ad2891f5733117011b680a55447c941"
         },
         {
-          "bytes": 3722,
+          "bytes": 4757,
           "path": "plugins/gemini/endor-labs-agent-kit/hooks/enforce-agent-api.sh",
-          "sha256": "3ab4e7fe37254f1e88c8447084b7123ff5a6184dcffbfaeb1f840c2bee3a332a"
+          "sha256": "9452088a41185547a9a8de9a5d6bf1546821b426a3a95eedcc6f8d63ad49b502"
         },
         {
           "bytes": 1195,
@@ -7278,14 +7278,14 @@
           "sha256": "3becdb237caedfcf5fbaf5adb4ac65ae20daeb53c0c9a23c25b63bfdf0913a70"
         },
         {
-          "bytes": 14017,
+          "bytes": 14575,
           "path": "plugins/gemini/endor-labs-agent-kit/skills/findings-browser/SKILL.md",
-          "sha256": "3ef942a3af1a20d25bedc3a9b816fa69c14ccfd939ecf8baae378d856d70ac25"
+          "sha256": "44992f78a5c0e192c529f34c5c2121c55682aab830a43fc2c6331fbeeb34982e"
         },
         {
-          "bytes": 12455,
+          "bytes": 13418,
           "path": "plugins/gemini/endor-labs-agent-kit/skills/malware-responder/SKILL.md",
-          "sha256": "a0cf6a7b7e297d68795693da21f79b64738a92b0cb70aab2eaf35771a28e15c8"
+          "sha256": "a38936b3692304da37f0eed1765717a4c2fcee719e375141ab1cc56d6e8e078c"
         },
         {
           "bytes": 16658,
@@ -7298,9 +7298,9 @@
           "sha256": "7db482c89fdf973a2c73115b9a933ed53cff1fb3f6b74358329b96d7f46a09e9"
         },
         {
-          "bytes": 49620,
+          "bytes": 49337,
           "path": "plugins/gemini/endor-labs-agent-kit/skills/sca-remediation/SKILL.md",
-          "sha256": "a4347bbe96cd8703916e29dbd996fc669bf945c6a588f3b09da6bbaeaf9d9aa8"
+          "sha256": "110606718659548a229334dd9356bc3282d4a5a68e9ade3702eab18a9dcb002a"
         },
         {
           "bytes": 27386,

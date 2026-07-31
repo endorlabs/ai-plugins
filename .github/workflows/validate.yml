@@ -17,20 +17,50 @@ jobs:
       - name: Install validation dependencies
         run: python3 -m pip install pyyaml
 
-      - name: Validate root skill frontmatter
+      - name: Check repository hygiene
+        run: python3 scripts/check_repository_hygiene.py
+
+      - name: Validate Agent Kit provenance
+        run: python3 scripts/validate_mirror_provenance.py
+
+      - name: Validate marketplace host boundaries
+        run: python3 scripts/validate_marketplace_host_boundaries.py
+
+      - name: Validate Codex directory package
+        run: python3 scripts/build_codex_directory_submission.py validate --root .
+
+      - name: Validate skill frontmatter
         run: |
           for skill in skills/*; do
+            python3 scripts/quick_validate.py "$skill"
+          done
+          for skill in plugins/cursor/endor-labs-agent-kit/skills/*; do
             python3 scripts/quick_validate.py "$skill"
           done
 
       - name: Validate JSON metadata
         run: |
           python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
+          python3 -m json.tool .claude-plugin/plugin.json >/dev/null
           python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
           python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
-          python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+          python3 -m json.tool plugins/cursor/endor-labs-agent-kit/.cursor-plugin/plugin.json >/dev/null
           python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
-          python3 -m json.tool .mcp.json >/dev/null
+          python3 -m json.tool hooks/hooks.json >/dev/null
+          python3 -m json.tool plugins/cursor/endor-labs-agent-kit/mcp.json >/dev/null
+          python3 -m json.tool plugins/cursor/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+          python3 -m json.tool plugins/claude/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+          python3 -m json.tool plugins/codex/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+          python3 -m json.tool plugins/gemini/endor-labs-agent-kit/hooks/hooks.json >/dev/null
+          python3 -m json.tool plugins/antigravity/endor-labs-agent-kit/hooks.json >/dev/null
+
+      - name: Validate hook scripts
+        shell: bash
+        run: |
+          shopt -s nullglob
+          for hook_script in hooks/*.sh plugins/*/*/hooks/*.sh; do
+            bash -n "$hook_script"
+          done
 
       - name: Compile Cursor SDK launcher
         run: python3 -m py_compile cursor-sdk/run_cursor_agent.py
@@ -40,6 +70,9 @@ jobs:
           test ! -e gemini-extension.json
           test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
           test ! -e plugins/gemini/endor-labs-agent-kit.zip
+          test ! -e .mcp.json
+          test ! -e .cursor-plugin/plugin.json
+          test ! -e cursor/endor-labs-agent-kit
 
       - name: Check README package version matches Claude marketplace
         run: |

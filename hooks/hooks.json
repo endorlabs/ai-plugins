@@ -1,24 +1,49 @@
 {
   "hooks": {
-    "afterFileEdit": [
+    "PostToolUse": [
       {
-        "command": "bash ./hooks/check-manifest-edit.sh afterFileEdit",
-        "timeout": 10,
-        "type": "command"
+        "hooks": [
+          {
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/check-dep-install.sh\"",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [
+          {
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/check-manifest-edit.sh\"",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit|MultiEdit|Write"
       }
     ],
-    "beforeShellExecution": [
+    "PreToolUse": [
       {
-        "command": "bash ./hooks/check-dep-install.sh beforeShellExecution",
-        "timeout": 10,
-        "type": "command"
+        "hooks": [
+          {
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/enforce-agent-api.sh\"",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
       }
     ],
-    "beforeSubmitPrompt": [
+    "UserPromptSubmit": [
       {
-        "command": "bash ./hooks/suggest-endor-tools.sh beforeSubmitPrompt",
-        "timeout": 10,
-        "type": "command"
+        "hooks": [
+          {
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/suggest-endor-tools.sh\"",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": ""
       }
     ]
   }

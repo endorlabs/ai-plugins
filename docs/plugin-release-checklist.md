@@ -17,10 +17,10 @@ Distribution roots:
   `plugins/codex/endor-labs-agent-kit/`
 - Gemini CLI: `plugins/gemini/endor-labs-agent-kit/`
 - Antigravity CLI: `plugins/antigravity/endor-labs-agent-kit/`
-- Cursor: `.cursor-plugin/`, generated root workflow `agents/`, generated root
-  workflow `skills/`, generated root advisory `hooks/`, and `assets/logo.png`
+- Cursor: `.cursor-plugin/marketplace.json` and the self-contained
+  `plugins/cursor/endor-labs-agent-kit/` package
 - Cursor SDK: `cursor-sdk/`
-- Root MCP/Gemini support context: `.mcp.json` and non-installable `GEMINI.md`
+- Root support context: non-installable `GEMINI.md`; `.mcp.json` must be absent
 
 Package versions are not bumped automatically by Agent Kit maintainer merges.
 The source `pyproject.toml` version is the release version for generated package
@@ -54,28 +54,31 @@ python3 "$AGENT_KIT_REPO/scripts/sync_ai_plugins_distribution.py" \
   --target .
 ```
 
-Do not sync root `GEMINI.md` as Cursor package output, and do not create a root
-`gemini-extension.json`. Root `.mcp.json` and `GEMINI.md` are support context;
-Gemini CLI uses `plugins/gemini/endor-labs-agent-kit/` as the installable
-extension.
+Do not sync root `GEMINI.md` as Cursor package output, and do not create root
+`.mcp.json` or `gemini-extension.json` files. Gemini CLI uses
+`plugins/gemini/endor-labs-agent-kit/` as the installable extension; Cursor uses
+its self-contained nested package.
 
 ## Local Validation
 
 Run these from the `ai-plugins` repo root:
 
 ```bash
-for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
+for skill in skills/* plugins/cursor/endor-labs-agent-kit/skills/*; do
+  python3 scripts/quick_validate.py "$skill"
+done
 claude plugin validate plugins/claude/endor-labs-agent-kit
 claude plugin validate plugins/claude/ai-plugins
 CODEX_PLUGIN_VALIDATOR="${CODEX_PLUGIN_VALIDATOR:-/path/to/plugin-creator/scripts/validate_plugin.py}"
 python3 "$CODEX_PLUGIN_VALIDATOR" plugins/codex/endor-labs-agent-kit
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
-antigravity plugin validate plugins/antigravity/endor-labs-agent-kit
+agy plugin validate plugins/antigravity/endor-labs-agent-kit
 python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
 python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
-python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+python3 -m json.tool plugins/cursor/endor-labs-agent-kit/.cursor-plugin/plugin.json >/dev/null
+python3 scripts/validate_marketplace_host_boundaries.py --root .
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
 python3 -m json.tool hooks/hooks.json >/dev/null
 python3 -m json.tool plugins/claude/endor-labs-agent-kit/hooks/hooks.json >/dev/null
@@ -89,7 +92,7 @@ import py_compile
 
 py_compile.compile("cursor-sdk/run_cursor_agent.py", cfile="/tmp/run_cursor_agent.pyc", doraise=True)
 PY
-python3 -m json.tool .mcp.json >/dev/null
+test ! -e .mcp.json
 test -f GEMINI.md
 test ! -e gemini-extension.json
 python3 - <<'PY'
@@ -97,17 +100,18 @@ import json
 from pathlib import Path
 
 definitions = json.loads(Path("cursor-sdk/agent_definitions.json").read_text(encoding="utf-8"))
+cursor_root = Path("plugins/cursor/endor-labs-agent-kit")
 for agent in definitions["agents"]:
     agent_name = agent["agent_name"]
     skill_id = agent["id"]
-    assert Path("agents", f"{agent_name}.md").is_file(), agent_name
-    assert Path("skills", skill_id, "SKILL.md").is_file(), skill_id
+    assert (cursor_root / "agents" / f"{agent_name}.md").is_file(), agent_name
+    assert (cursor_root / "skills" / skill_id / "SKILL.md").is_file(), skill_id
     assert Path("cursor-sdk", agent["prompt_file"]).is_file(), agent["prompt_file"]
 PY
-test -f skills/ai-sast-triage/architecture.svg
-test -f skills/findings-browser/architecture.svg
-test -f skills/malware-response/architecture.svg
-test -f skills/sca-remediation/actions.yaml
+test -f plugins/cursor/endor-labs-agent-kit/skills/ai-sast-remediation/architecture.svg
+test -f plugins/cursor/endor-labs-agent-kit/skills/findings-browser/architecture.svg
+test -f plugins/cursor/endor-labs-agent-kit/skills/malware-responder/architecture.svg
+test -f plugins/cursor/endor-labs-agent-kit/skills/sca-remediation/actions.yaml
 test -f CHANGELOG.md
 git diff --check
 ```
@@ -115,23 +119,17 @@ git diff --check
 Compare generated package drift:
 
 ```bash
-diff -qr /path/to/endor-labs-agent-kit/plugins ./plugins
-diff -qr /path/to/endor-labs-agent-kit/.cursor-plugin ./.cursor-plugin
-diff -qr /path/to/endor-labs-agent-kit/agents ./agents
-diff -qr /path/to/endor-labs-agent-kit/cursor-sdk ./cursor-sdk
-diff -qr /path/to/endor-labs-agent-kit/hooks ./hooks
-for skill in /path/to/endor-labs-agent-kit/skills/*; do
-  name=${skill##*/}
-  [ "$name" = "create-endor-labs-agent" ] && continue
-  diff -qr "$skill" "./skills/$name"
+for host in antigravity claude codex codex-directory gemini; do
+  diff -qr "/path/to/endor-labs-agent-kit/plugins/$host" "./plugins/$host"
 done
+diff -qr /path/to/endor-labs-agent-kit/cursor-sdk ./cursor-sdk
 diff -q /path/to/endor-labs-agent-kit/assets/logo.png assets/logo.png
 ```
 
-Normal provider package sync should be byte-for-byte identical, and Cursor
-metadata/root workflow agents, support skills, and advisory hooks should match
-the source-generated Cursor package. The root `CHANGELOG.md` should also match
-the source repo so release notes travel with generated distribution PRs.
+Normal source-generated provider packages should be byte-for-byte identical.
+The host-boundary validator checks the intentional Claude root and nested Cursor
+overlays. The root `CHANGELOG.md` should also match the source repo so release
+notes travel with generated distribution PRs.
 
 ## Safety Gates
 
@@ -214,39 +212,41 @@ validation below as the forward-path CLI check for affected consumer users.
 Antigravity CLI:
 
 ```bash
-antigravity plugin install /absolute/path/to/ai-plugins/plugins/antigravity/endor-labs-agent-kit
-antigravity plugin list
-antigravity plugin uninstall endor-labs-agent-kit
+agy plugin install /absolute/path/to/ai-plugins/plugins/antigravity/endor-labs-agent-kit
+agy plugin list
+agy plugin uninstall endor-labs-agent-kit
 ```
 
-Cursor package and root workflow skills:
+Cursor package:
 
 ```bash
-for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
+for skill in plugins/cursor/endor-labs-agent-kit/skills/*; do python3 scripts/quick_validate.py "$skill"; done
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
-python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+python3 -m json.tool plugins/cursor/endor-labs-agent-kit/.cursor-plugin/plugin.json >/dev/null
+python3 scripts/validate_marketplace_host_boundaries.py --root .
 python3 - <<'PY'
 import json
 from pathlib import Path
 
 definitions = json.loads(Path("cursor-sdk/agent_definitions.json").read_text(encoding="utf-8"))
+cursor_root = Path("plugins/cursor/endor-labs-agent-kit")
 for agent in definitions["agents"]:
     agent_name = agent["agent_name"]
     skill_id = agent["id"]
-    assert Path("agents", f"{agent_name}.md").is_file(), agent_name
-    assert Path("skills", skill_id, "SKILL.md").is_file(), skill_id
+    assert (cursor_root / "agents" / f"{agent_name}.md").is_file(), agent_name
+    assert (cursor_root / "skills" / skill_id / "SKILL.md").is_file(), skill_id
 PY
-test -f skills/ai-sast-triage/architecture.svg
-test -f skills/findings-browser/architecture.svg
-test -f skills/malware-response/architecture.svg
-test -f skills/sca-remediation/actions.yaml
-test -f hooks/hooks.json
-test -f assets/logo.png
+test -f plugins/cursor/endor-labs-agent-kit/skills/ai-sast-remediation/architecture.svg
+test -f plugins/cursor/endor-labs-agent-kit/skills/findings-browser/architecture.svg
+test -f plugins/cursor/endor-labs-agent-kit/skills/malware-responder/architecture.svg
+test -f plugins/cursor/endor-labs-agent-kit/skills/sca-remediation/actions.yaml
+test -f plugins/cursor/endor-labs-agent-kit/hooks/hooks.json
+test -f plugins/cursor/endor-labs-agent-kit/assets/logo.png
 ```
 
-Keep Cursor validation separate from Gemini validation. Cursor uses
-`.cursor-plugin/`, `agents/`, `skills/`, `hooks/`, and `assets/logo.png`;
-Gemini CLI uses `plugins/gemini/endor-labs-agent-kit/`.
+Keep Cursor validation separate from Gemini validation. Cursor uses the root
+marketplace index plus `plugins/cursor/endor-labs-agent-kit/`; Gemini CLI uses
+`plugins/gemini/endor-labs-agent-kit/`.
 
 The public Cursor Marketplace listing
 ([cursor.com/marketplace/endorlabs](https://cursor.com/marketplace/endorlabs))
@@ -267,8 +267,8 @@ py_compile.compile("cursor-sdk/run_cursor_agent.py", cfile="/tmp/run_cursor_agen
 PY
 test -f cursor-sdk/requirements.txt
 test -f cursor-sdk/agents/endor-agent-kit-setup-agent.md
-test -f cursor-sdk/agents/endor-malware-response-agent.md
-test -f cursor-sdk/agents/endor-probe-droid-agent.md
+test -f cursor-sdk/agents/endor-malware-responder-agent.md
+test -f cursor-sdk/agents/endor-configuration-automation-agent.md
 ```
 
 Do not run Cursor SDK local or cloud smoke tests without explicit approval for

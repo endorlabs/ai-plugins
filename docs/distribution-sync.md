@@ -9,15 +9,14 @@ workflow. Use these commands for local validation or manual fallback.
 | Repo | Owns |
 | --- | --- |
 | [🐙 The Endor Labs Agent Kit](https://github.com/endorlabs/endor-labs-agent-kit/tree/main) | Source recipes, compiler and publication code, guardrails, tests, provenance, generated catalog, and source documentation. |
-| [🐙 Endor Labs AI Plugins](https://github.com/endorlabs/ai-plugins/tree/main) | Public host metadata, Cursor package metadata, root Cursor agents, support skills, advisory hooks, Cursor SDK automation package, release-facing README, and checked-in distribution artifacts. |
+| [🐙 Endor Labs AI Plugins](https://github.com/endorlabs/ai-plugins/tree/main) | Public host metadata, the self-contained Cursor package, Claude compatibility overlays, Cursor SDK automation, release-facing documentation, and checked-in distribution artifacts. |
 
-Normal package sync should make `ai-plugins/plugins/` byte-for-byte identical to
-`endor-labs-agent-kit/plugins/`. Cursor package sync should make
-`ai-plugins/.cursor-plugin/`, generated root workflow `agents/`, generated root
-workflow `skills/`, generated root advisory `hooks/`, and `assets/logo.png`
-match the source repo. Cursor SDK sync should make `ai-plugins/cursor-sdk/`
-match the source repo. The root `CHANGELOG.md` is also synced so release notes
-travel with generated distribution PRs.
+Normal package sync makes the source-generated provider packages byte-for-byte
+identical, then builds two intentional mirror overlays: the repository root is
+the Claude compatibility package, while `.cursor-plugin/marketplace.json`
+points to the self-contained `plugins/cursor/endor-labs-agent-kit/` package.
+Cursor SDK remains byte-for-byte identical to the source repo. The root
+`CHANGELOG.md` is also synced so release notes travel with generated PRs.
 
 ## Automated Publication
 
@@ -91,11 +90,14 @@ Run from your local checkout of
 ```bash
 AGENT_KIT_REPO="/path/to/endor-labs-agent-kit"
 
-for skill in skills/*; do python3 scripts/quick_validate.py "$skill"; done
+for skill in skills/* plugins/cursor/endor-labs-agent-kit/skills/*; do
+  python3 scripts/quick_validate.py "$skill"
+done
 python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
 python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
-python3 -m json.tool .cursor-plugin/plugin.json >/dev/null
+python3 -m json.tool plugins/cursor/endor-labs-agent-kit/.cursor-plugin/plugin.json >/dev/null
+python3 scripts/validate_marketplace_host_boundaries.py --root .
 python3 -m json.tool cursor-sdk/agent_definitions.json >/dev/null
 python3 -m json.tool hooks/hooks.json >/dev/null
 python3 -m json.tool plugins/claude/endor-labs-agent-kit/hooks/hooks.json >/dev/null
@@ -112,16 +114,10 @@ PY
 test ! -e gemini-extension.json
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
-diff -qr "$AGENT_KIT_REPO/plugins" ./plugins
-diff -qr "$AGENT_KIT_REPO/.cursor-plugin" ./.cursor-plugin
-diff -qr "$AGENT_KIT_REPO/agents" ./agents
-diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
-diff -qr "$AGENT_KIT_REPO/hooks" ./hooks
-for skill in "$AGENT_KIT_REPO"/skills/*; do
-  name=${skill##*/}
-  [ "$name" = "create-endor-labs-agent" ] && continue
-  diff -qr "$skill" "./skills/$name"
+for host in antigravity claude codex codex-directory gemini; do
+  diff -qr "$AGENT_KIT_REPO/plugins/$host" "./plugins/$host"
 done
+diff -qr "$AGENT_KIT_REPO/cursor-sdk" ./cursor-sdk
 diff -q "$AGENT_KIT_REPO/assets/logo.png" assets/logo.png
 diff -q "$AGENT_KIT_REPO/CHANGELOG.md" CHANGELOG.md
 git diff --check
@@ -139,9 +135,9 @@ A normal documentation sync may include:
 - `docs/`
 - `llms.txt`
 - package READMEs generated from Agent Kit
-- `.cursor-plugin/`, generated root workflow `agents/`, generated root workflow
-  `skills/`, generated root advisory `hooks/`, `cursor-sdk/`, and
-  `assets/logo.png`
+- `.cursor-plugin/marketplace.json`, the self-contained
+  `plugins/cursor/endor-labs-agent-kit/` overlay, Claude root compatibility
+  surfaces, `cursor-sdk/`, and `assets/logo.png`
 - package manifest checksum updates from Agent Kit
 
 A normal generated package sync should not include hand-edited differences
@@ -154,13 +150,11 @@ inside `plugins/`.
 - Do not couple Cursor package sync to Gemini CLI extension files.
 - Do not add plugin-wide MCP unless a source decision and provider validation
   explicitly support it.
-- The root `.mcp.json` file may declare the source-approved `endor-cli-tools`
-  MCP server so users can opt into Endor MCP setup. Do not generate a root
-  `gemini-extension.json`; Gemini discovers bundled skills from the installed
-  extension root's `skills/` directory, and the repository root's `skills/`
-  directory is the Cursor package surface. Generated host package manifests
-  under `plugins/*/endor-labs-agent-kit/` must still stay MCP-free unless that
-  host package explicitly validates MCP. Setup guidance remains CLI-first and
-  must not start, register, or rely on MCP without explicit user approval.
+- Keep the repository root free of `.mcp.json` so the Claude compatibility
+  package cannot auto-load Cursor MCP configuration. The self-contained Cursor
+  package may carry its validated `mcp.json`. Do not generate a root
+  `gemini-extension.json`; Gemini discovers bundled skills from its installed
+  extension root. Setup guidance remains CLI-first and must not start,
+  register, or rely on MCP without explicit user approval.
 - Do not run live `endorctl api` smoke tests without explicit approval and
   namespace provenance.

@@ -73,7 +73,7 @@ CODEX_PLUGIN_VALIDATOR="${CODEX_PLUGIN_VALIDATOR:-/path/to/plugin-creator/script
 python3 "$CODEX_PLUGIN_VALIDATOR" plugins/codex/endor-labs-agent-kit
 test -f plugins/gemini/endor-labs-agent-kit/gemini-extension.json
 test ! -e plugins/gemini/endor-labs-agent-kit.zip
-antigravity plugin validate plugins/antigravity/endor-labs-agent-kit
+agy plugin validate plugins/antigravity/endor-labs-agent-kit
 python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
 python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
 python3 -m json.tool .cursor-plugin/marketplace.json >/dev/null
@@ -212,9 +212,9 @@ validation below as the forward-path CLI check for affected consumer users.
 Antigravity CLI:
 
 ```bash
-antigravity plugin install /absolute/path/to/ai-plugins/plugins/antigravity/endor-labs-agent-kit
-antigravity plugin list
-antigravity plugin uninstall endor-labs-agent-kit
+agy plugin install /absolute/path/to/ai-plugins/plugins/antigravity/endor-labs-agent-kit
+agy plugin list
+agy plugin uninstall endor-labs-agent-kit
 ```
 
 Cursor package:
@@ -267,8 +267,8 @@ py_compile.compile("cursor-sdk/run_cursor_agent.py", cfile="/tmp/run_cursor_agen
 PY
 test -f cursor-sdk/requirements.txt
 test -f cursor-sdk/agents/endor-agent-kit-setup-agent.md
-test -f cursor-sdk/agents/endor-malware-response-agent.md
-test -f cursor-sdk/agents/endor-probe-droid-agent.md
+test -f cursor-sdk/agents/endor-malware-responder-agent.md
+test -f cursor-sdk/agents/endor-configuration-automation-agent.md
 ```
 
 Do not run Cursor SDK local or cloud smoke tests without explicit approval for

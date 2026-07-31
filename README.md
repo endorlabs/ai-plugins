@@ -120,7 +120,7 @@ Cursor cloud agents:
 ```bash
 python3 -m pip install -r cursor-sdk/requirements.txt
 export CURSOR_API_KEY="crsr_..."
-python cursor-sdk/run_cursor_agent.py endor-probe-droid-agent \
+python cursor-sdk/run_cursor_agent.py endor-configuration-automation-agent \
   --workspace /path/to/repo \
   "Explain what evidence you need to assess GitHub onboarding gaps. Keep it read-only."
 ```
@@ -172,8 +172,6 @@ agy plugin install ./plugins/antigravity/endor-labs-agent-kit
 agy plugin list
 ```
 
-Some Antigravity installs expose the command as `antigravity` instead of `agy`;
-use the same `plugin validate`, `plugin install`, and `plugin list` subcommands.
 Restart Antigravity CLI if newly installed skills or subagents are not visible.
 
 Details: [`plugins/antigravity/endor-labs-agent-kit/README.md`](plugins/antigravity/endor-labs-agent-kit/README.md).
@@ -182,19 +180,17 @@ Details: [`plugins/antigravity/endor-labs-agent-kit/README.md`](plugins/antigrav
 
 | Agent | Best for | Cursor / SDK name | Safety | First prompt |
 | --- | --- | --- | --- | --- |
-| 🔎 AI SAST Triage | Triage Endor AI SAST findings and prepare approved change requests | `endor-ai-sast-triage-agent` | approval-gated mutating | `Triage AI SAST findings for this repository. Do not edit files, open a PR/MR, create a ticket, or write an Endor policy until I approve the specific gate.` |
+| 🔎 AI SAST Remediation | Triage Endor AI SAST findings, use exploit and remediation context, and open requested change requests | `endor-ai-sast-remediation-agent` | approval-gated mutating | `Triage AI SAST findings for this repository. Do not edit files, open a PR/MR, create a ticket, or write an Endor policy until I approve the specific gate.` |
 | 🧭 CI/CD And Supply Chain Posture | Assess CI/CD and supply chain posture from existing Endor findings and read-only GitHub configuration evidence | `endor-cicd-posture-agent` | read-only | `Assess CI/CD and supply chain posture for namespace <namespace>. Keep it read-only and validate the deterministic score.` |
-| ⚖️ Dependency Decision Helper | Decide whether to add, upgrade to, or keep a specific package version | `endor-dependency-decision-helper-agent` | read-only | `Assess whether we should use npm lodash version 4.17.20. Keep it read-only.` |
-| 📊 Package Risk Summary | Summarize the risk profile of a specific package version | `endor-package-risk-summary-agent` | read-only | `Summarize npm lodash version 4.17.20 with verified Endor evidence. Keep it read-only.` |
-| 📚 Repository Dependency Reviewer | Review local dependency manifests with read-only file inspection and Endor evidence | `endor-repository-dependency-reviewer-agent` | read-only | `Review this repository's dependency manifests with read-only evidence only.` |
-| ⬆️ Upgrade Impact Analysis | Analyze Endor platform upgrade impact with VersionUpgrade, CIA, findings, and manifest context | `endor-upgrade-impact-analysis-agent` | read-only | `Show the safest upgrade path for repository <owner>/<repo> package lodash. Keep it read-only.` |
-| 💬 Vulnerability Explainer | Understand a specific CVE, GHSA, or Endor vulnerability and what to do next | `endor-vulnerability-explainer-agent` | read-only | `Explain CVE-2021-44228 using verified Endor evidence. Keep it read-only.` |
-| 🧯 Endor Troubleshooter | Diagnose setup, scan, auth, policy, or integration issues | `endor-troubleshooter-agent` | read-only | `Diagnose this Endor issue from redacted error text and read-only tenant evidence. Keep it read-only.` |
+| 📡 Configuration Automation | Probe GitHub.com onboarding gaps and prescribe Endor scan profiles, toolchains, package integrations, and reachability setup | `endor-configuration-automation-agent` | read-only | `Explain what evidence you need to assess GitHub onboarding gaps for this repository. Keep it read-only.` |
+| ⚖️ Dependency Reviewer | Review an exact package decision, package risk, or repository dependencies through one bounded profile | `endor-dependency-reviewer-agent` | read-only | `Review this repository's exact direct dependencies with the repository-review profile. Keep it read-only.` |
 | 🔍 Findings Browser | Browse, filter, and summarize existing Endor findings | `endor-findings-browser-agent` | read-only | `Show the critical and high reachable findings for namespace <namespace>. Keep it read-only.` |
-| 🤖 Malware Response | Correlate supply-chain malware intelligence against tenant inventory | `endor-malware-response-agent` | read-only | `Use the malware-response workflow. Keep it within its generated safety contract.` |
-| 📡 Probe Droid | Assess GitHub onboarding and monitored-branch coverage gaps | `endor-probe-droid-agent` | read-only | `Explain what evidence you need to assess GitHub onboarding gaps for this repository. Keep it read-only.` |
-| 🗺️ Remediation Planner | Preview safe dependency remediation options without opening PRs | `endor-remediation-planner-agent` | read-only | `Preview remediation options for this repository. Do not edit files or open a PR/MR.` |
+| 🚨 Malware Responder | Correlate current software-supply-chain malware intelligence with tenant package inventory and report containment guidance | `endor-malware-responder-agent` | read-only | `Assess tenant exposure to malware campaign <campaign>. Keep it read-only and report evidence gaps.` |
+| ⬆️ OSS Upgrade Investigator | Analyze Endor platform upgrade impact with VersionUpgrade, CIA, findings, and manifest context | `endor-oss-upgrade-investigator-agent` | read-only | `Show the safest upgrade path for repository <owner>/<repo> package lodash. Keep it read-only.` |
+| 🗺️ Remediation Planning | Preview safe dependency remediation options without opening PRs | `endor-remediation-planning-agent` | read-only | `Preview remediation options for this repository. Do not edit files or open a PR/MR.` |
 | 🛠️ SCA Remediation | Find safe dependency remediation paths with Endor SCA evidence | `endor-sca-remediation-agent` | approval-gated mutating | `Inspect this repository and prepare a remediation plan only. Do not edit files, create branches, push, open a PR/MR, create a ticket, or write Endor policy.` |
+| 🧯 Troubleshooting | Diagnose setup, scan, auth, policy, or integration issues | `endor-troubleshooting-agent` | read-only | `Diagnose this Endor issue from redacted error text and read-only tenant evidence. Keep it read-only.` |
+| 💬 Vulnerability Explainer | Understand a specific CVE, GHSA, or Endor vulnerability and what to do next | `endor-vulnerability-explainer-agent` | read-only | `Explain CVE-2021-44228 using verified Endor evidence. Keep it read-only.` |
 | 🧰 Setup | Check host, auth, namespace, `endorctl`, `gh`, and workflow readiness | `endor-agent-kit-setup-agent` | read-only | `Check Endor Agent Kit readiness for this repository. Do not run scans.` |
 
 The provider packages expose the same generated workflow set from Agent Kit

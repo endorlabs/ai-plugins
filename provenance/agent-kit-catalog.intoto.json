@@ -339,7 +339,7 @@
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/antigravity/endor-labs-agent-kit",
-        "version": "2.2.0"
+        "version": "2.2.1"
       },
       {
         "distribution_channel": "repository",
@@ -379,7 +379,7 @@
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/claude/endor-labs-agent-kit",
-        "version": "2.2.0"
+        "version": "2.2.1"
       },
       {
         "distribution_channel": "official-directory",
@@ -399,7 +399,7 @@
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/codex-directory/endor-labs-agent-kit",
-        "version": "2.2.0"
+        "version": "2.2.1"
       },
       {
         "distribution_channel": "repository",
@@ -419,7 +419,7 @@
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/codex/endor-labs-agent-kit",
-        "version": "2.2.0"
+        "version": "2.2.1"
       },
       {
         "distribution_channel": "repository",
@@ -439,7 +439,7 @@
         ],
         "name": "endorlabs",
         "path": ".",
-        "version": "2.2.0"
+        "version": "2.2.1"
       },
       {
         "distribution_channel": "repository",
@@ -459,7 +459,7 @@
         ],
         "name": "endor-labs-agent-kit-cursor-sdk",
         "path": "cursor-sdk",
-        "version": "2.2.0"
+        "version": "2.2.1"
       },
       {
         "distribution_channel": "repository",
@@ -479,7 +479,7 @@
         ],
         "name": "endor-labs-agent-kit",
         "path": "plugins/gemini/endor-labs-agent-kit",
-        "version": "2.2.0"
+        "version": "2.2.1"
       }
     ]
   },
@@ -487,7 +487,7 @@
   "subject": [
     {
       "digest": {
-        "sha256": "a9f2cfdc742cf87785277fda72725660084cd23a55e491e314d1a27ff50f7e89"
+        "sha256": "3cd3409e95709a1fd1cb1ab25629bddadef7703748f8e6380339fc003dc04c83"
       },
       "name": "manifest.json"
     }
